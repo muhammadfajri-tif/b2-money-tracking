@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Face Recognition</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, shrink-to-fit=yes" />
+    <meta name="application-name" content="FaceAPI" />
+    <meta name="keywords" content="FaceAPI" />
+    <meta
+      name="description"
+      content="FaceAPI: AI-powered Face Detection, Description & Recognition for Browser and NodeJS using Tensorflow/JS; Author: Vladimir Mandic <https://github.com/vladmandic>"
+    />
+    <meta
+      name="msapplication-tooltip"
+      content="FaceAPI: AI-powered Face Detection, Description & Recognition for Browser and NodeJS using Tensorflow/JS; Author: Vladimir Mandic <https://github.com/vladmandic>"
+    />
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+    <!-- <script src="../js/models/webcam.js" type="module"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1/dist/face-api.js"></script>
+
+    <script type="module">
+      /**
+       * FaceAPI Demo for Browsers
+       * Loaded via `webcam.html`
+       */
+
+      // import * as faceapi from "../dist/face-api.esm.js"; // use when in dev mode
+      // import * as faceapi from "@vladmandic/face-api"; // use when downloading face-api as npm
+      // configuration options
+      // const modelPath = "../model/"; // path to model folder that will be loaded using http
+      const modelPath =
+        "https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model/"; // path to model folder that will be loaded using http
+      const minScore = 0.2; // minimum score
+      const maxResults = 5; // maximum number of results to return
+      let optionsSSDMobileNet;
+
+      // helper function to pretty-print json object to string
+      function str(json) {
+        let text = '<font color="lightblue">';
+        text += json
+          ? JSON.stringify(json)
+              .replace(/{|}|"|\[|\]/g, "")
+              .replace(/,/g, ", ")
+          : "";
+        text += "</font>";
+        return text;
+      }
+
+      // helper function to print strings to html document as a log
+      function log(...txt) {
+        console.log(...txt); // eslint-disable-line no-console
+        const div = document.getElementById("log");
+        if (div) div.innerHTML += `<br>${txt}`;
+      }
+      // helper function to draw detected faces
+      // helper function to draw detected faces
+      // helper function to draw detected faces
+      function drawFaces(canvas, data, fps, smileTime) {
+        const ctx = canvas.getContext("2d", { willReadFrequently: true });
+        if (!ctx) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // draw title
+        ctx.font = 'small-caps 20px "Segoe UI"';
+        ctx.fillStyle = "white";
+        ctx.fillText(`FPS: ${fps}`, 10, 25);
+
+        // Draw top message overlay
+        const overlayPadding = 10; // Padding around the text
+        const text =
+          smileTime !== 0
+            ? `Hold your smile until 5 seconds, your time: ${smileTime} seconds`
+            : "Please Smile To Login :)"; // Determine the text content
+        const textWidth = ctx.measureText(text).width; // Calculate the width of the text
+        const overlayWidth = textWidth + 1 * overlayPadding; // Calculate the width of the overlay rectangle
+        const overlayHeight = 50; // Height of the overlay rectangle
+        const overlayX = (canvas.width - overlayWidth) / 2; // X coordinate to center the overlay
+        const overlayY = 10; // Y coordinate of the overlay
+        ctx.font = 'bold 16px "Segoe UI"';
+        ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+        ctx.fillRect(overlayX, overlayY, overlayWidth, overlayHeight); // Adjust the position and size of the overlay rectangle
+        ctx.fillStyle = "white";
+        const textX = overlayX + (overlayWidth - textWidth + 30) / 2; // X coordinate to center the text within the overlay
+        ctx.fillText(text, textX, overlayY + 30); // Adjust the position of the text
+
+        // draw overlay
+        ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+        ctx.fillRect(10, canvas.height - 70, 230, 50); // Adjust the size of the overlay rectangle
+
+        // Draw emotional state
+        ctx.font = 'bold 20px "Segoe UI"'; // Adjust the font size and style
+        ctx.fillStyle = "white";
+        ctx.fillText("Emotion: ", 20, canvas.height - 35); // Adjust the position of the text
+
+        for (const person of data) {
+          // draw box around each face
+          ctx.lineWidth = 3;
+          ctx.strokeStyle = "deepskyblue";
+          ctx.fillStyle = "deepskyblue";
+          ctx.globalAlpha = 0.6;
+          ctx.beginPath();
+          ctx.rect(
+            person.detection.box.x,
+            person.detection.box.y,
+            person.detection.box.width,
+            person.detection.box.height
+          );
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+          // draw text labels
+          const expression = Object.entries(person.expressions).sort(
+            (a, b) => b[1] - a[1]
+          );
+          ctx.fillStyle = "black";
+          ctx.fillText(
+            `gender: ${Math.round(100 * person.genderProbability)}% ${
+              person.gender
+            }`,
+            person.detection.box.x,
+            person.detection.box.y - 59
+          );
+          ctx.fillText(
+            `expression: ${Math.round(100 * expression[0][1])}% ${
+              expression[0][0]
+            }`,
+            person.detection.box.x,
+            person.detection.box.y - 41
+          );
+          ctx.fillText(
+            `age: ${Math.round(person.age)} years`,
+            person.detection.box.x,
+            person.detection.box.y - 23
+          );
+          ctx.fillText(
+            `roll:${person.angle.roll}° pitch:${person.angle.pitch}° yaw:${person.angle.yaw}°`,
+            person.detection.box.x,
+            person.detection.box.y - 5
+          );
+          ctx.fillStyle = "lightblue";
+          ctx.fillText(
+            `gender: ${Math.round(100 * person.genderProbability)}% ${
+              person.gender
+            }`,
+            person.detection.box.x,
+            person.detection.box.y - 60
+          );
+          ctx.fillText(
+            `expression: ${Math.round(100 * expression[0][1])}% ${
+              expression[0][0]
+            }`,
+            person.detection.box.x,
+            person.detection.box.y - 42
+          );
+          ctx.fillText(
+            `age: ${Math.round(person.age)} years`,
+            person.detection.box.x,
+            person.detection.box.y - 24
+          );
+          ctx.fillText(
+            `roll:${person.angle.roll}° pitch:${person.angle.pitch}° yaw:${person.angle.yaw}°`,
+            person.detection.box.x,
+            person.detection.box.y - 6
+          );
+          // draw face points for each face
+          ctx.globalAlpha = 0.8;
+          ctx.fillStyle = "lightblue";
+          const pointSize = 2;
+          for (let i = 0; i < person.landmarks.positions.length; i++) {
+            ctx.beginPath();
+            ctx.arc(
+              person.landmarks.positions[i].x,
+              person.landmarks.positions[i].y,
+              pointSize,
+              0,
+              2 * Math.PI
+            );
+            ctx.fill();
+          }
+
+          // Determine emotional state
+          let emotion;
+          if (person.expressions.happy > 0.5) {
+            emotion = "Smile";
+          } else if (person.expressions.neutral > 0.5) {
+            emotion = "Neutral";
+          } else {
+            emotion = "Sad";
+          }
+          // Draw emotional state text
+          ctx.font = 'bold 20px "Segoe UI"'; // Adjust the font size and style
+          ctx.fillText(emotion, 150, canvas.height - 35); // Adjust the position of the text
+        }
+      }
+
+      // function drawFaces(canvas, data, fps) {
+      //   const ctx = canvas.getContext("2d", { willReadFrequently: true });
+      //   if (!ctx) return;
+      //   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      //   // draw FPS
+      //   ctx.font = 'small-caps 20px "Segoe UI"';
+      //   ctx.fillStyle = "white";
+      //   ctx.fillText(`FPS: ${fps}`, 10, 25);
+
+      //   // draw overlay
+      //   ctx.font = '16px "Segoe UI"';
+      //   ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+      //   ctx.fillRect(10, canvas.height - 40, 200, 30);
+
+      //   // draw emotional state
+      //   ctx.fillStyle = "white";
+      //   ctx.fillText("Emotion: ", 20, canvas.height - 20);
+
+      //   for (const person of data) {
+      //     // Draw the bounding box around the face
+      //     ctx.lineWidth = 3;
+      //     ctx.strokeStyle = "deepskyblue";
+      //     ctx.globalAlpha = 0.6;
+      //     ctx.beginPath();
+      //     ctx.rect(
+      //       person.detection.box.x,
+      //       person.detection.box.y,
+      //       person.detection.box.width,
+      //       person.detection.box.height
+      //     );
+      //     ctx.stroke();
+      //     ctx.globalAlpha = 1;
+
+      //     // Determine emotional state
+      //     let emotion;
+      //     if (person.expressions.happy > 0.5) {
+      //       emotion = "Smile";
+      //     } else if (person.expressions.neutral > 0.5) {
+      //       emotion = "Neutral";
+      //     } else {
+      //       emotion = "Sad";
+      //     }
+
+      //     // Draw emotional state text
+      //     ctx.fillText(emotion, 100, canvas.height - 20);
+      //   }
+      // }
+
+      let smileStartTime; // Variable to store the time when the smile is detected
+      let smileDetected = false; // Flag to track if a smile is detected
+      let smileTime = 0; // Variable to store the smile time
+
+      async function detectVideo(video, canvas) {
+        if (!video || video.paused) return false;
+        const t0 = performance.now();
+        faceapi
+          .detectAllFaces(video, optionsSSDMobileNet)
+          .withFaceLandmarks()
+          .withFaceExpressions()
+          .withAgeAndGender()
+          .then((result) => {
+            const fps = 1000 / (performance.now() - t0);
+            drawFaces(canvas, result, fps, smileTime);
+            // Check if any face is detected and if smiling
+            if (result.length > 0 && result[0].expressions.happy > 0.5) {
+              if (!smileDetected) {
+                // Start timer if smile is newly detected
+                smileStartTime = performance.now();
+                smileDetected = true;
+              }
+              // Update smile time every frame
+              smileTime = Math.round(
+                (performance.now() - smileStartTime) / 1000
+              );
+              if (smileTime === 5) {
+                window.location.href = "index.html";
+              }
+            } else {
+              // Reset smile time if no smile detected
+              smileDetected = false;
+              smileTime = 0;
+            }
+            requestAnimationFrame(() => detectVideo(video, canvas));
+            return true;
+          })
+          .catch((err) => {
+            log(`Detect Error: ${str(err)}`);
+            return false;
+          });
+        return false;
+      }
+
+      // just initialize everything and call main function
+      async function setupCamera() {
+        const video = document.getElementById("video");
+        const canvas = document.getElementById("canvas");
+        if (!video || !canvas) return null;
+
+        log("Setting up camera");
+        // setup webcam. note that navigator.mediaDevices requires that page is accessed via https
+        if (!navigator.mediaDevices) {
+          log("Camera Error: access not supported");
+          return null;
+        }
+        let stream;
+        const constraints = {
+          audio: false,
+          video: { facingMode: "user", resizeMode: "crop-and-scale" },
+        };
+        if (window.innerWidth > window.innerHeight)
+          constraints.video.width = { ideal: window.innerWidth };
+        else constraints.video.height = { ideal: window.innerHeight };
+        try {
+          stream = await navigator.mediaDevices.getUserMedia(constraints);
+        } catch (err) {
+          if (
+            err.name === "PermissionDeniedError" ||
+            err.name === "NotAllowedError"
+          )
+            log(
+              `Camera Error: camera permission denied: ${err.message || err}`
+            );
+          if (err.name === "SourceUnavailableError")
+            log(`Camera Error: camera not available: ${err.message || err}`);
+          return null;
+        }
+        if (stream) {
+          video.srcObject = stream;
+        } else {
+          log("Camera Error: stream empty");
+          return null;
+        }
+        const track = stream.getVideoTracks()[0];
+        const settings = track.getSettings();
+        if (settings.deviceId) delete settings.deviceId;
+        if (settings.groupId) delete settings.groupId;
+        if (settings.aspectRatio)
+          settings.aspectRatio = Math.trunc(100 * settings.aspectRatio) / 100;
+        log(`Camera active: ${track.label}`);
+        log(`Camera settings: ${str(settings)}`);
+        // canvas.addEventListener("click", () => {
+        //   if (video && video.readyState >= 2) {
+        //     if (video.paused) {
+        //       video.play();
+        //       detectVideo(video, canvas);
+        //     } else {
+        //       video.pause();
+        //     }
+        //   }
+        //   log(`Camera state: ${video.paused ? "paused" : "playing"}`);
+        // });
+        return new Promise((resolve) => {
+          video.onloadeddata = async () => {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            video.play();
+            detectVideo(video, canvas);
+            resolve(true);
+          };
+        });
+      }
+
+      async function setupFaceAPI() {
+        // load face-api models
+        // log('Models loading');
+        // await faceapi.nets.tinyFaceDetector.load(modelPath); // using ssdMobilenetv1
+        await faceapi.nets.ssdMobilenetv1.load(modelPath);
+        await faceapi.nets.ageGenderNet.load(modelPath);
+        await faceapi.nets.faceLandmark68Net.load(modelPath);
+        await faceapi.nets.faceRecognitionNet.load(modelPath);
+        await faceapi.nets.faceExpressionNet.load(modelPath);
+        optionsSSDMobileNet = new faceapi.SsdMobilenetv1Options({
+          minConfidence: minScore,
+          maxResults,
+        });
+        // check tf engine state
+        // log(
+        //   `Models loaded: ${str(faceapi.tf.engine().state.numTensors)} tensors`
+        // );
+      }
+
+      async function main() {
+        // initialize tfjs
+        // log("FaceAPI WebCam Test");
+
+        // if you want to use wasm backend location for wasm binaries must be specified
+        // await faceapi.tf?.setWasmPaths(`https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@${faceapi.tf.version_core}/dist/`);
+        // await faceapi.tf?.setBackend('wasm');
+        // log(`WASM SIMD: ${await faceapi.tf?.env().getAsync('WASM_HAS_SIMD_SUPPORT')} Threads: ${await faceapi.tf?.env().getAsync('WASM_HAS_MULTITHREAD_SUPPORT') ? 'Multi' : 'Single'}`);
+
+        // default is webgl backend
+        await faceapi.tf.setBackend("webgl");
+        await faceapi.tf.ready();
+
+        // tfjs optimizations
+        if (faceapi.tf?.env().flagRegistry.CANVAS2D_WILL_READ_FREQUENTLY)
+          faceapi.tf.env().set("CANVAS2D_WILL_READ_FREQUENTLY", true);
+        if (faceapi.tf?.env().flagRegistry.WEBGL_EXP_CONV)
+          faceapi.tf.env().set("WEBGL_EXP_CONV", true);
+        if (faceapi.tf?.env().flagRegistry.WEBGL_EXP_CONV)
+          faceapi.tf.env().set("WEBGL_EXP_CONV", true);
+
+        // check version
+        // log(
+        //   `Version: FaceAPI ${str(
+        //     faceapi?.version || "(not loaded)"
+        //   )} TensorFlow/JS ${str(
+        //     faceapi.tf?.version_core || "(not loaded)"
+        //   )} Backend: ${str(faceapi.tf?.getBackend() || "(not loaded)")}`
+        // );
+
+        await setupFaceAPI();
+        await setupCamera();
+      }
+
+      // start processing as soon as page is loaded
+      window.onload = main;
+    </script>
+  </head>
+  <body
+    style="
+      font-family: monospace;
+      background: black;
+      color: white;
+      font-size: 16px;
+      line-height: 22px;
+      margin: 0;
+      overflow: hidden;
+    "
+  >
+    <video id="video" playsinline class="video"></video>
+    <canvas
+      id="canvas"
+      class="canvas"
+      style="position: fixed; top: 0; left: 0; z-index: 3"
+    ></canvas>
+    <div id="log" style="overflow-y: scroll; height: 16.5rem"></div>
+    <!-- Heading Says Setting Up Camera.. on center of page -->
+  </body>
+</html>
