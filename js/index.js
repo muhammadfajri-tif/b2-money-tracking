@@ -36,14 +36,3 @@ Orders.forEach((order) => {
   tr.innerHTML = trContent;
   document.querySelector("table tbody").appendChild(tr);
 });
-
-const prefersDarkMode = window.matchMedia(
-  "(prefers-color-scheme: dark)"
-).matches;
-
-// If user prefers dark mode, set it by default
-if (prefersDarkMode) {
-  document.body.classList.toggle("dark-mode-variables");
-  darkMode.querySelector("span:nth-child(1)").classList.toggle("active");
-  darkMode.querySelector("span:nth-child(2)").classList.toggle("active");
-}
