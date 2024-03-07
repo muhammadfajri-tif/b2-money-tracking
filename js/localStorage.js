@@ -1,6 +1,7 @@
 
 import { loadFileContent, isDataValid, initializeDataToLocalStorage } from './utils/file.mjs';
 
+// handle form file upload untuk import data
 const fileSelector = document.getElementById('file-select'); // must be appropriate
 fileSelector.addEventListener('change', readFile, false);
 
@@ -41,3 +42,42 @@ function readFile() {
   }
 }
 
+// handle form tambah pendapatan
+const formAddIncomeSelector = document.getElementById('add-income-form');
+formAddIncomeSelector.addEventListener('submit', handleAddIncomeFrom);
+
+/**
+ * Module event handler untuk menangani data pemasukan baru 
+ *
+ * @param {Event} event - event on submit
+ */
+function handleAddIncomeFrom(event) {
+  event.preventDefault();
+
+  // special case for date only (get input value as date and convert it to dd/mm/yyyy)
+  const date = new Date(formAddIncomeSelector.elements[0].valueAsDate).toLocaleDateString('en-GB');
+  console.log("form income date", date);
+
+  const form = new FormData(formAddIncomeSelector);
+  console.log(form);
+}
+
+// handle form tambah pengeluaran
+const formAddSpendingSelector = document.getElementById('add-spending-form');
+formAddSpendingSelector.addEventListener('submit', handleAddSpendingForm);
+
+/**
+ * Module event handler untuk menangani data pengeluaran baru
+ *
+ * @param {Event} event - event on submit
+ */
+function handleAddSpendingForm(event) {
+  event.preventDefault();
+
+  // special case for date only (get input value as date and convert it to dd/mm/yyyy)
+  const date = new Date(formAddSpendingSelector.elements[0].valueAsDate).toLocaleDateString('en-GB');
+  console.log("form spending date", date);
+
+  const form = new FormData(formAddSpendingSelector);
+  console.log(form);
+}

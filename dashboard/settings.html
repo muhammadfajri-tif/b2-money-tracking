@@ -1,95 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../css/dashboard-style.css" />
-    <title>Settings</title>
-  </head>
 
-  <body>
-    <div class="container">
-      <!-- Sidebar Section -->
-      <aside>
-        <div class="toggle">
-          <div class="logo">
-            <img src="../images/logo.png" />
-            <h2>Asmr<span class="danger">Prog</span></h2>
-          </div>
-          <div class="close" id="close-btn">
-            <span class="material-icons-sharp"> close </span>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/dashboard-style.css" />
+  <title>Settings</title>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Sidebar Section -->
+    <aside>
+      <div class="toggle">
+        <div class="logo">
+          <img src="../images/logo.png" />
+          <h2>Asmr<span class="danger">Prog</span></h2>
         </div>
-
-        <div class="sidebar">
-          <a href="index.html">
-            <span class="material-icons-sharp"> dashboard </span>
-            <h3>Dashboard</h3>
-          </a>
-          <a href="#">
-            <span class="material-icons-sharp"> person_outline </span>
-            <h3>Users</h3>
-          </a>
-          <a href="#">
-            <span class="material-icons-sharp"> receipt_long </span>
-            <h3>History</h3>
-          </a>
-          <a href="analytics.html">
-            <span class="material-icons-sharp"> insights </span>
-            <h3>Analytics</h3>
-          </a>
-          <a href="#">
-            <span class="material-icons-sharp"> mail_outline </span>
-            <h3>Tickets</h3>
-            <span class="message-count">27</span>
-          </a>
-          <a href="#">
-            <span class="material-icons-sharp"> inventory </span>
-            <h3>Sale List</h3>
-          </a>
-          <a href="#">
-            <span class="material-icons-sharp"> report_gmailerrorred </span>
-            <h3>Reports</h3>
-          </a>
-          <a href="#" class="active">
-            <span class="material-icons-sharp"> settings </span>
-            <h3>Settings</h3>
-          </a>
-          <a href="#">
-            <span class="material-icons-sharp"> add </span>
-            <h3>New Login</h3>
-          </a>
-          <a href="">
-            <span class="material-icons-sharp"> logout </span>
-            <h3>Logout</h3>
-          </a>
+        <div class="close" id="close-btn">
+          <span class="material-icons-sharp"> close </span>
         </div>
-      </aside>
-      <!-- End of Sidebar Section -->
+      </div>
 
-      <!-- Main Content -->
-      <main>
-        <h1>Dashboard</h1>
+      <div class="sidebar">
+        <a href="index.html">
+          <span class="material-icons-sharp"> dashboard </span>
+          <h3>Dashboard</h3>
+        </a>
+        <a href="#">
+          <span class="material-icons-sharp"> person_outline </span>
+          <h3>Users</h3>
+        </a>
+        <a href="#">
+          <span class="material-icons-sharp"> receipt_long </span>
+          <h3>History</h3>
+        </a>
+        <a href="analytics.html">
+          <span class="material-icons-sharp"> insights </span>
+          <h3>Analytics</h3>
+        </a>
+        <a href="#">
+          <span class="material-icons-sharp"> mail_outline </span>
+          <h3>Tickets</h3>
+          <span class="message-count">27</span>
+        </a>
+        <a href="#">
+          <span class="material-icons-sharp"> inventory </span>
+          <h3>Sale List</h3>
+        </a>
+        <a href="#">
+          <span class="material-icons-sharp"> report_gmailerrorred </span>
+          <h3>Reports</h3>
+        </a>
+        <a href="#" class="active">
+          <span class="material-icons-sharp"> settings </span>
+          <h3>Settings</h3>
+        </a>
+        <a href="#">
+          <span class="material-icons-sharp"> add </span>
+          <h3>New Login</h3>
+        </a>
+        <a href="">
+          <span class="material-icons-sharp"> logout </span>
+          <h3>Logout</h3>
+        </a>
+      </div>
+    </aside>
+    <!-- End of Sidebar Section -->
 
-        <label for="file-select">Spreadsheet</label>
-        <input
-          id="file-select"
-          class="file-select"
-          type="file"
-          accept=".json, .csv"
-        />
-        <div id="data"></div>
+    <!-- Main Content -->
+    <main>
+      <h1>Dashboard</h1>
 
-        <script type="module" src="../js/localStorage.js"></script>
-      </main>
-      <!-- End of Main Content -->
-    </div>
+      <label for="file-select">Spreadsheet</label>
+      <input id="file-select" class="file-select" type="file" accept=".json, .csv" />
+      <div id="data"></div>
 
-    <script src="../js/orders.js"></script>
-    <script src="../js/index.js"></script>
-  </body>
+    </main>
+    <!-- End of Main Content -->
+
+    <!-- Form input new data -->
+    <section>
+      <div>
+        <h2>tambahkan pemasukan</h2>
+
+        <!-- form input new income -->
+        <form id="add-income-form">
+          <div>
+            <label for="date-income">tanggal pemasukan</label>
+            <input id="date-income" name="date-income" type="date" />
+          </div>
+
+          <div>
+            <label for="amount-income">jumlah pendapatan (rp.)</label>
+            <input id="amount-income" name="amount-income" type="number" min="1" />
+          </div>
+
+          <div>
+            <label for="category-income">kategori</label>
+            <select id="category-income" name="category-income">
+              <option value="grants">pemberian</option>
+              <option value="allowance">uang bulanan</option>
+              <option value="salary">gaji</option>
+              <option value="others">lainnya</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="desc-income">catatan: </label>
+            <textarea id="desc-income" name="desc-income" rows="5" cols="25"
+              placeholder="uang dari mamah..."></textarea>
+          </div>
+
+          <input type="submit" name="submit-income" value="simpan" />
+        </form>
+      </div>
+
+      <br>
+
+      <div>
+        <h2>tambahkan pengeluaran</h2>
+
+        <!-- form input new spending -->
+        <form id="add-spending-form">
+          <div>
+            <label for="date-spending">tanggal pengeluaran</label>
+            <input id="date-spending" name="date-spending" type="date" />
+          </div>
+
+          <div>
+            <label for="amount-spending">jumlah pengeluaran (rp.)</label>
+            <input id="amount-spending" name="amount-spending" type="number" min="1" />
+          </div>
+
+
+          <div>
+            <label for="category-spending">kategori</label>
+            <select id="category-spending" name="category-spending">
+              <option value="food">makanan/minuman</option>
+              <option value="entertaiments">hiburan</option>
+              <option value="transportation">transportasi</option>
+              <option value="household">kebutuhan rumah/kostan</option>
+              <option value="college">kebutuhan kuliah</option>
+              <option value="medical">kesehatan</option>
+              <option value="others">lainnya</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="desc-spending">catatan: </label>
+            <textarea id="desc-spending" name="desc-spending" rows="5" cols="25"
+              placeholder="ngopi bareng barudaks..."></textarea>
+          </div>
+
+          <input type="submit" name="submit-spending" value="simpan" />
+        </form>
+      </div>
+
+    </section>
+    <!-- End of Form input new data -->
+
+  </div>
+
+
+  <script type="module" src="../js/localStorage.js"></script>
+  <script src="../js/orders.js"></script>
+  <script src="../js/index.js"></script>
+</body>
+
 </html>
