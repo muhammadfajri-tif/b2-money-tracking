@@ -1,3 +1,5 @@
+import { getWeeklyMoney } from "./utils/dataTrasaction.mjs";
+
 function formatNumber(val) {
   if (val < 1000) {
     return val;
@@ -55,6 +57,14 @@ var dailyOption = {
   },
 };
 
+const weeklySums = getWeeklyMoney();
+
+console.log(weeklySums);
+
+// Extract income and outcome data from the weekly sums
+const incomeData = weeklySums.map((week) => week.income); // Extracts the sum for each week
+const outcomeData = weeklySums.map((week) => week.spending); // Extracts the sum for each week
+console.log(incomeData);
 var weeklyOption = {
   chart: {
     type: "bar",
@@ -68,21 +78,7 @@ var weeklyOption = {
       endingShape: "flat", // Columns with flat ending
     },
   },
-  series: [
-    {
-      name: "Income",
-      // income data for each week of ratusan ribu dynamic
-      data: [125000, 530000, 325000, 124000, 750000],
-    },
-    {
-      name: "Outcome",
-      // outcome data for each week of ratusan ribu dynamic
-      data: [100000, 450000, 300000, 100000, 600000],
-    },
-  ],
-  xaxis: {
-    categories: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"], // Weeks of the month
-  },
+  xaxis: {},
   yaxis: {
     labels: {
       formatter: function (val) {
@@ -104,6 +100,27 @@ var weeklyOption = {
     },
   },
 };
+
+// Update the series data in your chart options
+weeklyOption.series = [
+  {
+    name: "Income",
+    data: incomeData,
+  },
+  {
+    name: "Outcome",
+    data: outcomeData,
+  },
+];
+
+// Update the x-axis categories if needed (assuming weeks are available in weeklySums)
+weeklyOption.xaxis.categories = weeklySums.map((week) => week.name);
+
+// Now, you can use weeklyOption to initialize your chart
+
+// Extract income and outcome data from the weekly sums
+// const incomeData = weeklySums.map((week) => week.sum); // Extracts the sum for each week
+// const outcomeData = weeklySums.map
 
 var monthlyOption = {
   chart: {

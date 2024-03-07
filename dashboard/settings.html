@@ -8,11 +8,11 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../css/dashboard-style.css" />
-    <title>Responsive Dashboard Design #1 | AsmrProg</title>
+    <title>Settings</title>
   </head>
 
   <body>
-    <div class="container two-section">
+    <div class="container">
       <!-- Sidebar Section -->
       <aside>
         <div class="toggle">
@@ -38,7 +38,7 @@
             <span class="material-icons-sharp"> receipt_long </span>
             <h3>History</h3>
           </a>
-          <a href="#" class="active">
+          <a href="analytics.html">
             <span class="material-icons-sharp"> insights </span>
             <h3>Analytics</h3>
           </a>
@@ -55,7 +55,7 @@
             <span class="material-icons-sharp"> report_gmailerrorred </span>
             <h3>Reports</h3>
           </a>
-          <a href="settings.html">
+          <a href="#" class="active">
             <span class="material-icons-sharp"> settings </span>
             <h3>Settings</h3>
           </a>
@@ -72,32 +72,24 @@
       <!-- End of Sidebar Section -->
 
       <!-- Main Content -->
-      <main class="main-container">
-        <h1>Analytics</h1>
-        <!-- Analyses -->
-        <div class="analytics">
-          <div class="chart-container">
-            <h2>Your Daily Spend</h2>
-            <div id="dailyChart"></div>
-          </div>
-          <div class="chart-container">
-            <h2>Your Weekly Spend</h2>
-            <div id="weeklyChart"></div>
-          </div>
-          <div class="chart-container">
-            <h2>Your Monthly Spend</h2>
-            <div id="monthlyChart"></div>
-          </div>
-        </div>
-        <!-- End of Analyses -->
+      <main>
+        <h1>Dashboard</h1>
+
+        <label for="file-select">Spreadsheet</label>
+        <input
+          id="file-select"
+          class="file-select"
+          type="file"
+          accept=".json, .csv"
+        />
+        <div id="data"></div>
+
+        <script type="module" src="../js/localStorage.js"></script>
       </main>
+      <!-- End of Main Content -->
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="../js/orders.js"></script>
     <script src="../js/index.js"></script>
-    <script type="module" src="../js/utils/dataTrasaction.mjs"></script>
-    <script type="module" src="../js/chart.js"></script>
   </body>
 </html>
