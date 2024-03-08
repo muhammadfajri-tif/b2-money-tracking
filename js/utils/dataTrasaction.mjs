@@ -43,7 +43,7 @@ export function getMoney() {
 /**
  * Getter untuk mendapatkan list pengeluaran pengguna.
  *
- * @returns {Transaction} - Daftar transaksi pengeluaran
+ * @returns {Transaction[]} - Daftar transaksi pengeluaran
  */
 export function getSpendingList() {
   return JSON.parse(window.localStorage.getItem("spending"));
@@ -52,7 +52,7 @@ export function getSpendingList() {
 /**
  * Getter untuk mendapatkan list pendapatan pengguna.
  *
- * @returns {Transaction} - Daftar transaksi pendapatan
+ * @returns {Transaction[]} - Daftar transaksi pendapatan
  */
 export function getIncomeList() {
   return JSON.parse(window.localStorage.getItem("income"));
