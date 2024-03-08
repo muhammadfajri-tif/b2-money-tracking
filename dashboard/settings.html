@@ -73,10 +73,28 @@
     <main>
       <h1>Dashboard</h1>
 
-      <label for="file-select">Spreadsheet</label>
+      <label for="file-select">Import Data</label>
       <input id="file-select" class="file-select" type="file" accept=".json, .csv" />
       <div id="data"></div>
 
+      <div>
+        <button type="submit" onclick="toggleFormCreateUse()">Buat akun baru</button>
+
+        <form id="new-account-form" style="display: none;">
+          <h2>Tambah Akun Baru</h2>
+          <div>
+            <label for="new-account-name">Nama pengguna: </label>
+            <input type="text" name="new-account-name" placeholder="kazuto kirigaya" required>
+          </div>
+
+          <div>
+            <label for="new-account-money">Jumlah uang yang dimiliki: </label>
+            <input type="number" name="new-account-money" min="0" required>
+          </div>
+
+          <input type="submit" name="new-account-submit" value="daftar" />
+        </form>
+      </div>
     </main>
     <!-- End of Main Content -->
 
