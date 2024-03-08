@@ -89,17 +89,17 @@
         <form id="add-income-form">
           <div>
             <label for="date-income">tanggal pemasukan</label>
-            <input id="date-income" name="date-income" type="date" />
+            <input id="date-income" name="date-income" type="date" required />
           </div>
 
           <div>
-            <label for="amount-income">jumlah pendapatan (rp.)</label>
-            <input id="amount-income" name="amount-income" type="number" min="1" />
+            <label for="amount-income">jumlah pendapatan (Rp.)</label>
+            <input id="amount-income" name="amount-income" type="number" min="1" required />
           </div>
 
           <div>
             <label for="category-income">kategori</label>
-            <select id="category-income" name="category-income">
+            <select id="category-income" name="category-income" required>
               <option value="grants">pemberian</option>
               <option value="allowance">uang bulanan</option>
               <option value="salary">gaji</option>
@@ -126,18 +126,18 @@
         <form id="add-spending-form">
           <div>
             <label for="date-spending">tanggal pengeluaran</label>
-            <input id="date-spending" name="date-spending" type="date" />
+            <input id="date-spending" name="date-spending" type="date" required />
           </div>
 
           <div>
-            <label for="amount-spending">jumlah pengeluaran (rp.)</label>
-            <input id="amount-spending" name="amount-spending" type="number" min="1" />
+            <label for="amount-spending">jumlah pengeluaran (Rp.)</label>
+            <input id="amount-spending" name="amount-spending" type="number" min="1" required />
           </div>
 
 
           <div>
             <label for="category-spending">kategori</label>
-            <select id="category-spending" name="category-spending">
+            <select id="category-spending" name="category-spending" required>
               <option value="food">makanan/minuman</option>
               <option value="entertaiments">hiburan</option>
               <option value="transportation">transportasi</option>
