@@ -222,35 +222,3 @@ export function getSpendingDataWithCategory() {
     amount: data[key],
   }));
 }
-
-export function getIncomeDataWithCategory() {
-  const income = getIncomeList();
-  const data = {};
-  for (const transaction of income) {
-    if (transaction.category in data) {
-      data[transaction.category] += transaction.amount;
-    } else {
-      data[transaction.category] = transaction.amount;
-    }
-  }
-  return Object.keys(data).map((key) => ({
-    category: key,
-    amount: data[key],
-  }));
-}
-
-export function getSpendingDataWithCategory() {
-  const spending = getSpendingList();
-  const data = {};
-  for (const transaction of spending) {
-    if (transaction.category in data) {
-      data[transaction.category] += transaction.amount;
-    } else {
-      data[transaction.category] = transaction.amount;
-    }
-  }
-  return Object.keys(data).map((key) => ({
-    category: key,
-    amount: data[key],
-  }));
-}
