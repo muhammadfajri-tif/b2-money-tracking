@@ -21,9 +21,8 @@
  * @property {Transaction[]} income - List pemasukan keuangan
  */
 
-
 /**
- * Getter untuk mendapatkan username 
+ * Getter untuk mendapatkan username
  *
  * @returns {string} - nama pengguna
  */
@@ -96,7 +95,6 @@ export function getWeeklyTransaction(data, weekly_sums, transactionType) {
     const weekKey = `${year}-Week${weekNumber}`;
     if (!(weekKey in weekly_sums)) {
       weekly_sums[weekKey] = { spending: 0, income: 0 };
-
     }
     weekly_sums[weekKey][transactionType] += transaction["amount"];
   }
@@ -104,7 +102,7 @@ export function getWeeklyTransaction(data, weekly_sums, transactionType) {
 }
 
 /**
- * Module untuk mendapatkan total hasil rekap transaksi pengeluaran dan pemasukan per minggu 
+ * Module untuk mendapatkan total hasil rekap transaksi pengeluaran dan pemasukan per minggu
  *
  * @returns {TransactionSummary} total hasil rekap mingguan
  */
@@ -120,12 +118,44 @@ export function getWeeklyMoney() {
   getWeeklyTransaction(data, weekly_sums, "spending");
   getWeeklyTransaction(data, weekly_sums, "income");
 
-  const result = Object.keys(weekly_sums).map(key => ({
+  const result = Object.keys(weekly_sums).map((key) => ({
     name: key.split("-")[1],
     spending: weekly_sums[key].spending,
     income: weekly_sums[key].income,
   }));
   return result;
+}
+
+export function getIncomeDataWithCategory() {
+  const income = getIncomeList();
+  const data = {};
+  for (const transaction of income) {
+    if (transaction.category in data) {
+      data[transaction.category] += transaction.amount;
+    } else {
+      data[transaction.category] = transaction.amount;
+    }
+  }
+  return Object.keys(data).map((key) => ({
+    category: key,
+    amount: data[key],
+  }));
+}
+
+export function getSpendingDataWithCategory() {
+  const spending = getSpendingList();
+  const data = {};
+  for (const transaction of spending) {
+    if (transaction.category in data) {
+      data[transaction.category] += transaction.amount;
+    } else {
+      data[transaction.category] = transaction.amount;
+    }
+  }
+  return Object.keys(data).map((key) => ({
+    category: key,
+    amount: data[key],
+  }));
 }
 
 // TODO: Set new data

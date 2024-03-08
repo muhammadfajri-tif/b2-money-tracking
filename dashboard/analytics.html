@@ -7,7 +7,49 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
       rel="stylesheet"
     />
+
     <link rel="stylesheet" href="../css/dashboard-style.css" />
+    <style>
+      .chart-box {
+        padding-left: 0;
+        background: #fff;
+      }
+
+      #yearlyChart,
+      #quartersChart {
+        width: 100%;
+        max-width: 48%;
+        box-shadow: none;
+      }
+      #yearlyChart {
+        float: left;
+        position: relative;
+        z-index: 3;
+      }
+
+      #quartersChart {
+        float: left;
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        clear: both;
+        transition: transform 1.1s ease-in-out, visibility 1.1s ease-in-out; /* Add transition for visibility */
+
+        visibility: hidden; /* Initially hide the quarterly chart */
+        transform: translateY(
+          -100%
+        ); /* Initially move the quarterly chart off-screen */
+        margin-top: -30px;
+      }
+
+      #quartersChart.active {
+        /* transform: translate(107%, -106%); */
+        transform: translate(107%, -100%);
+        visibility: visible; /* Show the quarterly chart when it becomes active */
+        margin-top: -30px;
+      }
+    </style>
+
     <title>Responsive Dashboard Design #1 | AsmrProg</title>
   </head>
 
@@ -77,6 +119,14 @@
         <!-- Analyses -->
         <div class="analytics">
           <div class="chart-container">
+            <h2>Income</h2>
+            <div id="incomeChart"></div>
+          </div>
+          <div class="chart-container">
+            <h2>Outcome</h2>
+            <div id="outcomeChart"></div>
+          </div>
+          <div class="chart-container">
             <h2>Your Daily Spend</h2>
             <div id="dailyChart"></div>
           </div>
@@ -88,6 +138,9 @@
             <h2>Your Monthly Spend</h2>
             <div id="monthlyChart"></div>
           </div>
+          <div id="yearlyChart" class="chart-box"></div>
+          <div id="quartersChart" class="chart-box"></div>
+          <!-- <div class="wrap"></div> -->
         </div>
         <!-- End of Analyses -->
       </main>
