@@ -2,7 +2,42 @@ import {
   getIncomeDataWithCategory,
   getWeeklyMoney,
   getSpendingDataWithCategory,
+  getIncomeList,
+  getOutcomeList,
 } from "./utils/dataTrasaction.mjs";
+
+document.getElementById("filterDay").addEventListener("click", () => {
+  updateDashboardChart("1D");
+});
+document.getElementById("filterWeek").addEventListener("click", () => {
+  updateDashboardChart("1W");
+});
+document.getElementById("filterMonth").addEventListener("click", () => {
+  updateDashboardChart("1M");
+});
+document.getElementById("filterYear").addEventListener("click", () => {
+  updateDashboardChart("1Y");
+});
+document.getElementById("filterAll").addEventListener("click", () => {
+  updateDashboardChart("ALL");
+});
+const filterButtons = document.querySelectorAll(".filter-item");
+filterButtons.forEach((button) => {
+  // if click active button then remove active class
+  button.addEventListener("click", () => {
+    // if click active button then remove active class
+    if (button.classList.contains("active")) {
+      button.classList.remove("active");
+    } else {
+      // remove active class from all buttons
+      filterButtons.forEach((button) => {
+        button.classList.remove("active");
+      });
+      // add active class to the clicked button
+      button.classList.add("active");
+    }
+  });
+});
 
 var colors = [
   "#008FFB",
@@ -48,6 +83,401 @@ function updateQuarterChart(sourceChart, destChartIDToUpdate) {
     });
   }
 }
+
+function shuffleArray() {
+  var array = [
+    {
+      y: 400,
+      quarters: [
+        {
+          x: "Q1",
+          y: 120,
+        },
+        {
+          x: "Q2",
+          y: 90,
+        },
+        {
+          x: "Q3",
+          y: 100,
+        },
+        {
+          x: "Q4",
+          y: 90,
+        },
+      ],
+    },
+    {
+      y: 430,
+      quarters: [
+        {
+          x: "Q1",
+          y: 120,
+        },
+        {
+          x: "Q2",
+          y: 110,
+        },
+        {
+          x: "Q3",
+          y: 90,
+        },
+        {
+          x: "Q4",
+          y: 110,
+        },
+      ],
+    },
+    {
+      y: 448,
+      quarters: [
+        {
+          x: "Q1",
+          y: 70,
+        },
+        {
+          x: "Q2",
+          y: 100,
+        },
+        {
+          x: "Q3",
+          y: 140,
+        },
+        {
+          x: "Q4",
+          y: 138,
+        },
+      ],
+    },
+    {
+      y: 470,
+      quarters: [
+        {
+          x: "Q1",
+          y: 150,
+        },
+        {
+          x: "Q2",
+          y: 60,
+        },
+        {
+          x: "Q3",
+          y: 190,
+        },
+        {
+          x: "Q4",
+          y: 70,
+        },
+      ],
+    },
+    {
+      y: 540,
+      quarters: [
+        {
+          x: "Q1",
+          y: 120,
+        },
+        {
+          x: "Q2",
+          y: 120,
+        },
+        {
+          x: "Q3",
+          y: 130,
+        },
+        {
+          x: "Q4",
+          y: 170,
+        },
+      ],
+    },
+    {
+      y: 580,
+      quarters: [
+        {
+          x: "Q1",
+          y: 170,
+        },
+        {
+          x: "Q2",
+          y: 130,
+        },
+        {
+          x: "Q3",
+          y: 120,
+        },
+        {
+          x: "Q4",
+          y: 160,
+        },
+      ],
+    },
+  ];
+
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
+}
+
+function makeData() {
+  var dataSet = shuffleArray();
+
+  var dataYearSeries = [
+    {
+      x: "2011",
+      y: dataSet[0].y,
+      color: colors[0],
+      quarters: dataSet[0].quarters,
+    },
+    {
+      x: "2012",
+      y: dataSet[1].y,
+      color: colors[1],
+      quarters: dataSet[1].quarters,
+    },
+    {
+      x: "2013",
+      y: dataSet[2].y,
+      color: colors[2],
+      quarters: dataSet[2].quarters,
+    },
+    {
+      x: "2014",
+      y: dataSet[3].y,
+      color: colors[3],
+      quarters: dataSet[3].quarters,
+    },
+    {
+      x: "2015",
+      y: dataSet[4].y,
+      color: colors[4],
+      quarters: dataSet[4].quarters,
+    },
+    {
+      x: "2016",
+      y: dataSet[5].y,
+      color: colors[5],
+      quarters: dataSet[5].quarters,
+    },
+  ];
+
+  return dataYearSeries;
+}
+
+// Function to convert date strings to Date objects
+function parseDate(dateString) {
+  const [day, month, year] = dateString.split("/");
+  return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+}
+
+// Function to group income/outcome data by date
+function groupDataByDate(data) {
+  const groupedData = {};
+  data.forEach((entry) => {
+    const date = parseDate(entry.date);
+    const key = date.toISOString().split("T")[0]; // Group by date without time
+    if (!groupedData[key]) {
+      groupedData[key] = { date, total: 0 };
+    }
+    groupedData[key].total += entry.amount;
+  });
+  return groupedData;
+}
+
+// Function to generate series data for the chart
+function generateSeriesData(groupedData) {
+  const seriesData = [];
+  Object.keys(groupedData).forEach((key) => {
+    seriesData.push({ x: groupedData[key].date, y: groupedData[key].total });
+  });
+  // Sort series data by date
+  seriesData.sort((a, b) => a.x - b.x);
+  return seriesData;
+}
+
+// Generate grouped income and outcome data
+const groupedIncome = groupDataByDate(getIncomeList());
+const groupedOutcome = groupDataByDate(getOutcomeList());
+
+// Generate series data for income and outcome
+const incomeSeries = generateSeriesData(groupedIncome);
+const outcomeSeries = generateSeriesData(groupedOutcome);
+
+// Initial data for the chart
+const dashboardChartData = {
+  income: incomeSeries,
+  outcome: outcomeSeries,
+};
+
+console.log(dashboardChartData);
+
+// Function to render the chart
+function renderChart(data) {
+  dashboardChart.updateOptions({
+    series: [
+      {
+        name: "Income",
+        data: data.income,
+      },
+      {
+        name: "Outcome",
+        data: data.outcome,
+      },
+    ],
+  });
+}
+
+function updateDashboardChart(interval) {
+  let newData;
+  switch (interval) {
+    case "1D":
+      // Get data for 1 day
+      newData = generateChartDataForInterval("1D");
+      break;
+    case "1W":
+      // Get data for 1 week
+      newData = generateChartDataForInterval("1W");
+      break;
+    case "1M":
+      // Get data for 1 month
+      newData = generateChartDataForInterval("1M");
+      break;
+    case "1Y":
+      // Get data for 1 year
+      newData = generateChartDataForInterval("1Y");
+      break;
+    case "ALL":
+      // Get all data
+      newData = dashboardChartData;
+      break;
+    default:
+      // Default to all data
+      newData = dashboardChartData;
+      break;
+  }
+  // Update series data for the dashboardChart
+  renderChart(newData);
+}
+
+// Function to generate chart data for a specific time interval
+function generateChartDataForInterval(interval) {
+  // Logic to generate data for the specified interval
+  // Replace this with your actual implementation
+  let startDate, endDate;
+  switch (interval) {
+    case "1D":
+      // Get data for 1 day
+      startDate = new Date();
+      endDate = new Date();
+      break;
+    case "1W":
+      // Get data for 1 week
+      startDate = new Date();
+      startDate.setDate(startDate.getDate() - 7);
+      endDate = new Date();
+      break;
+    case "1M":
+      // Get data for 1 month
+      startDate = new Date();
+      startDate.setMonth(startDate.getMonth() - 1);
+      endDate = new Date();
+      break;
+    case "1Y":
+      // Get data for 1 year
+      // from 1 of January to 31 of December of the current year
+      startDate = new Date(new Date().getFullYear(), 0, 1);
+      endDate = new Date(new Date().getFullYear(), 11, 31);
+      break;
+    default:
+      // Default to all data
+      return dashboardChartData;
+  }
+
+  // Filter income and outcome data for the specified interval
+  const filteredIncome = incomeSeries.filter(
+    (entry) => entry.x >= startDate && entry.x <= endDate
+  );
+
+  const filteredOutcome = outcomeSeries.filter(
+    (entry) => entry.x >= startDate && entry.x <= endDate
+  );
+  return { income: filteredIncome, outcome: filteredOutcome };
+}
+
+// Example usage:
+// Assume you have HTML buttons for each interval, and onclick events call updateDashboardChart function with the respective interval
+// For example:
+
+const dashboardChartOptions = {
+  id: "dashboardChart",
+  series: [
+    {
+      name: "Income",
+      data: getIncomeList().map((income) => ({
+        x: parseDate(income.date),
+        y: income.amount,
+      })),
+    },
+    {
+      name: "Outcome",
+      data: getOutcomeList().map((outcome) => ({
+        x: parseDate(outcome.date),
+        y: outcome.amount,
+      })),
+    },
+  ],
+  chart: {
+    type: "area",
+    stacked: false,
+    height: 350,
+    zoom: {
+      type: "x",
+      enabled: true,
+      autoScaleYaxis: true,
+    },
+    toolbar: {
+      autoSelected: "zoom",
+    },
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  legend: {
+    position: "top",
+    style: {
+      fontSize: "14px",
+      fontFamily: "Poppins, sans-serif",
+      fontWeight: "500",
+    },
+  },
+  markers: {
+    size: 0,
+  },
+  fill: {
+    type: "gradient",
+    gradient: {
+      shadeIntensity: 1,
+      inverseColors: false,
+      opacityFrom: 0.5,
+      opacityTo: 0,
+      stops: [0, 90, 100],
+    },
+  },
+  yaxis: {
+    labels: {
+      formatter: function (val) {
+        return "Rp" + val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      },
+    },
+  },
+  xaxis: {
+    type: "datetime",
+  },
+};
 
 var dailyOptions = {
   series: [
@@ -303,7 +733,7 @@ const incomeOptions = {
   labels: incomeDataWithCategory.map((data) => data.category),
   chart: {
     type: "pie",
-    height: 350,
+    width: "740px",
     animations: {
       enabled: true,
       easing: "easeinout",
@@ -318,12 +748,30 @@ const incomeOptions = {
       },
     },
   },
-
+  title: {
+    text: "Your Outcome Category",
+    align: "left",
+    margin: 20,
+    offsetX: 0,
+    offsetY: 0,
+    floating: false,
+    style: {
+      fontSize: "20px",
+      fontWeight: "bold",
+      fontFamily: "Poppins, sans-serif",
+      color: "#263238",
+    },
+  },
   legend: {
-    position: "bottom",
+    position: "right",
     fontSize: "14px",
     fontFamily: "Roboto, sans-serif",
     fontWeight: "500",
+    offsetY: 100,
+    itemMargin: {
+      horizontal: 7,
+      vertical: 7,
+    },
   },
   colors: [
     "#4361ee",
@@ -379,7 +827,7 @@ const outcomeOptions = {
   labels: outcomeDataWithCategory.map((data) => data.category),
   chart: {
     type: "pie",
-    height: 350,
+    width: "600px",
     animations: {
       enabled: true,
       easing: "easeinout",
@@ -394,24 +842,32 @@ const outcomeOptions = {
       },
     },
   },
-
+  title: {
+    text: "Your Income Category",
+    align: "left",
+    margin: 20,
+    offsetX: 0,
+    offsetY: 0,
+    floating: false,
+    style: {
+      fontSize: "20px",
+      fontWeight: "bold",
+      fontFamily: "Poppins, sans-serif",
+      color: "#263238",
+    },
+  },
   legend: {
-    position: "bottom",
+    position: "right",
     fontSize: "14px",
     fontFamily: "Roboto, sans-serif",
     fontWeight: "500",
+    offsetY: 100,
+    itemMargin: {
+      horizontal: 7,
+      vertical: 7,
+    },
   },
   colors: [
-    "#4361ee",
-    "#805dca",
-    "#e2a03f",
-    "#f77f00",
-    "#f55236",
-    "#4caf50",
-    "#03a9f4",
-    "#ffeb3b",
-    "#9c27b0",
-    "#ff5722",
     "#8bc34a",
     "#00bcd4",
     "#ffc107",
@@ -588,190 +1044,6 @@ var quartersOptions = {
   },
 };
 
-function shuffleArray() {
-  var array = [
-    {
-      y: 400,
-      quarters: [
-        {
-          x: "Q1",
-          y: 120,
-        },
-        {
-          x: "Q2",
-          y: 90,
-        },
-        {
-          x: "Q3",
-          y: 100,
-        },
-        {
-          x: "Q4",
-          y: 90,
-        },
-      ],
-    },
-    {
-      y: 430,
-      quarters: [
-        {
-          x: "Q1",
-          y: 120,
-        },
-        {
-          x: "Q2",
-          y: 110,
-        },
-        {
-          x: "Q3",
-          y: 90,
-        },
-        {
-          x: "Q4",
-          y: 110,
-        },
-      ],
-    },
-    {
-      y: 448,
-      quarters: [
-        {
-          x: "Q1",
-          y: 70,
-        },
-        {
-          x: "Q2",
-          y: 100,
-        },
-        {
-          x: "Q3",
-          y: 140,
-        },
-        {
-          x: "Q4",
-          y: 138,
-        },
-      ],
-    },
-    {
-      y: 470,
-      quarters: [
-        {
-          x: "Q1",
-          y: 150,
-        },
-        {
-          x: "Q2",
-          y: 60,
-        },
-        {
-          x: "Q3",
-          y: 190,
-        },
-        {
-          x: "Q4",
-          y: 70,
-        },
-      ],
-    },
-    {
-      y: 540,
-      quarters: [
-        {
-          x: "Q1",
-          y: 120,
-        },
-        {
-          x: "Q2",
-          y: 120,
-        },
-        {
-          x: "Q3",
-          y: 130,
-        },
-        {
-          x: "Q4",
-          y: 170,
-        },
-      ],
-    },
-    {
-      y: 580,
-      quarters: [
-        {
-          x: "Q1",
-          y: 170,
-        },
-        {
-          x: "Q2",
-          y: 130,
-        },
-        {
-          x: "Q3",
-          y: 120,
-        },
-        {
-          x: "Q4",
-          y: 160,
-        },
-      ],
-    },
-  ];
-
-  for (var i = array.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-  return array;
-}
-
-function makeData() {
-  var dataSet = shuffleArray();
-
-  var dataYearSeries = [
-    {
-      x: "2011",
-      y: dataSet[0].y,
-      color: colors[0],
-      quarters: dataSet[0].quarters,
-    },
-    {
-      x: "2012",
-      y: dataSet[1].y,
-      color: colors[1],
-      quarters: dataSet[1].quarters,
-    },
-    {
-      x: "2013",
-      y: dataSet[2].y,
-      color: colors[2],
-      quarters: dataSet[2].quarters,
-    },
-    {
-      x: "2014",
-      y: dataSet[3].y,
-      color: colors[3],
-      quarters: dataSet[3].quarters,
-    },
-    {
-      x: "2015",
-      y: dataSet[4].y,
-      color: colors[4],
-      quarters: dataSet[4].quarters,
-    },
-    {
-      x: "2016",
-      y: dataSet[5].y,
-      color: colors[5],
-      quarters: dataSet[5].quarters,
-    },
-  ];
-
-  return dataYearSeries;
-}
-
 var dailyChart = new ApexCharts(
   document.querySelector("#dailyChart"),
   dailyOptions
@@ -800,6 +1072,10 @@ var quartersChart = new ApexCharts(
   document.querySelector("#quartersChart"),
   quartersOptions
 );
+var dashboardChart = new ApexCharts(
+  document.querySelector("#dashboardChart"),
+  dashboardChartOptions
+);
 
 weeklyChart.render();
 dailyChart.render();
@@ -808,6 +1084,7 @@ incomeChart.render();
 outcomeChart.render();
 yearlyChart.render();
 quartersChart.render();
+dashboardChart.render();
 
 yearlyChart.addEventListener("dataPointSelection", function (e, chart, opts) {
   var quartersChartEl = document.querySelector("#quartersChart");

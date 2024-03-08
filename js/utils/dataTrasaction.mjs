@@ -58,6 +58,15 @@ export function getIncomeList() {
 }
 
 /**
+ * Getter untuk mendapatkan list pengeluaran pengguna.
+ *
+ * @returns {UserFinancialData} - Daftar transaksi pengguna
+ */
+export function getOutcomeList() {
+  return JSON.parse(window.localStorage.getItem("spending"));
+}
+
+/**
  * Module untuk menambah data pendapatan/pengeluaran transaksi
  *
  * @param {Transaction} newTransaction - data transaksi dari form

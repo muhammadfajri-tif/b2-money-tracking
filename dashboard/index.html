@@ -126,52 +126,22 @@
           </div>
         </div>
         <!-- End of Analyses -->
-
-        <!-- New Users Section -->
-        <div class="new-users">
-          <h2>New Users</h2>
-          <div class="user-list">
-            <div class="user">
-              <img src="../images/profile-2.jpg" />
-              <h2>Jack</h2>
-              <p>54 Min Ago</p>
+        <div class="analytics">
+          <div class="chart-container" style="padding-top: 0">
+            <div id="filter">
+              <h2>Overview Statistic</h2>
+              <div class="filter-group">
+                <button id="filterDay" class="filter-item">1 Day</button>
+                <button id="filterWeek" class="filter-item">1 Week</button>
+                <button id="filterMonth" class="filter-item">1 Month</button>
+                <button id="filterYear" class="filter-item">1 Year</button>
+                <button id="filterAll" class="filter-item">All Time</button>
+              </div>
             </div>
-            <div class="user">
-              <img src="../images/profile-3.jpg" />
-              <h2>Amir</h2>
-              <p>3 Hours Ago</p>
-            </div>
-            <div class="user">
-              <img src="../images/profile-4.jpg" />
-              <h2>Ember</h2>
-              <p>6 Hours Ago</p>
-            </div>
-            <div class="user">
-              <img src="../images/plus.png" />
-              <h2>More</h2>
-              <p>New User</p>
-            </div>
+            <div id="dashboardChart"></div>
           </div>
         </div>
-        <!-- End of New Users Section -->
 
-        <!-- Recent Orders Table -->
-        <div class="recent-orders">
-          <h2>Recent Orders</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Course Name</th>
-                <th>Course Number</th>
-                <th>Payment</th>
-                <th>Status</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-          <a href="#">Show All</a>
-        </div>
         <!-- End of Recent Orders -->
       </main>
       <!-- End of Main Content -->
@@ -249,7 +219,10 @@
       </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="../js/orders.js"></script>
     <script src="../js/index.js"></script>
+    <script type="module" src="../js/utils/dataTrasaction.mjs"></script>
+    <script type="module" src="../js/chart.js"></script>
   </body>
 </html>

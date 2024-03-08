@@ -571,6 +571,87 @@ main .analytics .sales {
   justify-content: space-between;
 }
 
+.chart-box {
+  padding-left: 0;
+  background: #fff;
+}
+
+#yearlyChart,
+#quartersChart {
+  width: 100%;
+  max-width: 48%;
+  box-shadow: none;
+}
+#yearlyChart {
+  float: left;
+  position: relative;
+  z-index: 3;
+}
+
+#quartersChart {
+  float: left;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  clear: both;
+  transition: transform 1.1s ease-in-out, visibility 1.1s ease-in-out; /* Add transition for visibility */
+
+  visibility: hidden; /* Initially hide the quarterly chart */
+  transform: translateY(
+    -100%
+  ); /* Initially move the quarterly chart off-screen */
+  margin-top: -30px;
+}
+
+#quartersChart.active {
+  /* transform: translate(107%, -106%); */
+  transform: translate(107%, -100%);
+  visibility: visible; /* Show the quarterly chart when it becomes active */
+  margin-top: -30px;
+}
+
+.chart-combine {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+#filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.6rem;
+  margin-top: 1.6rem;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 20px;
+}
+
+.filter-item {
+  /* create container like a button to make it like a filter button */
+  padding: 0.6rem 1.2rem;
+  border-radius: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--color-dark-variant);
+  background-color: var(--color-light);
+}
+
+.filter-item:hover {
+  background-color: var(--color-success);
+  color: var(--color-white);
+}
+
+.filter-item.active {
+  background-color: var(--color-success);
+  color: var(--color-white);
+}
+
 @media screen and (max-width: 1200px) {
   .container {
     width: 95%;
