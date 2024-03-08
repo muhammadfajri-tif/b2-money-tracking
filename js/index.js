@@ -23,15 +23,24 @@ Orders.forEach((order) => {
         <td>${order.productName}</td>
         <td>${order.productNumber}</td>
         <td>${order.paymentStatus}</td>
-        <td class="${
-          order.status === "Declined"
-            ? "danger"
-            : order.status === "Pending"
-            ? "warning"
-            : "primary"
-        }">${order.status}</td>
+        <td class="${order.status === "Declined"
+      ? "danger"
+      : order.status === "Pending"
+        ? "warning"
+        : "primary"
+    }">${order.status}</td>
         <td class="primary">Details</td>
     `;
   tr.innerHTML = trContent;
   document.querySelector("table tbody").appendChild(tr);
 });
+
+// handle form buat akun baru
+function toggleFormCreateUse() {
+  const formNewAccount = document.getElementById("new-account-form");
+  if (formNewAccount.style.display === "none") {
+    formNewAccount.style.display = "block";
+  } else {
+    formNewAccount.style.display = "none";
+  }
+}

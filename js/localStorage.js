@@ -83,8 +83,45 @@ function handleAddSpendingForm(event) {
   addNewIncome(parseData, 'spending');
 }
 
+// handle form buat akun baru
+const formCreateUserSelector = document.getElementById("new-account-form");
+formCreateUserSelector.addEventListener('submit', handleCreateNewAccount);
+
+function handleCreateNewAccount(event) {
+  event.preventDefault();
+
+  const form = new FormData(formCreateUserSelector);
+  console.log("create new account", form);
+
+  // parse form data
+  const name = form.get("new-account-name");
+  const money = parseInt(form.get("new-account-money"));
+
+  const newAccount = {
+    name,
+    money,
+    spending: [],
+    income: []
+  };
+
+  // validate if there's existing account/data
+  if (getUsername() !== null && getMoney() !== null) {
+    // TODO: ganti sweet alert
+    if (confirm("Terdapat data dari akun sebelumnya. Membuat akun baru akan menghapus semua data dari akun sebelumnya. Agar data akun sebelumnya tidak terhapus, pastikan backup /export data terlebih dahulu. Apakah akan membuat akun baru ? ")) {
+      initializeDataToLocalStorage(newAccount);
+      alert("user baru berhasil dibuat");
+    } else {
+      alert("user baru gagal dibuat");
+    }
+  } else {
+    // no existing account/data
+    initializeDataToLocalStorage(newAccount);
+    alert("user baru berhasil dibuat");
+  }
+
+}
+
 
 // TODO
-// - Form create new user (not by import)
 // - export income as json/csv
 // - export spending as json/csv
