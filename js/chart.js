@@ -12,7 +12,7 @@ function formatNumber(val) {
   }
 }
 
-var dailyOption = {
+var dailyOptions = {
   chart: {
     type: "line",
     height: 350,
@@ -53,7 +53,7 @@ var dailyOption = {
   },
   colors: ["#2ecc71", "#3498db", "#e74c3c"], // Green for Food, Blue for Transportation, Red for Entertainment
   grid: {
-    borderColor: "#f1f1f1",
+    borderColor: "#e0e6ed",
   },
 };
 
@@ -65,13 +65,13 @@ console.log(weeklySums);
 const incomeData = weeklySums.map((week) => week.income); // Extracts the sum for each week
 const outcomeData = weeklySums.map((week) => week.spending); // Extracts the sum for each week
 console.log(incomeData);
-var weeklyOption = {
+var weeklyOptions = {
   chart: {
     type: "bar",
     height: 350,
   },
   colors: ["#03C988", "#e7515a"], // Green for income, Red for outcome
-  plotOptions: {
+  plotOptionss: {
     bar: {
       horizontal: false,
       columnWidth: "50%", // Adjust the width of columns
@@ -82,7 +82,7 @@ var weeklyOption = {
   yaxis: {
     labels: {
       formatter: function (val) {
-        return "Rp " + val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return "Rp " + val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
       },
     },
   },
@@ -93,7 +93,7 @@ var weeklyOption = {
     opacity: 1,
   },
   dataLabels: {
-    enabled: true,
+    enabled: false,
     formatter: formatNumber,
     style: {
       fontSize: "8px",
@@ -101,8 +101,8 @@ var weeklyOption = {
   },
 };
 
-// Update the series data in your chart options
-weeklyOption.series = [
+// Update the series data in your chart Optionss
+weeklyOptions.series = [
   {
     name: "Income",
     data: incomeData,
@@ -114,76 +114,90 @@ weeklyOption.series = [
 ];
 
 // Update the x-axis categories if needed (assuming weeks are available in weeklySums)
-weeklyOption.xaxis.categories = weeklySums.map((week) => week.name);
+weeklyOptions.xaxis.categories = weeklySums.map((week) => week.name);
 
-// Now, you can use weeklyOption to initialize your chart
+// Now, you can use weeklyOptions to initialize your chart
 
 // Extract income and outcome data from the weekly sums
 // const incomeData = weeklySums.map((week) => week.sum); // Extracts the sum for each week
 // const outcomeData = weeklySums.map
 
-var monthlyOption = {
-  chart: {
-    type: "bar",
-    height: 350,
-  },
-  colors: ["#03C988", "#e7515a"], // Green for income, Red for outcome
-  plotOptions: {
-    bar: {
-      horizontal: false,
-      columnWidth: "50%", // Adjust the width of columns
-      endingShape: "flat", // Columns with flat ending
-    },
-  },
+const monthlyOptions = {
   series: [
     {
       name: "Income",
-      // income data for each month of ratusan ribu dynamic
-      data: [1250000, 5300000, 3250000, 1240000, 7500000],
+      data: [
+        16800, 16800, 15500, 17800, 15500, 17000, 19000, 16000, 15000, 17000,
+        14000, 17000,
+      ],
     },
     {
       name: "Outcome",
-      // outcome data for each month of ratusan ribu dynamic
-      data: [1000000, 4500000, 3000000, 1000000, 6000000],
+      data: [
+        11200, 11200, 10300, 11800, 10300, 11300, 13300, 11300, 10300, 11300,
+        9300, 11300,
+      ],
     },
   ],
+  chart: {
+    type: "area",
+    height: 300,
+  },
+  colors: ["#00ab55", "#805dca"],
+  dataLabels: {
+    enabled: false,
+  },
+  stroke: {
+    width: [2, 2],
+    curve: "smooth",
+  },
   xaxis: {
-    categories: ["January", "February", "March", "April", "May"], // Months of the year
+    axisBorder: {
+      color: "#191e3a",
+    },
   },
   yaxis: {
+    opposite: false,
     labels: {
       formatter: function (val) {
-        return "Rp " + val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return "Rp " + val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
       },
     },
   },
+  labels: [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ],
   legend: {
     position: "top",
   },
-  fill: {
-    opacity: 1,
-  },
-  dataLabels: {
-    enabled: true,
-    formatter: formatNumber,
-    style: {
-      fontSize: "8px",
-    },
+  grid: {
+    borderColor: "#e0e6ed",
   },
 };
 
 document.addEventListener("DOMContentLoaded", function (event) {
   var dailyChart = new ApexCharts(
     document.querySelector("#dailyChart"),
-    dailyOption
+    dailyOptions
   );
   var weeklyChart = new ApexCharts(
     document.querySelector("#weeklyChart"),
-    weeklyOption
+    weeklyOptions
   );
   var monthlyChart = new ApexCharts(
     document.querySelector("#monthlyChart"),
-    monthlyOption
+    monthlyOptions
   );
   weeklyChart.render();
   dailyChart.render();
