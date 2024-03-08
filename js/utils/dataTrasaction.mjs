@@ -42,7 +42,7 @@ export function getMoney() {
 /**
  * Getter untuk mendapatkan list pengeluaran pengguna.
  *
- * @returns {Transaction} - Daftar transaksi pengeluaran
+ * @returns {Transaction[]} - Daftar transaksi pengeluaran
  */
 export function getSpendingList() {
   return JSON.parse(window.localStorage.getItem("spending"));
@@ -51,10 +51,47 @@ export function getSpendingList() {
 /**
  * Getter untuk mendapatkan list pendapatan pengguna.
  *
- * @returns {Transaction} - Daftar transaksi pendapatan
+ * @returns {Transaction[]} - Daftar transaksi pendapatan
  */
 export function getIncomeList() {
   return JSON.parse(window.localStorage.getItem("income"));
+}
+
+/**
+ * Module untuk menambah data pendapatan/pengeluaran transaksi
+ *
+ * @param {Transaction} newTransaction - data transaksi dari form
+ * @param {'spending'|'income'} typeTransaction - Tipe transaksi. Nilai yang valid adalah 'spending' atau 'income'
+ */
+export function addNewIncome(newTransaction, typeTransaction) {
+  // validate type transaction
+  if (typeTransaction !== "spending" && typeTransaction !== "income") {
+    console.error(
+      "`typeTransaction` tidak valid. Opsi hanya tersedia spending atau income"
+    );
+    return;
+  }
+
+  // load existing data
+  const existingTransaction =
+    (typeTransaction === "spending" && (getSpendingList() || [])) ||
+    (typeTransaction === "income" && (getIncomeList() || []));
+
+  // append new data to existing data
+  existingTransaction.push(newTransaction);
+
+  // sort by date
+  existingTransaction.sort((a, b) => parseDate(a.date) - parseDate(b.date));
+  console.log(`[SORTED] current ${typeTransaction}`, existingTransaction);
+
+  // save to the local storage
+  typeTransaction === "income" &&
+    window.localStorage.setItem("income", JSON.stringify(existingTransaction));
+  typeTransaction === "spending" &&
+    window.localStorage.setItem(
+      "spending",
+      JSON.stringify(existingTransaction)
+    );
 }
 
 /**
@@ -66,6 +103,34 @@ export function getIncomeList() {
 export function parseDate(date_str) {
   const [day, month, year] = date_str.split("/");
   return new Date(year, month - 1, day);
+}
+
+/**
+ * Module untuk me-format data dari form ke bentuk object javascript.
+ *
+ * @param {FormData} form - Form data
+ * @param {'spending'|'income'} typeTransaction - Tipe transaksi antara pengeluaran atau pendapatan
+ * @returns {Transaction} Data transaksi data
+ */
+export function parseFormData(form, typeTransaction) {
+  // validate type transaction
+  if (typeTransaction !== "spending" && typeTransaction !== "income") {
+    console.error(
+      "`typeTransaction` tidak valid. Opsi hanya tersedia spending atau income"
+    );
+    return;
+  }
+
+  const parseData = {};
+  // convert form date to type date with dd/mm/yyyy format
+  parseData["date"] = new Date(
+    form.get(`date-${typeTransaction}`)
+  ).toLocaleDateString("en-GB");
+  parseData["amount"] = parseInt(form.get(`amount-${typeTransaction}`));
+  parseData["category"] = form.get(`category-${typeTransaction}`);
+  parseData["desc"] = form.get(`desc-${typeTransaction}`);
+
+  return parseData;
 }
 
 /**
@@ -158,6 +223,34 @@ export function getSpendingDataWithCategory() {
   }));
 }
 
-// TODO: Set new data
-// TODO: sort transaction (income/spending) based on date
-// TODO: export to file (csv/json)
+export function getIncomeDataWithCategory() {
+  const income = getIncomeList();
+  const data = {};
+  for (const transaction of income) {
+    if (transaction.category in data) {
+      data[transaction.category] += transaction.amount;
+    } else {
+      data[transaction.category] = transaction.amount;
+    }
+  }
+  return Object.keys(data).map((key) => ({
+    category: key,
+    amount: data[key],
+  }));
+}
+
+export function getSpendingDataWithCategory() {
+  const spending = getSpendingList();
+  const data = {};
+  for (const transaction of spending) {
+    if (transaction.category in data) {
+      data[transaction.category] += transaction.amount;
+    } else {
+      data[transaction.category] = transaction.amount;
+    }
+  }
+  return Object.keys(data).map((key) => ({
+    category: key,
+    amount: data[key],
+  }));
+}

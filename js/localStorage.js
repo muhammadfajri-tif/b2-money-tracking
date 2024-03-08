@@ -1,5 +1,6 @@
 
 import { loadFileContent, isDataValid, initializeDataToLocalStorage } from './utils/file.mjs';
+import { getUsername, getMoney, getIncomeList, getSpendingList, addNewIncome, parseDate, parseFormData } from './utils/dataTrasaction.mjs'
 
 // handle form file upload untuk import data
 const fileSelector = document.getElementById('file-select'); // must be appropriate
@@ -41,10 +42,10 @@ function readFile() {
     });
   }
 }
-
 // handle form tambah pendapatan
 const formAddIncomeSelector = document.getElementById('add-income-form');
 formAddIncomeSelector.addEventListener('submit', handleAddIncomeFrom);
+
 
 /**
  * Module event handler untuk menangani data pemasukan baru 
@@ -54,12 +55,12 @@ formAddIncomeSelector.addEventListener('submit', handleAddIncomeFrom);
 function handleAddIncomeFrom(event) {
   event.preventDefault();
 
-  // special case for date only (get input value as date and convert it to dd/mm/yyyy)
-  const date = new Date(formAddIncomeSelector.elements[0].valueAsDate).toLocaleDateString('en-GB');
-  console.log("form income date", date);
-
   const form = new FormData(formAddIncomeSelector);
-  console.log(form);
+
+  const parseData = parseFormData(form, 'income');
+  console.log("income", parseData);
+
+  addNewIncome(parseData, "income");
 }
 
 // handle form tambah pengeluaran
@@ -74,10 +75,16 @@ formAddSpendingSelector.addEventListener('submit', handleAddSpendingForm);
 function handleAddSpendingForm(event) {
   event.preventDefault();
 
-  // special case for date only (get input value as date and convert it to dd/mm/yyyy)
-  const date = new Date(formAddSpendingSelector.elements[0].valueAsDate).toLocaleDateString('en-GB');
-  console.log("form spending date", date);
-
   const form = new FormData(formAddSpendingSelector);
-  console.log(form);
+
+  const parseData = parseFormData(form, 'spending');
+  console.log("spending", parseData);
+
+  addNewIncome(parseData, 'spending');
 }
+
+
+// TODO
+// - Form create new user (not by import)
+// - export income as json/csv
+// - export spending as json/csv
