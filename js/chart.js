@@ -371,15 +371,30 @@ function generateChartDataForInterval(interval) {
   switch (interval) {
     case "1D":
       // Get data for 1 day
+      // from 00:00 before the current day to 23:59 of the current day
       startDate = new Date();
+      startDate.setDate(startDate.getDate() - 1);
       endDate = new Date();
+      endDate.setHours(23, 59, 59, 999);
       break;
     case "1W":
       // Get data for 1 week
-      startDate = new Date();
-      startDate.setDate(startDate.getDate() - 7);
-      endDate = new Date();
+      // today is 9th of March 2024, get data from 4th of March to 10th of March 2024
+      const today = new Date();
+      const dayOfWeek = today.getDay(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
+
+      // Calculate the offset to the previous Monday
+      const mondayOffset = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+
+      // Set the start date to the previous Monday
+      startDate = new Date(today);
+      startDate.setDate(today.getDate() - mondayOffset);
+
+      // Set the end date to the following Sunday
+      endDate = new Date(startDate);
+      endDate.setDate(startDate.getDate() + 6);
       break;
+
     case "1M":
       // Get data for 1 month
       startDate = new Date();
@@ -397,10 +412,14 @@ function generateChartDataForInterval(interval) {
       return dashboardChartData;
   }
 
+  console.log("start date", startDate, "end date", endDate);
+
   // Filter income and outcome data for the specified interval
   const filteredIncome = incomeSeries.filter(
     (entry) => entry.x >= startDate && entry.x <= endDate
   );
+
+  console.log("filtered income", filteredIncome);
 
   const filteredOutcome = outcomeSeries.filter(
     (entry) => entry.x >= startDate && entry.x <= endDate

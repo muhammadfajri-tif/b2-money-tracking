@@ -188,10 +188,77 @@ aside .sidebar a span {
   transition: all 0.3s ease;
 }
 
-aside .sidebar a:last-child {
+/* aside .sidebar a:last-child {
   position: absolute;
   bottom: 2rem;
   width: 100%;
+} */
+
+aside .sidebar .bottom-sidebar {
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
+}
+
+aside .sidebar .sidebar-cc {
+  padding: 2rem 1rem 1rem 2rem;
+  font-size: 0.8rem;
+}
+
+.bottom-active {
+  padding-bottom: 15px;
+  padding-top: 1px;
+  color: var(--color-primary);
+  background-color: var(--color-light);
+  transition: all 0.3s ease;
+}
+
+aside .sidebar a.active:first-child {
+  width: 100%;
+  color: var(--color-primary);
+  background-color: var(--color-light);
+  margin-left: 0;
+  border-radius: 1rem 1rem 0 0;
+}
+
+aside .sidebar .sidebar-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1rem;
+  background-color: var(--color-white);
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem var(--color-light);
+  margin: 1rem 1rem 0rem 1rem;
+}
+
+aside .sidebar .sidebar-profile img {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+}
+
+aside .sidebar .line {
+  height: 1px;
+  background-color: var(--color-light);
+  margin: 1.5rem 1rem;
+}
+
+aside .sidebar .profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+aside .sidebar .bottom-sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1rem;
+  background-color: var(--color-white);
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem var(--color-light);
+  margin: 1rem 1rem 0rem 1rem;
+  transition: all 0.3s;
 }
 
 aside .sidebar a.active {
@@ -219,6 +286,10 @@ aside .sidebar a:hover {
 
 aside .sidebar a:hover span {
   margin-left: 0.6rem;
+}
+aside .sidebar a:hover .sidebar-theme {
+  font-size: 0.7rem;
+  transition: all 0.3s ease;
 }
 
 aside .sidebar .message-count {
@@ -427,24 +498,11 @@ main .recent-orders a {
   border-radius: var(--border-radius-1);
 }
 
-.right-section .nav .profile {
-  display: flex;
-  gap: 2rem;
-  text-align: right;
-}
-
-.right-section .nav .profile .profile-photo {
-  width: 2.8rem;
-  height: 2.8rem;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
 .right-section .user-profile {
   display: flex;
   justify-content: center;
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 3.9rem;
   background-color: var(--color-white);
   padding: var(--card-padding);
   border-radius: var(--card-border-radius);
@@ -595,7 +653,6 @@ main .analytics .sales {
   width: 100%;
   clear: both;
   transition: transform 1.1s ease-in-out, visibility 1.1s ease-in-out; /* Add transition for visibility */
-
   visibility: hidden; /* Initially hide the quarterly chart */
   transform: translateY(
     -100%
@@ -650,6 +707,249 @@ main .analytics .sales {
 .filter-item.active {
   background-color: var(--color-success);
   color: var(--color-white);
+}
+
+.form-section {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1.4rem;
+}
+
+.form-wrapper {
+  background-color: var(--color-white);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* form-style.css */
+
+/* Style for form container */
+.form-container {
+  background-color: var(--color-white);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  margin-top: 1rem;
+}
+
+.form-container p {
+  margin-bottom: 20px;
+  color: #7d8da1;
+  font-size: 14px;
+}
+
+/* Style for form group */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Style for form labels */
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Style for form inputs */
+.form-group input[type="text"],
+.form-group input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Style for file upload button */
+.file-upload {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.file-upload input[type="file"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: var(--color-white);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.custom-file-upload span {
+  margin-right: 10px;
+}
+
+.custom-file-upload:hover {
+  background-color: #0056b3;
+}
+
+/* Style for file name display */
+.file-name {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+/* Style for submit button */
+
+.btn-show-form {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: var(--color-white);
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* add transition */
+.create-account {
+  float: left;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  clear: both;
+  transition: transform 1.1s ease-in-out, visibility 1.1s ease-in-out; /* Add transition for visibility */
+  visibility: hidden; /* Initially hide the quarterly chart */
+  transform: translateY(
+    -20%
+  ); /* Initially move the quarterly chart off-screen */
+  margin-top: -30px;
+}
+
+.create-account.active {
+  transform: translate(0%, 10%);
+  visibility: visible; /* Show the quarterly chart when it becomes active */
+  margin-top: -30px;
+}
+
+.create-account button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: var(--color-white);
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.create-account button[type="submit"]:hover {
+  background-color: #218838;
+}
+
+/* placeholder of input create-account-form to red */
+.create-account-form input {
+  background-color: var(--color-white);
+}
+
+.support {
+  margin-top: 1.4rem;
+  gap: 1.6rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.support-card {
+  background-color: var(--color-white);
+  padding: var(--card-padding);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.support-card:hover {
+  box-shadow: none;
+}
+
+.support-card .icon {
+  padding: 1.2rem;
+  background-color: var(--color-light);
+  border-radius: var(--border-radius-1);
+  margin-bottom: 1.2rem;
+}
+
+.support-header {
+  display: flex;
+
+  gap: 0.6rem;
+}
+
+.support-card h3 {
+  margin-bottom: 0.8rem;
+  font-size: 1.2rem;
+  color: var(--color-dark);
+}
+
+.support-card p {
+  color: var(--color-dark-variant);
+}
+
+@media screen and (max-width: 768px) {
+  .form-section {
+    flex-direction: column;
+  }
+
+  .form-wrapper {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 1200px) {

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/dashboard-style.css" />
+    <title>Manage Your Account</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Sidebar Section -->
+      <aside>
+        <div class="toggle">
+          <div class="logo">
+            <img src="../images/logo.png" />
+            <h2>Asmr<span class="danger">Prog</span></h2>
+          </div>
+          <div class="close" id="close-btn">
+            <span class="material-icons-sharp"> close </span>
+          </div>
+        </div>
+
+        <div class="sidebar">
+          <a href="index.html">
+            <span class="material-icons-sharp"> dashboard </span>
+            <h3>Dashboard</h3>
+          </a>
+          <a href="manage.html" class="active">
+            <span class="material-icons-sharp"> account_balance_wallet </span>
+            <h3>Manage</h3>
+          </a>
+          <a href="analytics.html">
+            <span class="material-icons-sharp"> insights </span>
+            <h3>Analytics</h3>
+          </a>
+          <a href="settings.html">
+            <span class="material-icons-sharp"> settings </span>
+            <h3>Settings</h3>
+          </a>
+          <div class="bottom-sidebar">
+            <a href="support.html">
+              <span class="material-icons-sharp"> help_outline </span>
+              <h3>Support</h3>
+            </a>
+            <div class="dark-mode">
+              <a href="#">
+                <span class="material-icons-sharp icon-theme"> wb_sunny </span>
+                <h3 class="sidebar-theme title-theme">Light Theme</h3>
+              </a>
+            </div>
+
+            <!-- hr line -->
+            <div class="line"></div>
+            <div class="sidebar-profile">
+              <img src="../images/profile-1.jpg" />
+              <div class="profile-info">
+                <h3>Reza</h3>
+                <small class="text-muted">Admin</small>
+              </div>
+            </div>
+            <div class="sidebar-cc">
+              <p>©2024 Kelompok B2</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <!-- End of Sidebar Section -->
+
+      <!-- Main Content -->
+      <main class="main-container">
+        <div class="file-select" style="display: none"></div>
+        <h1 class="head-form">Manage Your Account</h1>
+
+        <section class="form-section">
+          <div class="form-wrapper">
+            <h2>Add Income</h2>
+            <form id="add-income-form">
+              <div class="form-group">
+                <label for="date-income">Date:</label>
+                <input
+                  id="date-income"
+                  name="date-income"
+                  type="date"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="amount-income">Amount:</label>
+                <input
+                  id="amount-income"
+                  name="amount-income"
+                  type="text"
+                  id="amount"
+                  name="amount"
+                  placeholder="Rp0"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="category-income">Category:</label>
+                <select id="category-income" name="category-income" required>
+                  <option value="grants">Grants</option>
+                  <option value="allowance">Allowance</option>
+                  <option value="salary">Salary</option>
+                  <option value="others">Others</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="desc-income">Note:</label>
+                <textarea
+                  id="desc-income"
+                  name="desc-income"
+                  rows="5"
+                  cols="25"
+                  placeholder="Notes..."
+                ></textarea>
+              </div>
+
+              <button type="submit" name="submit-income">Save</button>
+            </form>
+          </div>
+
+          <div class="form-wrapper">
+            <h2>Add Spending</h2>
+            <form id="add-spending-form">
+              <div class="form-group">
+                <label for="date-spending">Date:</label>
+                <input
+                  id="date-spending"
+                  name="date-spending"
+                  type="date"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="amount-spending">Amount:</label>
+                <input
+                  id="amount-spending"
+                  name="amount-spending"
+                  type="text"
+                  id="amount"
+                  name="amount"
+                  placeholder="Rp0"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="category-spending">Category:</label>
+                <select
+                  id="category-spending"
+                  name="category-spending"
+                  required
+                >
+                  <option value="food">Food/Drink</option>
+                  <option value="entertainment">Entertainment</option>
+                  <option value="transportation">Transportation</option>
+                  <option value="household">Household</option>
+                  <option value="college">College</option>
+                  <option value="medical">Medical</option>
+                  <option value="others">Others</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="desc-spending">Note:</label>
+                <textarea
+                  id="desc-spending"
+                  name="desc-spending"
+                  rows="5"
+                  cols="25"
+                  placeholder="Notes..."
+                ></textarea>
+              </div>
+
+              <button type="submit" name="submit-spending">Save</button>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      <!-- End of Main Content -->
+    </div>
+
+    <script type="module" src="../js/utils/formatter.mjs"></script>
+    <script type="module" src="../js/utils/transaction.mjs"></script>
+    <script src="../js/orders.js"></script>
+    <script src="../js/index.js"></script>
+  </body>
+</html>
