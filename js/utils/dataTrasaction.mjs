@@ -7,18 +7,25 @@
  */
 
 /**
- * @typedef {Object} TransactionSummary rekap transaksi bulanan/tahunan/harian
+ * @typedef {Object} UserFinancialData - rekap data keuangan pengguna
+ * @property {String} name - Nama pengguna
+ * @property {number} money - Uang yang pertama kali dimiliki
+ * @property {Transaction[]} spending - List pengeluaran keuangan
+ * @property {Transaction[]} income - List pemasukan keuangan
+ */
+
+/**
+ * @typedef {Object} TransactionSummary - rekap transaksi bulanan/tahunan/harian
  * @property {String} name - identifier untuk transaksi. Misalnya week10
  * @property {number} spending - total pengeluaran
  * @property {number} income - total pendapatan
  */
 
 /**
- * @typedef {Object} UserFinancialData - rekap data keuangan pengguna
- * @property {String} name - Nama pengguna
- * @property {number} money - Uang yang pertama kali dimiliki
- * @property {Transaction[]} spending - List pengeluaran keuangan
- * @property {Transaction[]} income - List pemasukan keuangan
+ * @typedef {Objet} TransactionSummaryByCategory - rekap transaksi berdasarkan kategori
+ * @property {String} category - kategori transaksi
+ * @property {number} amount - total jumlah transaksi dalam satu kategori
+ *
  */
 
 /**
@@ -200,6 +207,11 @@ export function getWeeklyMoney() {
   return result;
 }
 
+/**
+ * Module untuk mendapatkan data pemasukan berdasarkan kategori
+ *
+ * @returns {TransactionSummaryByCategory[]} - Rekap data pemasukan
+ */
 export function getIncomeDataWithCategory() {
   const income = getIncomeList();
   const data = {};
@@ -216,6 +228,11 @@ export function getIncomeDataWithCategory() {
   }));
 }
 
+/**
+ * Module untuk mendapatkan data pengeluaran berdasarkan kategori
+ *
+ * @returns {TransactionSummaryByCategory[]} - Rekap data pengeluaran
+ */
 export function getSpendingDataWithCategory() {
   const spending = getSpendingList();
   const data = {};

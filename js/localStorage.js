@@ -87,6 +87,11 @@ function handleAddSpendingForm(event) {
 const formCreateUserSelector = document.getElementById("new-account-form");
 formCreateUserSelector.addEventListener('submit', handleCreateNewAccount);
 
+/**
+ * Module event handler untuk menangani akun/user baru
+ *
+ * @param {Event} event
+ */
 function handleCreateNewAccount(event) {
   event.preventDefault();
 
