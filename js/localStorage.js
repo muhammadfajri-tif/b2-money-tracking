@@ -128,7 +128,10 @@ function handleCreateNewAccount(event) {
 const backupAccountButton = document.getElementById("backup-account-button");
 backupAccountButton.addEventListener('click', handleBackupAccount);
 
-function handleBackupAccount(event) {
+/**
+ * Module event handler untuk menangani button backup data user.
+ */
+function handleBackupAccount() {
   // construct object to export
   const account = {
     name: getUsername(),
@@ -150,6 +153,9 @@ function handleBackupAccount(event) {
 const exportIncomeUserButton = document.getElementById("export-income-json-button");
 exportIncomeUserButton.addEventListener('click', handleExportIncome);
 
+/**
+ * Module event handler untuk menangani button export pendapatan user.
+ */
 function handleExportIncome() {
   // get data
   const data = getIncomeList();
@@ -167,6 +173,9 @@ function handleExportIncome() {
 const exportSpendingUserButton = document.getElementById("export-spending-json-button");
 exportSpendingUserButton.addEventListener('click', handleExportSpending);
 
+/**
+ * Module event handler untuk menangani button export pengeluaran user.
+ */
 function handleExportSpending() {
   // get data
   const data = getSpendingList();
@@ -182,5 +191,5 @@ function handleExportSpending() {
 
 
 // TODO
-// - export income as json/csv
-// - export spending as json/csv
+// - export income as csv
+// - export spending as csv
