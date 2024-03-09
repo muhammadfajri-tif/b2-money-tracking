@@ -95,6 +95,49 @@
           <input type="submit" name="new-account-submit" value="daftar" />
         </form>
       </div>
+
+      <br>
+
+      <div>
+        <h2>Data Pemasukan</h2>
+        <table id="user-income-transaction-table">
+          <thead>
+            <tr>
+              <th>no</th>
+              <th>tanggal</th>
+              <th>nominal (Rp.)</th>
+              <th>kategori</th>
+              <th>deskripsi</th>
+              <th>action</th>
+            </tr>
+          </thead>
+          <!-- automatic insert via js, code: js/history.js -->
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+
+
+      <div>
+        <h2>Data Pengeluaran</h2>
+        <table id="user-spending-transaction-table">
+          <thead>
+            <tr>
+              <th>no</th>
+              <th>tanggal</th>
+              <th>nominal (Rp.)</th>
+              <th>kategori</th>
+              <th>deskripsi</th>
+              <th>action</th>
+            </tr>
+          </thead>
+          <!-- automatic insert via js, code: js/history.js -->
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+
+
     </main>
     <!-- End of Main Content -->
 
@@ -182,6 +225,7 @@
   </div>
 
 
+  <script type="module" src="../js/history.js"></script>
   <script type="module" src="../js/localStorage.js"></script>
   <script src="../js/orders.js"></script>
   <script src="../js/index.js"></script>
