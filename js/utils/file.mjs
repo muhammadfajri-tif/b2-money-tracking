@@ -15,6 +15,14 @@
  */
 
 /**
+ * @typedef {Object} BackupAccountBlob - Informasi/metadata file backup akun user.
+ * @property {String} url - URL file
+ * @property {UserFinancialData} data - data akun pengguna
+ * @property {String} type - tipe/format data dalam file
+ * @property {String} charset - character encoding
+ */
+
+/**
  * Callback function untuk me-handle file yang di load.
  *
  * @callback fileOnloadCallback
@@ -65,6 +73,35 @@ export function initializeDataToLocalStorage(data) {
   window.localStorage.setItem("money", data.money);
   window.localStorage.setItem("spending", JSON.stringify(data.spending));
   window.localStorage.setItem("income", JSON.stringify(data.income));
+}
+
+/**
+ * Module untuk melakan export/backup akun user ke dalam bentuk json file.
+ *
+ * @returns {[TODO:type]} [TODO:description]
+ */
+/**
+ * Module untuk melakan export/backup akun user ke dalam bentuk json file.
+ *
+ * @param {UserFinancialData} account - data keuangan user
+ * @returns {BackupAccountBlob} - Metadata file backup akun user
+ */
+export function exportUserDataToJSON(accountData) {
+  // create file information
+  const type = 'application/json';
+  const charset = 'utf-8';
+
+  // construct new blob file
+  const blob = new Blob([JSON.stringify(accountData)], { type: `${type};charset=${charset},` });
+  const url = URL.createObjectURL(blob);
+
+
+  return {
+    url,
+    data: accountData,
+    type,
+    charset
+  }
 }
 
 function csvJSON(data) {
