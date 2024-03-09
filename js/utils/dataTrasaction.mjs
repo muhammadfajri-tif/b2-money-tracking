@@ -231,3 +231,55 @@ export function getSpendingDataWithCategory() {
     amount: data[key],
   }));
 }
+
+/**
+ * Module untuk mengubah/mengedit data transaksi yang sudah ada berdasarkan index/idnya.
+ *
+ * @param {number} id - Index transaksi pendapatan/pengeluaran
+ * @param {Transaction} updatedData - Data baru/yang telah di update
+ * @param {Transaction[]} existingTransaction - Data transaksi yang disimpan di local storage
+ * @param {'spending'|'income'} transactionType - Tipe/jenis transaksi. Nilai valid hanya 'spending' atau 'income'
+ * @returns {Transaction[]} index 0: data yang belum di update, index 1: data yang telah di update
+ */
+export function updateTransaction(id, updatedData, existingTransaction, transactionType) {
+  // update specific data by index
+  const dataBeforeUpdate = existingTransaction.splice(id, 1, updatedData);
+
+  // sort by date
+  existingTransaction.sort((a, b) => parseDate(a.date) - parseDate(b.date));
+  console.log(`[UPDATED] ${transactionType}`, existingTransaction);
+
+  // save to the local storage
+  (transactionType === "income") &&
+    window.localStorage.setItem("income", JSON.stringify(existingTransaction));
+  (transactionType === "spending") &&
+    window.localStorage.setItem("spending", JSON.stringify(existingTransaction));
+
+  return [dataBeforeUpdate, updatedData];
+}
+
+/**
+ * Module untuk menghapus data transaksi yang sudah ada berdasarkan index/idnya,
+ *
+ * @param {number} id - Index transaksi pendapatan/pengeluaran
+ * @param {Transaction} existingTransaction - Data transaksi yang disimpan di local storage
+ * @param {'spending'|'income'} transactionType - Tipe/jenis transaksi. Nilai valid hanya 'spending' atau 'income'
+ * @returns {Transaction} Data transaksi yang dihapus
+ */
+export function deleteTransaction(id, existingTransaction, transactionType) {
+  // delete specific data by index
+  const deletedData = existingTransaction.splice(id, 1);
+
+  // sort by date
+  existingTransaction.sort((a, b) => parseDate(a.date) - parseDate(b.date));
+  console.log(`[DELETED] current ${transactionType}`, existingTransaction);
+
+  // save to the local storage
+  (transactionType === "income") &&
+    window.localStorage.setItem("income", JSON.stringify(existingTransaction));
+  (transactionType === "spending") &&
+    window.localStorage.setItem("spending", JSON.stringify(existingTransaction));
+
+  return deletedData;
+}
+
