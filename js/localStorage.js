@@ -1,4 +1,4 @@
-import { loadFileContent, isDataValid, initializeDataToLocalStorage, exportUserDataToJSON } from './utils/file.mjs';
+import { loadFileContent, isDataValid, initializeDataToLocalStorage, importCSVUserData, exportUserData } from './utils/file.mjs';
 import { getUsername, getMoney, getIncomeList, getSpendingList, addNewIncome, parseDate, parseFormData, getOutcomeList } from './utils/dataTrasaction.mjs'
 
 // handle form file upload untuk import data
@@ -24,7 +24,10 @@ function readFile() {
   } else if (!fileSelector.files[0]) {
     console.warn('No file selected.');
   } else {
-    // get file
+    /**
+     * get file
+     * @type {File}
+     */
     let file = fileSelector.files[0];
 
     // baca isi file data & handle
@@ -32,8 +35,8 @@ function readFile() {
       // validate data
       if (isDataValid(reader.target.result, file.type)) {
         // save data to local storage
-        initializeDataToLocalStorage(JSON.parse(reader.target.result));
-        console.log("loaded ", reader.target.result);
+        (file.type === 'application/json') && initializeDataToLocalStorage(JSON.parse(reader.target.result));
+        (file.type === 'text/csv') && initializeDataToLocalStorage(importCSVUserData(reader.target.result));
       } else {
         console.error("File type not supported!");
       }
@@ -124,7 +127,7 @@ function handleCreateNewAccount(event) {
   }
 }
 
-// handle backup/export account
+// NOTE: handle backup/export account
 const backupAccountButton = document.getElementById("backup-account-button");
 backupAccountButton.addEventListener('click', handleBackupAccount);
 
@@ -140,16 +143,25 @@ function handleBackupAccount() {
     income: getIncomeList(),
   }
 
-  // create downloadable file
-  const metadataFile = exportUserDataToJSON(account);
-  const fileName = `backup-${account.name}_money-tracking-by-b2.json`;
+  const fileType = prompt("Pilih format data yang akan di download: [json/csv] (default: json)", 'json').toString();
+  if (fileType === 'json' || fileType === 'csv') {
+    // create downloadable file
+    const metadataFile =
+      ((fileType === 'json') && exportUserData(account, 'json')) ||
+      ((fileType === 'csv') && exportUserData(account, 'csv'));
+    const fileName = `backup-${account.name}_money-tracking-by-b2.${metadataFile.ext}`;
 
-  // manipulate DOM to enable download file
-  backupAccountButton.setAttribute('href', metadataFile.url);
-  backupAccountButton.setAttribute('download', fileName);
+    // manipulate DOM to enable download file
+    backupAccountButton.setAttribute('href', metadataFile.url);
+    backupAccountButton.setAttribute('download', fileName);
+  } else {
+    console.error("[ERR] file type not supported.");
+    return;
+  }
+
 }
 
-// handle backup/export income
+// NOTE: handle backup/export income
 const exportIncomeUserButton = document.getElementById("export-income-json-button");
 exportIncomeUserButton.addEventListener('click', handleExportIncome);
 
@@ -161,15 +173,15 @@ function handleExportIncome() {
   const data = getIncomeList();
 
   // create downloadable file
-  const metadataFile = exportUserDataToJSON(data);
-  const fileName = `${getUsername()}_income-data_money-tracking-by-b2.json`;
+  const metadataFile = exportUserData(data, 'json');
+  const fileName = `${getUsername()}_income-data_money-tracking-by-b2.${metadataFile.ext}`;
 
   // manipulate DOM to enable download file
   exportIncomeUserButton.setAttribute('href', metadataFile.url);
   exportIncomeUserButton.setAttribute('download', fileName);
 }
 
-// handle backup/export spending
+// NOTE: handle backup/export spending
 const exportSpendingUserButton = document.getElementById("export-spending-json-button");
 exportSpendingUserButton.addEventListener('click', handleExportSpending);
 
@@ -181,15 +193,48 @@ function handleExportSpending() {
   const data = getSpendingList();
 
   // create downloadable file
-  const metadataFile = exportUserDataToJSON(data);
-  const fileName = `${getUsername()}_spending-data_money-tracking-by-b2.json`;
+  const metadataFile = exportUserData(data, 'json');
+  const fileName = `${getUsername()}_spending-data_money-tracking-by-b2.${metadataFile.ext}`;
 
   // manipulate DOM to enable download file
   exportSpendingUserButton.setAttribute('href', metadataFile.url);
   exportSpendingUserButton.setAttribute('download', fileName);
 }
 
+// NOTE: handle export csv income
+const exportIncomeUserCSVButton = document.getElementById("export-income-csv-button");
+exportIncomeUserCSVButton.addEventListener('click', handleExportIncomeCSV);
 
-// TODO
-// - export income as csv
-// - export spending as csv
+/**
+ * Module event handler untuk menangani button export pengeluaran user dalam bentuk CSV.
+ */
+function handleExportIncomeCSV() {
+  const data = getIncomeList();
+
+  // create downloadable file
+  const metadataFile = exportUserData(data, 'csv');
+  const fileName = `${getUsername()}_income-data_money-tracking-by-b2.${metadataFile.ext}`;
+
+  // manipulate DOM to enable download file
+  exportIncomeUserCSVButton.setAttribute('href', metadataFile.url);
+  exportIncomeUserCSVButton.setAttribute('download', fileName);
+}
+
+// NOTE: handle export csv spending
+const exportSpendingUserCSVButton = document.getElementById("export-spending-csv-button");
+exportSpendingUserCSVButton.addEventListener('click', handleExportSpendingCSV);
+
+/**
+ * Module event handler untuk menangani button export pengeluaran user dalam bentuk CSV.
+ */
+function handleExportSpendingCSV() {
+  const data = getSpendingList();
+
+  // create downloadable file
+  const metadataFile = exportUserData(data, 'csv');
+  const fileName = `${getUsername()}_spending-data_money-tracking-by-b2.${metadataFile.ext}`;
+
+  // manipulate DOM to enable download file
+  exportSpendingUserCSVButton.setAttribute('href', metadataFile.url);
+  exportSpendingUserCSVButton.setAttribute('download', fileName);
+}

@@ -20,6 +20,7 @@
  * @property {UserFinancialData} data - data akun pengguna
  * @property {String} type - tipe/format data dalam file
  * @property {String} charset - character encoding
+ * @property {String} ext - File extension
  */
 
 /**
@@ -55,6 +56,9 @@ export function isDataValid(rawData, fileType) {
     const parsedData = JSON.parse(rawData);
     // validate each property in object
     return ('name' in parsedData && 'money' in parsedData && 'income' in parsedData && 'spending' in parsedData) ? true : false;
+  } else if (fileType === 'text/csv') {
+    // validate by header
+    return (rawData.indexOf('name') && rawData.indexOf('money') && rawData.indexOf('type')) ? true : false;
   } else {
     return false;
   }
@@ -76,23 +80,74 @@ export function initializeDataToLocalStorage(data) {
 }
 
 /**
- * Module untuk melakan export/backup akun user ke dalam bentuk json file.
+ * Module untuk mengimport akun user dalam bentuk CSV
  *
- * @returns {[TODO:type]} [TODO:description]
+ * @param {String} accountData - isi file CSV
+ * @returns {UserFinancialData} Data keuangan user
  */
+export function importCSVUserData(accountData) {
+  const data = {
+    name: "",
+    money: "",
+    spending: [],
+    income: []
+  }
+
+  const records = accountData.split("\n");
+  const headers = records[0].split(",");
+  records.pop(); // delete empty new line
+
+  // loop csv total number of lines
+  records.forEach((record, id) => {
+    let currentRecord = record.split(","); // 0: name, 1: money, 2: type, 3: date, 4: amount, 5: category, 6: desc
+    // get name & amount money in the first record
+    if (id === 1) {
+      data.name = currentRecord[0].replace(/"/g, "");
+      data.money = parseInt(currentRecord[1]);
+    }
+
+    // skip header
+    if (id > 0) {
+      let transaction = {};
+      // fill transaction data
+      for (let i = 3; i < headers.length; i++) {
+        headers[i] = headers[i].replace(/"/g, "");
+        if (i === 4) {
+          transaction[headers[i]] = parseInt(currentRecord[i]);
+        } else {
+          currentRecord[i] = currentRecord[i].replace(/"/g, "");
+          transaction[headers[i]] = currentRecord[i];
+        }
+      }
+
+      // push to spesific property
+      currentRecord[2] = currentRecord[2].replace(/\"/g, "");
+      if (currentRecord[2] === ("spending")) data.spending.push(transaction);
+      if (currentRecord[2] === ("income")) data.income.push(transaction);
+    }
+  });
+  return data;
+}
+
 /**
  * Module untuk melakan export/backup akun user ke dalam bentuk json file.
  *
- * @param {UserFinancialData} account - data keuangan user
+ * @param {UserFinancialData} accountData - data keuangan user
+ * @param {'json'|'csv'} formatType 
  * @returns {BackupAccountBlob} - Metadata file backup akun user
  */
-export function exportUserDataToJSON(accountData) {
+export function exportUserData(accountData, formatType) {
   // create file information
-  const type = 'application/json';
+  const type =
+    ((formatType === 'json') && 'application/json') ||
+    ((formatType === 'csv') && 'text/csv');
   const charset = 'utf-8';
 
   // construct new blob file
-  const blob = new Blob([JSON.stringify(accountData)], { type: `${type};charset=${charset},` });
+  const content =
+    ((formatType === 'json') && JSON.stringify(accountData)) ||
+    ((formatType === 'csv') && Array.isArray(accountData) ? jsonToCSV(accountData) : convertAccountDataToCSV(accountData));
+  const blob = new Blob([content], { type: `${type};charset=${charset},` });
   const url = URL.createObjectURL(blob);
 
 
@@ -100,50 +155,85 @@ export function exportUserDataToJSON(accountData) {
     url,
     data: accountData,
     type,
-    charset
+    charset,
+    ext: (formatType === 'csv' && 'csv') || (formatType === 'json' && 'json')
   }
 }
 
-function csvJSON(data) {
-  const lines = data.split("\n");
-  const result = {
-    name: "",
-    money: 0,
-    spending: [],
-    income: []
-  };
-  const headers = lines[0].split(",");
+/**
+ * Module untuk melakukan konversi akun user beserta datanya dalam bentuk JSON ke CSV.
+ *
+ * @param {UserFinancialData} data - Data transaksi dan informasi akun user
+ * @returns {String} Data yang telah di format menjadi CSV dalam bentuk string.
+ */
+export function convertAccountDataToCSV(data) {
+  // construct header data
+  let header = [];
+  // get each field name 
+  for (let key in data)
+    (Array.isArray(data[key])) ? header.push("type", Object.keys(data[key][0])) : header.push(key);
+  // remove duplicate
+  header = header.flat().filter((item, id) => header.flat().indexOf(item) === id);
+  // convert to string, remove parenthesis/brackets
+  header = JSON.stringify(header).replace(/[\[\]']+/g, '');
+
+  // construct actual data
+  let csv = `${header}\n`;
+
+  // insert spending data
+  data.spending.forEach((transaction, id) => {
+    csv += `${id === 0 ? '"' + data.name + '"' : ""},${id === 0 ? data.money : ""},"spending","${transaction.date}",${transaction.amount},"${transaction.category}","${transaction.desc || ""}"\n`;
+  });
+
+  // insert income data
+  data.income.forEach(transaction => {
+    csv += `,,"income","${transaction.date}",${transaction.amount},"${transaction.category}","${transaction.desc || ""}"\n`;
+  });
+
+  return csv;
+}
+
+/**
+ * Module untuk melakukan konversi tipe data JSON ke CSV.
+ *
+ * @param {Transaction[]} data - Data transaksi pengeluaran/pemasukan.
+ * @returns {String} Data yang telah di format menjadi CSV dalam bentuk string.
+ */
+export function jsonToCSV(data) {
+  const replacer = (_key, value) => value === null ? '' : value;
+  const header = Object.keys(data[0]);
+  const csv = [
+    header.join(','),
+    ...data.map(row => header.map(field => JSON.stringify(row[field], replacer)).join(','))
+  ].join('\n');
+
+  return csv;
+}
+
+/**
+ * Module untuk melakukan konversi tipe data CSV ke JSON.
+ *
+ * @param {Transaction[]} data - Data transaksi pengeluaran/pemasukan dalam bentuk CSV.
+ * @returns {String} Data yang telah di format menjadi JSON dalam bentuk string.
+ */
+export function csvToJSON(data) {
+  const records = data.split("\n");
+  const headers = records[0].split(",");
+  const result = [];
 
   // loop csv total number of lines
-  for (let i = 0; i < lines.length; i++) {
-    if (!lines[i]) continue;
+  records.forEach((record, id) => {
+    if (id > 0) {
+      let transaction = {};
+      let currentRecord = record.split(",");
 
-    const currentline = lines[i].split(",");
+      for (let i = 0; i < headers.length; i++)
+        transaction[headers[i]] = currentRecord[i];
 
-    // for spending/income
-    const trasaction = {
-      date: "",
-      amount: 0,
-      category: "",
-      desc: ""
-    };
-
-    // loop for record each line
-    for (let j = 0; j < headers.length; j++) {
-      if (headers[j] === "name") result.name = currentline[j];
-      if (headers[j] === "money") result.money = currentline[j];
-
-      if (headers[j].includes("date")) trasaction.date = currentline[j];
-      if (headers[j].includes("amount")) trasaction.amount = currentline[j];
-      if (headers[j].includes("category")) trasaction.category = currentline[j];
-      if (headers[j].includes("desc")) trasaction.desc = currentline[j];
-
-      console.log("here", headers[j].split("_")[2]);
-
-      if (j > 1) (headers[j].split("_")[2] === headers[j + 1].split("_")[0] || j === headers.length - 1) &&
-        result[headers[j].split("_")[0]].push(trasaction);
+      result.push(transaction);
     }
-  }
+  });
 
-  return result;
+  return JSON.stringify(result);
 }
+
