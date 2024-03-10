@@ -7,19 +7,66 @@
  */
 
 /**
- * @typedef {Object} TransactionSummary rekap transaksi bulanan/tahunan/harian
- * @property {String} name - identifier untuk transaksi. Misalnya week10
- * @property {number} spending - total pengeluaran
- * @property {number} income - total pendapatan
- */
-
-/**
  * @typedef {Object} UserFinancialData - rekap data keuangan pengguna
  * @property {String} name - Nama pengguna
  * @property {number} money - Uang yang pertama kali dimiliki
  * @property {Transaction[]} spending - List pengeluaran keuangan
  * @property {Transaction[]} income - List pemasukan keuangan
  */
+
+/**
+ * @typedef {Object} TransactionSummary - rekap transaksi bulanan/tahunan/harian
+ * @property {String} name - identifier untuk transaksi. Misalnya week10
+ * @property {number} spending - total pengeluaran
+ * @property {number} income - total pendapatan
+ */
+
+/**
+ * @typedef {Objet} TransactionSummaryByCategory - rekap transaksi berdasarkan kategori
+ * @property {String} category - kategori transaksi
+ * @property {number} amount - total jumlah transaksi dalam satu kategori
+ *
+ */
+
+
+/**
+ * Module untuk mengubah tanggal (hh/bb/tttt) dari bentuk string ke Date.
+ *
+ * @param {String} date_str - tanggal berbentuk string. Biasanya digunakan untuk `Transaction.date`
+ * @returns {Date} tanggal yang sudah diformat ke bentuk Date
+ */
+export function parseDate(date_str) {
+  const [day, month, year] = date_str.split("/");
+  return new Date(year, month - 1, day);
+}
+
+/**
+ * Module untuk me-format data dari form ke bentuk object javascript.
+ *
+ * @param {FormData} form - Form data
+ * @param {'spending'|'income'} typeTransaction - Tipe transaksi antara pengeluaran atau pendapatan
+ * @returns {Transaction} Data transaksi data
+ */
+export function parseFormData(form, typeTransaction) {
+  // validate type transaction
+  if (typeTransaction !== "spending" && typeTransaction !== "income") {
+    console.error(
+      "`typeTransaction` tidak valid. Opsi hanya tersedia spending atau income"
+    );
+    return;
+  }
+
+  const parseData = {};
+  // convert form date to type date with dd/mm/yyyy format
+  parseData["date"] = new Date(
+    form.get(`date-${typeTransaction}`)
+  ).toLocaleDateString("en-GB");
+  parseData["amount"] = parseInt(form.get(`amount-${typeTransaction}`));
+  parseData["category"] = form.get(`category-${typeTransaction}`);
+  parseData["desc"] = form.get(`desc-${typeTransaction}`);
+
+  return parseData;
+}
 
 /**
  * Getter untuk mendapatkan username
@@ -64,82 +111,6 @@ export function getIncomeList() {
  */
 export function getOutcomeList() {
   return JSON.parse(window.localStorage.getItem("spending"));
-}
-
-/**
- * Module untuk menambah data pendapatan/pengeluaran transaksi
- *
- * @param {Transaction} newTransaction - data transaksi dari form
- * @param {'spending'|'income'} typeTransaction - Tipe transaksi. Nilai yang valid adalah 'spending' atau 'income'
- */
-export function addNewIncome(newTransaction, typeTransaction) {
-  // validate type transaction
-  if (typeTransaction !== "spending" && typeTransaction !== "income") {
-    console.error(
-      "`typeTransaction` tidak valid. Opsi hanya tersedia spending atau income"
-    );
-    return;
-  }
-
-  // load existing data
-  const existingTransaction =
-    (typeTransaction === "spending" && (getSpendingList() || [])) ||
-    (typeTransaction === "income" && (getIncomeList() || []));
-
-  // append new data to existing data
-  existingTransaction.push(newTransaction);
-
-  // sort by date
-  existingTransaction.sort((a, b) => parseDate(a.date) - parseDate(b.date));
-  console.log(`[SORTED] current ${typeTransaction}`, existingTransaction);
-
-  // save to the local storage
-  typeTransaction === "income" &&
-    window.localStorage.setItem("income", JSON.stringify(existingTransaction));
-  typeTransaction === "spending" &&
-    window.localStorage.setItem(
-      "spending",
-      JSON.stringify(existingTransaction)
-    );
-}
-
-/**
- * Module untuk mengubah tanggal (hh/bb/tttt) dari bentuk string ke Date.
- *
- * @param {String} date_str - tanggal berbentuk string. Biasanya digunakan untuk `Transaction.date`
- * @returns {Date} tanggal yang sudah diformat ke bentuk Date
- */
-export function parseDate(date_str) {
-  const [day, month, year] = date_str.split("/");
-  return new Date(year, month - 1, day);
-}
-
-/**
- * Module untuk me-format data dari form ke bentuk object javascript.
- *
- * @param {FormData} form - Form data
- * @param {'spending'|'income'} typeTransaction - Tipe transaksi antara pengeluaran atau pendapatan
- * @returns {Transaction} Data transaksi data
- */
-export function parseFormData(form, typeTransaction) {
-  // validate type transaction
-  if (typeTransaction !== "spending" && typeTransaction !== "income") {
-    console.error(
-      "`typeTransaction` tidak valid. Opsi hanya tersedia spending atau income"
-    );
-    return;
-  }
-
-  const parseData = {};
-  // convert form date to type date with dd/mm/yyyy format
-  parseData["date"] = new Date(
-    form.get(`date-${typeTransaction}`)
-  ).toLocaleDateString("en-GB");
-  parseData["amount"] = parseInt(form.get(`amount-${typeTransaction}`));
-  parseData["category"] = form.get(`category-${typeTransaction}`);
-  parseData["desc"] = form.get(`desc-${typeTransaction}`);
-
-  return parseData;
 }
 
 /**
@@ -200,6 +171,11 @@ export function getWeeklyMoney() {
   return result;
 }
 
+/**
+ * Module untuk mendapatkan data pemasukan berdasarkan kategori
+ *
+ * @returns {TransactionSummaryByCategory[]} - Rekap data pemasukan
+ */
 export function getIncomeDataWithCategory() {
   const income = getIncomeList();
   const data = {};
@@ -216,6 +192,11 @@ export function getIncomeDataWithCategory() {
   }));
 }
 
+/**
+ * Module untuk mendapatkan data pengeluaran berdasarkan kategori
+ *
+ * @returns {TransactionSummaryByCategory[]} - Rekap data pengeluaran
+ */
 export function getSpendingDataWithCategory() {
   const spending = getSpendingList();
   const data = {};
@@ -231,3 +212,92 @@ export function getSpendingDataWithCategory() {
     amount: data[key],
   }));
 }
+
+/**
+ * Module untuk menambah data pendapatan/pengeluaran transaksi
+ *
+ * @param {Transaction} newTransaction - data transaksi dari form
+ * @param {'spending'|'income'} typeTransaction - Tipe transaksi. Nilai yang valid adalah 'spending' atau 'income'
+ */
+export function addNewIncome(newTransaction, typeTransaction) {
+  // validate type transaction
+  if (typeTransaction !== "spending" && typeTransaction !== "income") {
+    console.error(
+      "`typeTransaction` tidak valid. Opsi hanya tersedia spending atau income"
+    );
+    return;
+  }
+
+  // load existing data
+  const existingTransaction =
+    (typeTransaction === "spending" && (getSpendingList() || [])) ||
+    (typeTransaction === "income" && (getIncomeList() || []));
+
+  // append new data to existing data
+  existingTransaction.push(newTransaction);
+
+  // sort by date
+  existingTransaction.sort((a, b) => parseDate(a.date) - parseDate(b.date));
+  console.log(`[SORTED] current ${typeTransaction}`, existingTransaction);
+
+  // save to the local storage
+  typeTransaction === "income" &&
+    window.localStorage.setItem("income", JSON.stringify(existingTransaction));
+  typeTransaction === "spending" &&
+    window.localStorage.setItem(
+      "spending",
+      JSON.stringify(existingTransaction)
+    );
+}
+
+/**
+ * Module untuk mengubah/mengedit data transaksi yang sudah ada berdasarkan index/idnya.
+ *
+ * @param {number} id - Index transaksi pendapatan/pengeluaran
+ * @param {Transaction} updatedData - Data baru/yang telah di update
+ * @param {Transaction[]} existingTransaction - Data transaksi yang disimpan di local storage
+ * @param {'spending'|'income'} transactionType - Tipe/jenis transaksi. Nilai valid hanya 'spending' atau 'income'
+ * @returns {Transaction[]} index 0: data yang belum di update, index 1: data yang telah di update
+ */
+export function updateTransaction(id, updatedData, existingTransaction, transactionType) {
+  // update specific data by index
+  const dataBeforeUpdate = existingTransaction.splice(id, 1, updatedData);
+
+  // sort by date
+  existingTransaction.sort((a, b) => parseDate(a.date) - parseDate(b.date));
+  console.log(`[UPDATED] ${transactionType}`, existingTransaction);
+
+  // save to the local storage
+  (transactionType === "income") &&
+    window.localStorage.setItem("income", JSON.stringify(existingTransaction));
+  (transactionType === "spending") &&
+    window.localStorage.setItem("spending", JSON.stringify(existingTransaction));
+
+  return [dataBeforeUpdate, updatedData];
+}
+
+/**
+ * Module untuk menghapus data transaksi yang sudah ada berdasarkan index/idnya,
+ *
+ * @param {number} id - Index transaksi pendapatan/pengeluaran
+ * @param {Transaction} existingTransaction - Data transaksi yang disimpan di local storage
+ * @param {'spending'|'income'} transactionType - Tipe/jenis transaksi. Nilai valid hanya 'spending' atau 'income'
+ * @returns {Transaction} Data transaksi yang dihapus
+ */
+export function deleteTransaction(id, existingTransaction, transactionType) {
+  // delete specific data by index
+  const deletedData = existingTransaction.splice(id, 1);
+
+  // sort by date
+  existingTransaction.sort((a, b) => parseDate(a.date) - parseDate(b.date));
+  console.log(`[DELETED] current ${transactionType}`, existingTransaction);
+
+  // save to the local storage
+  (transactionType === "income") &&
+    window.localStorage.setItem("income", JSON.stringify(existingTransaction));
+  (transactionType === "spending") &&
+    window.localStorage.setItem("spending", JSON.stringify(existingTransaction));
+
+  return deletedData;
+}
+

@@ -4,6 +4,7 @@ import {
   initializeDataToLocalStorage,
   loadFileContent,
   isDataValid,
+  importCSVUserData
 } from "./file.mjs";
 
 // handle form file upload untuk import data
@@ -29,7 +30,10 @@ function readFile() {
   } else if (!fileSelector.files[0]) {
     console.warn("No file selected.");
   } else {
-    // get file
+    /**
+     * get file
+     * @type {File}
+     */
     let file = fileSelector.files[0];
 
     // baca isi file data & handle
@@ -37,8 +41,8 @@ function readFile() {
       // validate data
       if (isDataValid(reader.target.result, file.type)) {
         // save data to local storage
-        initializeDataToLocalStorage(JSON.parse(reader.target.result));
-        console.log("loaded ", reader.target.result);
+        (file.type === 'application/json') && initializeDataToLocalStorage(JSON.parse(reader.target.result));
+        (file.type === 'text/csv') && initializeDataToLocalStorage(importCSVUserData(reader.target.result));
       } else {
         console.error("File type not supported!");
       }
@@ -50,6 +54,11 @@ function readFile() {
 const formCreateUserSelector = document.getElementById("new-account-form");
 formCreateUserSelector.addEventListener("submit", handleCreateNewAccount);
 
+/**
+ * Module event handler untuk menangani akun/user baru
+ *
+ * @param {Event} event
+ */
 function handleCreateNewAccount(event) {
   event.preventDefault();
 
