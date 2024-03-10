@@ -711,8 +711,9 @@ main .analytics .sales {
 
 .form-section {
   display: flex;
-  gap: 2rem;
-  margin-top: 1.4rem;
+  flex-direction: column;
+  gap: 1.6rem;
+  margin-top: 3.5rem;
 }
 
 .form-wrapper {
@@ -926,6 +927,14 @@ button[type="submit"]:hover {
   margin-bottom: 1.2rem;
 }
 
+#export-spending-json-button {
+  font-size: 1.5rem !important;
+}
+
+#export-spending-csv-button {
+  font-size: 1.5rem !important;
+}
+
 .support-header {
   display: flex;
 
@@ -940,6 +949,141 @@ button[type="submit"]:hover {
 
 .support-card p {
   color: var(--color-dark-variant);
+}
+
+/* Style for export links */
+#backup-account-button,
+#export-income-json-button,
+#export-income-csv-button,
+#export-spending-json-button,
+#export-spending-csv-button {
+  display: inline-block;
+  padding: 1rem 1rem;
+  border-radius: 1rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+/* Hover effect */
+#backup-account-button:hover,
+#export-income-json-button:hover,
+#export-income-csv-button:hover,
+#export-spending-json-button:hover,
+#export-spending-csv-button:hover {
+  background-color: #4caf50; /* Green background on hover */
+  color: var(--color-white); /* White text on hover */
+  border-color: #4caf50; /* Green border on hover */
+}
+
+/* Active/focus effect */
+#backup-account-button:focus,
+#export-income-json-button:focus,
+#export-income-csv-button:focus,
+#export-spending-json-button:focus,
+#export-spending-csv-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+/* CSS for Table Styling */
+.table-container {
+  overflow-x: auto;
+}
+
+.dataTable {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.dataTable th,
+.dataTable td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.dataTable th {
+  background-color: #2196f3; /* Blue */
+  color: #fff; /* White text */
+  text-align: left;
+  font-weight: bold;
+}
+
+.dataTable tbody tr:nth-child(even) {
+  background-color: #e3f2fd; /* Light blue background */
+}
+
+.dataTable tbody tr:hover {
+  background-color: #bbdefb; /* Lighter blue on hover */
+  transition: background-color 0.3s ease;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.dataTable tbody tr {
+  animation: fadeIn 0.5s ease;
+}
+
+/* Pagination Style */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  padding: 0.5em 0.75em !important;
+  margin-left: 5px !important;
+  border-radius: 4px !important;
+  border: 1px solid #2196f3 !important; /* Blue border */
+  background-color: #fff !important; /* White background */
+  color: #2196f3 !important; /* Blue color */
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background-color: #181a1e !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  background-color: #2196f3 !important; /* Blue background for current page */
+  color: #fff !important; /* White text for current page */
+}
+
+/* Action Button Style */
+/* Style for buttons within the .dataTable class */
+.dataTable button {
+  padding: 8px 16px; /* Adjust padding as needed */
+  color: white; /* White text color */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+tbody > tr > td:nth-child(6) {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Style for buttons in odd cells */
+.dataTable td button:nth-child(odd) {
+  background-color: #4caf50; /* Green background for buttons in odd cells */
+}
+
+/* Style for buttons in even cells */
+.dataTable td button:nth-child(even) {
+  background-color: #ff5733; /* Red background for buttons in even cells */
+}
+
+/* Hover effect */
+.dataTable button:hover {
+  opacity: 0.8; /* Reduce opacity on hover */
 }
 
 @media screen and (max-width: 768px) {

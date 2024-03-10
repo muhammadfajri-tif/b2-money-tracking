@@ -4,7 +4,7 @@ import {
   initializeDataToLocalStorage,
   loadFileContent,
   isDataValid,
-  importCSVUserData
+  importCSVUserData,
 } from "./file.mjs";
 
 // handle form file upload untuk import data
@@ -41,8 +41,10 @@ function readFile() {
       // validate data
       if (isDataValid(reader.target.result, file.type)) {
         // save data to local storage
-        (file.type === 'application/json') && initializeDataToLocalStorage(JSON.parse(reader.target.result));
-        (file.type === 'text/csv') && initializeDataToLocalStorage(importCSVUserData(reader.target.result));
+        file.type === "application/json" &&
+          initializeDataToLocalStorage(JSON.parse(reader.target.result));
+        file.type === "text/csv" &&
+          initializeDataToLocalStorage(importCSVUserData(reader.target.result));
       } else {
         console.error("File type not supported!");
       }
@@ -67,7 +69,11 @@ function handleCreateNewAccount(event) {
 
   // parse form data
   const name = form.get("new-account-name");
-  const money = parseInt(form.get("new-account-money"));
+  let money = form.get("new-account-money");
+  money = money.replace(/\D/g, "");
+  money = parseInt(money);
+
+  console.log(money);
 
   const newAccount = {
     name,

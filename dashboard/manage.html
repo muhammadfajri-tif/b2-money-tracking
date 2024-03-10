@@ -8,6 +8,18 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../css/dashboard-style.css" />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- DataTables CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"
+    />
     <title>Manage Your Account</title>
   </head>
 
@@ -59,7 +71,7 @@
             <div class="sidebar-profile">
               <img src="../images/profile-1.jpg" />
               <div class="profile-info">
-                <h3>Reza</h3>
+                <h3>Admin</h3>
                 <small class="text-muted">Admin</small>
               </div>
             </div>
@@ -72,9 +84,63 @@
       <!-- End of Sidebar Section -->
 
       <!-- Main Content -->
-      <main class="main-container">
+      <main>
         <div class="file-select" style="display: none"></div>
         <h1 class="head-form">Manage Your Account</h1>
+
+        <!-- Section table income  -->
+        <div class="form-container">
+          <h2>Data Pemasukan</h2>
+          <div class="table-container">
+            <table id="user-income-transaction-table" class="dataTable">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Category</th>
+                  <th>Description</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <!-- automatic insert via js, code: js/history.js -->
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <!-- End of Section table income -->
+
+        <!-- Section table spending -->
+        <div class="form-container">
+          <h2>Data Pengeluaran</h2>
+          <div class="table-container">
+            <table id="user-spending-transaction-table" class="dataTable">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Category</th>
+                  <th>Description</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <!-- automatic insert via js, code: js/history.js -->
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+      <!-- End of Main Content -->
+
+      <!-- Right Section -->
+      <div class="right-section manage-section">
+        <div class="nav">
+          <button id="menu-btn">
+            <span class="material-icons-sharp"> menu </span>
+          </button>
+        </div>
+        <!-- End of Nav -->
 
         <section class="form-section">
           <div class="form-wrapper">
@@ -186,14 +252,29 @@
             </form>
           </div>
         </section>
-      </main>
-
-      <!-- End of Main Content -->
+      </div>
     </div>
 
+    <script type="module" src="../js/index.js"></script>
     <script type="module" src="../js/utils/formatter.mjs"></script>
     <script type="module" src="../js/utils/transaction.mjs"></script>
+
     <script src="../js/orders.js"></script>
-    <script src="../js/index.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"
+    ></script>
+
+    <script>
+      $(document).ready(function () {
+        $("#user-income-transaction-table").DataTable();
+        $("#user-spending-transaction-table").DataTable();
+      });
+    </script>
   </body>
 </html>
