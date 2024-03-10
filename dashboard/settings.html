@@ -92,15 +92,6 @@
           <span class="file-name">No file chosen</span>
         </div>
       </div>
-      <div>
-        <a id="export-income-json-button">Export Pemasukan/income Keuangan (json)</a> |
-        <a id="export-income-csv-button">Export Pemasukan/income Keuangan (csv)</a>
-      </div>
-
-      <div>
-        <a id="export-spending-json-button">Export Pengeluaran/spending Keuangan (json)</a> |
-        <a id="export-spending-csv-button">Export Pengeluaran/spending Keuangan (csv)</a>
-      </div>
 
       <!-- Improved Create Account form -->
       <div class="form-container">
@@ -135,49 +126,21 @@
       </div>
       <!-- End of Section create new account -->
 
-      <br>
-
-      <!-- Section table income  -->
       <div>
-        <h2>Data Pemasukan</h2>
-        <table id="user-income-transaction-table">
-          <thead>
-            <tr>
-              <th>no</th>
-              <th>tanggal</th>
-              <th>nominal (Rp.)</th>
-              <th>kategori</th>
-              <th>deskripsi</th>
-              <th>action</th>
-            </tr>
-          </thead>
-          <!-- automatic insert via js, code: js/history.js -->
-          <tbody>
-          </tbody>
-        </table>
-      </div>
-      <!-- End of Section table income -->
+        <div>
+          <a id="backup-account-button">Backup/Export Akun</a>
+        </div>
 
-      <!-- Section table spending -->
-      <div>
-        <h2>Data Pengeluaran</h2>
-        <table id="user-spending-transaction-table">
-          <thead>
-            <tr>
-              <th>no</th>
-              <th>tanggal</th>
-              <th>nominal (Rp.)</th>
-              <th>kategori</th>
-              <th>deskripsi</th>
-              <th>action</th>
-            </tr>
-          </thead>
-          <!-- automatic insert via js, code: js/history.js -->
-          <tbody>
-          </tbody>
-        </table>
+        <div>
+          <a id="export-income-json-button">Export Pemasukan/income Keuangan (json)</a> |
+          <a id="export-income-csv-button">Export Pemasukan/income Keuangan (csv)</a>
+        </div>
+
+        <div>
+          <a id="export-spending-json-button">Export Pengeluaran/spending Keuangan (json)</a> |
+          <a id="export-spending-csv-button">Export Pengeluaran/spending Keuangan (csv)</a>
+        </div>
       </div>
-      <!-- End of Section table spending -->
 
       <!-- Section table income  -->
       <div>
@@ -229,7 +192,6 @@
 
   <script type="module" src="../js/history.js"></script>
   <script type="module" src="../js/utils/account.mjs"></script>
-  <script type="module" src="../js/localStorage.js"></script>
   <script src="../js/orders.js"></script>
   <script src="../js/index.js"></script>
 </body>
