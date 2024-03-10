@@ -7,248 +7,362 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" href="../css/dashboard-style.css" />
     <title>Responsive Dashboard Design #1 | AsmrProg</title>
   </head>
 
   <body>
-    <div class="container">
-      <!-- Sidebar Section -->
-      <aside>
-        <div class="toggle">
-          <div class="logo">
-            <img src="../images/logo.png" />
-            <h2>Asmr<span class="danger">Prog</span></h2>
-          </div>
-          <div class="close" id="close-btn">
-            <span class="material-icons-sharp"> close </span>
-          </div>
+    <!-- Sidebar Section -->
+    <aside>
+      <div class="toggle">
+        <div class="logo">
+          <img src="../images/logo.png" />
+          <h2>B2<span class="danger">Proyek</span></h2>
         </div>
-
-        <div class="sidebar">
-          <a href="#">
-            <span class="material-icons-sharp"> dashboard </span>
-            <h3>Dashboard</h3>
-          </a>
-          <a href="#">
-            <span class="material-icons-sharp"> person_outline </span>
-            <h3>Users</h3>
-          </a>
-          <a href="#">
-            <span class="material-icons-sharp"> receipt_long </span>
-            <h3>History</h3>
-          </a>
-          <a href="#" class="active">
-            <span class="material-icons-sharp"> insights </span>
-            <h3>Analytics</h3>
-          </a>
-          <a href="#">
-            <span class="material-icons-sharp"> mail_outline </span>
-            <h3>Tickets</h3>
-            <span class="message-count">27</span>
-          </a>
-          <a href="#">
-            <span class="material-icons-sharp"> inventory </span>
-            <h3>Sale List</h3>
-          </a>
-          <a href="#">
-            <span class="material-icons-sharp"> report_gmailerrorred </span>
-            <h3>Reports</h3>
-          </a>
-          <a href="#">
-            <span class="material-icons-sharp"> settings </span>
-            <h3>Settings</h3>
-          </a>
-          <a href="#">
-            <span class="material-icons-sharp"> add </span>
-            <h3>New Login</h3>
-          </a>
-          <a href="#">
-            <span class="material-icons-sharp"> logout </span>
-            <h3>Logout</h3>
-          </a>
+        <div class="close" id="close-btn">
+          <span class="material-icons-sharp"> close </span>
         </div>
-      </aside>
-      <!-- End of Sidebar Section -->
+      </div>
 
-      <!-- Main Content -->
-      <main>
-        <h1>Analytics</h1>
-        <!-- Analyses -->
-        <div class="analyse">
-          <div class="sales">
-            <div class="status">
+      <div class="sidebar">
+        <a href="/dashboard/index.html" class="active">
+          <span class="material-icons-sharp"> dashboard </span>
+          <h3>Dashboard</h3>
+        </a>
+        <!-- <a href="#">
+          <span class="material-icons-sharp"> person_outline </span>
+          <h3>Users</h3>
+        </a> -->
+        <!-- <a href="#">
+          <span class="material-icons-sharp"> receipt_long </span>
+          <h3>History</h3>
+        </a> -->
+        <a href="#">
+          <span class="material-icons-sharp"> insights </span>
+          <h3>Analytics</h3>
+        </a>
+        <!-- <a href="#">
+          <span class="material-icons-sharp"> mail_outline </span>
+          <h3>Tickets</h3>
+          <span class="message-count">27</span>
+        </a> -->
+        <!-- <a href="#">
+          <span class="material-icons-sharp"> inventory </span>
+          <h3>Sale List</h3>
+        </a> -->
+        <!-- <a href="#">
+          <span class="material-icons-sharp"> report_gmailerrorred </span>
+          <h3>Reports</h3>
+        </a> -->
+        <!-- <a href="#">
+          <span class="material-icons-sharp"> settings </span>
+          <h3>Settings</h3>
+        </a> -->
+        <!-- <a href="#">
+          <span class="material-icons-sharp"> add </span>
+          <h3>New Login</h3>
+        </a> -->
+        <!-- <a href="#">
+          <span class="material-icons-sharp"> logout </span>
+          <h3>Logout</h3>
+        </a> -->
+      </div>
+    </aside>
+    <!-- End of Sidebar Section -->
+    <div class="main-container">
+      <!-- Header -->
+
+      <header>
+        <div class="header-date">
+          <i class="fa fa-cloud"></i>
+          <div class="date"></div>
+        </div>
+        <div class="header-search">
+          <input type="text" placeholder="Search" />
+        </div>
+        <div class="haeder-menu">
+          <div class="nav">
+            <button id="menu-btn">
+              <span class="material-icons-sharp"> menu </span>
+            </button>
+            <div class="dark-mode">
+              <span class="material-icons-sharp active"> light_mode </span>
+              <span class="material-icons-sharp"> dark_mode </span>
+            </div>
+
+            <div class="profile">
               <div class="info">
-                <h3>Total Sales</h3>
-                <h1>$65,024</h1>
+                <p>Hey, <b>Hanif Ahmad</b></p>
               </div>
-              <div class="progresss">
-                <svg>
-                  <circle cx="38" cy="38" r="36"></circle>
-                </svg>
-                <div class="percentage">
-                  <p>+81%</p>
+              <div class="profile-photo">
+                <a data-modal-target="#modal" href="#">
+                  <img src="../images/profil.jpeg" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- End Header -->
+      <div class="modal" id="modal">
+        <div class="modal-header">
+          <div class="title">Hanif Ahmad</div>
+          <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-image">
+            <img src="../images/profil.jpeg" />
+          </div>
+          <div class="modal-nav">
+            <a href="#">
+              <span class="material-icons-sharp"> settings </span>
+              <h3>Settings</h3>
+            </a>
+            <a href="#">
+              <span class="material-icons-sharp"> logout </span>
+              <h3>Logout</h3>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div id="overlay"></div>
+      <div class="container">
+        <!-- Main Content -->
+        <main>
+          <!-- Analyses -->
+          <h1>Dashboard</h1>
+          <div class="analyse">
+            <!-- Card -->
+            <div class="sales">
+              <div class="status">
+                <div class="info">
+                  <h3>Balance</h3>
+                  <h1 id="balance-value">90</h1>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="visits">
-            <div class="status">
-              <div class="info">
-                <h3>Site Visit</h3>
-                <h1>24,981</h1>
-              </div>
-              <div class="progresss">
-                <svg>
-                  <circle cx="38" cy="38" r="36"></circle>
-                </svg>
-                <div class="percentage">
-                  <p>-48%</p>
+                <!-- Lingkaran -->
+                <div class="progresss Balance">
+                  <svg>
+                    <defs>
+                      <linearGradient id="GradientColorBalance">
+                        <stop offset="0%" stop-color="#67E434" />
+                        <stop offset="100%" stop-color="#67E434" />
+                      </linearGradient>
+                    </defs>
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="36"
+                      stroke-linecap="round"
+                    ></circle>
+                  </svg>
+                  <div id="number"></div>
                 </div>
+                <!-- Lingkaran -->
               </div>
             </div>
-          </div>
-          <div class="searches">
-            <div class="status">
-              <div class="info">
-                <h3>Searches</h3>
-                <h1>14,147</h1>
-              </div>
-              <div class="progresss">
-                <svg>
-                  <circle cx="38" cy="38" r="36"></circle>
-                </svg>
-                <div class="percentage">
-                  <p>+21%</p>
+            <!-- Card -->
+            <div class="visits">
+              <div class="status">
+                <div class="info">
+                  <h3>Expenses</h3>
+                  <h1 id="expense-value">100</h1>
                 </div>
+                <!-- Lingkaran -->
+                <div class="progresss Expenses">
+                  <svg>
+                    <defs>
+                      <linearGradient id="GradientColorExpenses">
+                        <stop offset="0%" stop-color="#E4080A" />
+                        <stop offset="100%" stop-color="#E4080A" />
+                      </linearGradient>
+                    </defs>
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="36"
+                      stroke-linecap="round"
+                    ></circle>
+                  </svg>
+                  <div id="number"></div>
+                </div>
+                <!-- Lingkaran -->
+              </div>
+            </div>
+            <!-- Card -->
+            <div class="searches">
+              <div class="status">
+                <div class="info">
+                  <h3>Income</h3>
+                  <h1 id="income-value">200</h1>
+                </div>
+                <!-- Card -->
+                <div class="progresss Income">
+                  <svg>
+                    <defs>
+                      <linearGradient id="GradientColorIncome">
+                        <stop offset="0%" stop-color="#3483eb" />
+                        <stop offset="100%" stop-color="#3483eb" />
+                      </linearGradient>
+                    </defs>
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="36"
+                      stroke-linecap="round"
+                    ></circle>
+                  </svg>
+                  <div id="number"></div>
+                </div>
+                <!-- Card -->
               </div>
             </div>
           </div>
-        </div>
-        <!-- End of Analyses -->
-
-        <!-- New Users Section -->
-        <div class="new-users">
-          <h2>New Users</h2>
-          <div class="user-list">
-            <div class="user">
-              <img src="../images/profile-2.jpg" />
-              <h2>Jack</h2>
-              <p>54 Min Ago</p>
-            </div>
-            <div class="user">
-              <img src="../images/profile-3.jpg" />
-              <h2>Amir</h2>
-              <p>3 Hours Ago</p>
-            </div>
-            <div class="user">
-              <img src="../images/profile-4.jpg" />
-              <h2>Ember</h2>
-              <p>6 Hours Ago</p>
-            </div>
-            <div class="user">
-              <img src="../images/plus.png" />
-              <h2>More</h2>
-              <p>New User</p>
-            </div>
+          <!-- Recent Orders Table -->
+          <div class="recent-orders">
+            <h2>Recent History</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Method</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Add</td>
+                  <td>50000</td>
+                  <td>Success</td>
+                  <td>POST</td>
+                </tr>
+                <tr>
+                  <td>Add</td>
+                  <td>53000</td>
+                  <td>Success</td>
+                  <td>POST</td>
+                </tr>
+                <tr>
+                  <td>Add</td>
+                  <td>100000</td>
+                  <td>Success</td>
+                  <td>POST</td>
+                </tr>
+              </tbody>
+            </table>
+            <a href="#">Show All</a>
           </div>
-        </div>
-        <!-- End of New Users Section -->
-
-        <!-- Recent Orders Table -->
-        <div class="recent-orders">
-          <h2>Recent Orders</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Course Name</th>
-                <th>Course Number</th>
-                <th>Payment</th>
-                <th>Status</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-          <a href="#">Show All</a>
-        </div>
-        <!-- End of Recent Orders -->
-      </main>
-      <!-- End of Main Content -->
-
-      <!-- Right Section -->
-      <div class="right-section">
-        <div class="nav">
-          <button id="menu-btn">
-            <span class="material-icons-sharp"> menu </span>
-          </button>
-          <div class="dark-mode">
-            <span class="material-icons-sharp active"> light_mode </span>
-            <span class="material-icons-sharp"> dark_mode </span>
-          </div>
-
-          <div class="profile">
-            <div class="info">
-              <p>Hey, <b>Reza</b></p>
-              <small class="text-muted">Admin</small>
-            </div>
-            <div class="profile-photo">
-              <img src="../images/profile-1.jpg" />
-            </div>
-          </div>
-        </div>
-        <!-- End of Nav -->
-
-        <div class="user-profile">
-          <div class="logo">
-            <img src="../images/logo.png" />
-            <h2>AsmrProg</h2>
-            <p>Fullstack Web Developer</p>
-          </div>
-        </div>
-
-        <div class="reminders">
-          <div class="header">
-            <h2>Reminders</h2>
-            <span class="material-icons-sharp"> notifications_none </span>
-          </div>
-
-          <div class="notification">
-            <div class="icon">
-              <span class="material-icons-sharp"> volume_up </span>
-            </div>
-            <div class="content">
-              <div class="info">
-                <h3>Workshop</h3>
-                <small class="text_muted"> 08:00 AM - 12:00 PM </small>
+          <!-- End of Recent Orders -->
+          <!-- Card -->
+          <!-- End of Analyses -->
+          <!-- New Users Section -->
+          <!-- <div class="new-users">
+            <h2>New Users</h2>
+            <div class="user-list">
+              <div class="user">
+                <img src="../images/profile-2.jpg" />
+                <h2>Jack</h2>
+                <p>54 Min Ago</p>
               </div>
-              <span class="material-icons-sharp"> more_vert </span>
-            </div>
-          </div>
-
-          <div class="notification deactive">
-            <div class="icon">
-              <span class="material-icons-sharp"> edit </span>
-            </div>
-            <div class="content">
-              <div class="info">
-                <h3>Workshop</h3>
-                <small class="text_muted"> 08:00 AM - 12:00 PM </small>
+              <div class="user">
+                <img src="../images/profile-3.jpg" />
+                <h2>Amir</h2>
+                <p>3 Hours Ago</p>
               </div>
-              <span class="material-icons-sharp"> more_vert </span>
+              <div class="user">
+                <img src="../images/profile-4.jpg" />
+                <h2>Ember</h2>
+                <p>6 Hours Ago</p>
+              </div>
+              <div class="user">
+                <img src="../images/plus.png" />
+                <h2>More</h2>
+                <p>New User</p>
+              </div>
             </div>
-          </div>
+          </div> -->
+          <!-- End of New Users Section -->
 
-          <div class="notification add-reminder">
-            <div>
-              <span class="material-icons-sharp"> add </span>
-              <h3>Add Reminder</h3>
+          <!-- Recent Orders Table -->
+          <!-- <div class="recent-orders">
+            <h2>Recent Orders</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Course Name</th>
+                  <th>Course Number</th>
+                  <th>Payment</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+            <a href="#">Show All</a>
+          </div> -->
+          <!-- End of Recent Orders -->
+        </main>
+        <!-- End of Main Content -->
+
+        <!-- Right Section -->
+        <div class="right-section">
+          <!-- End of Nav -->
+
+          <!-- <div class="user-profile">
+            <div class="logo">
+              <img src="../images/logo.png" />
+              <h2>AsmrProg</h2>
+              <p>Fullstack Web Developer</p>
+            </div>
+          </div> -->
+
+          <div class="reminders">
+            <div class="header">
+              <h2>Reminders</h2>
+              <span class="material-icons-sharp"> notifications_none </span>
+            </div>
+  
+            <div class="notification">
+              <div class="icon">
+                <span class="material-icons-sharp"> volume_up </span>
+              </div>
+              <div class="content">
+                <div class="info">
+                  <h3>Workshop</h3>
+                  <small class="text_muted"> 08:00 AM - 12:00 PM </small>
+                </div>
+                <span class="material-icons-sharp"> more_vert </span>
+              </div>
+            </div>
+  
+            <div class="notification deactive">
+              <div class="icon">
+                <span class="material-icons-sharp"> edit </span>
+              </div>
+              <div class="content">
+                <div class="info">
+                  <h3>Workshop</h3>
+                  <small class="text_muted"> 08:00 AM - 12:00 PM </small>
+                </div>
+                <span class="material-icons-sharp"> more_vert </span>
+              </div>
+            </div>
+  
+            <div class="notification add-reminder">
+              <div>
+                <span class="material-icons-sharp"> add </span>
+                <h3>Add Reminder</h3>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
     <script src="../js/orders.js"></script>
     <script src="../js/index.js"></script>
   </body>
