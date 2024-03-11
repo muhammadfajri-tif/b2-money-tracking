@@ -177,10 +177,10 @@ The backup and restore feature allows users to securely save their financial dat
 
 ## Contributor
 
-- [231524044] **Fathan Khairun Normawijaya** ~ *developing landing page + documentation*
-- [231524045] **Hanif Ahmad Rizqullah** ~ *developing dashboard*
-- [231524053] **Muhammad Fajri** ~ *developing export/import account + manage transaction features*
-- [231524054] **Muhammad Gianluigi Julian** ~ *developing landing page*
-- [231524064] **Yahya Alfon Sinaga** ~ *developing face recognition, data visualization + analytics features*
+- [231524044] **Fathan Khairun Normawijaya**<br>*developing landing page + documentation*
+- [231524045] **Hanif Ahmad Rizqullah**<br>*developing dashboard*
+- [231524053] **Muhammad Fajri**<br>*developing export/import account + manage transaction features*
+- [231524054] **Muhammad Gianluigi Julian**<br>*developing landing page*
+- [231524064] **Yahya Alfon Sinaga**<br>*developing face recognition, data visualization + analytics features*
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
