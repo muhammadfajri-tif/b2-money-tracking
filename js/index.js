@@ -1,6 +1,7 @@
 import { getUsername } from "./utils/dataTrasaction.mjs";
 
 const username = getUsername();
+username = username ? username : "User";
 document.querySelector(".profile-info > h3").textContent = username;
 
 const darkMode = document.querySelector(".dark-mode");
