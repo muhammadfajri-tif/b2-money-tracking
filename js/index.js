@@ -1,6 +1,18 @@
 import { getUsername } from "./utils/dataTrasaction.mjs";
 
-const username = getUsername();
+const sideMenu = document.querySelector("aside");
+const menuBtn = document.getElementById("menu-btn");
+const closeBtn = document.getElementById("close-btn");
+
+menuBtn.addEventListener("click", () => {
+  sideMenu.style.display = "block";
+});
+
+closeBtn.addEventListener("click", () => {
+  sideMenu.style.display = "none";
+});
+
+var username = getUsername();
 username = username ? username : "User";
 document.querySelector(".profile-info > h3").textContent = username;
 
