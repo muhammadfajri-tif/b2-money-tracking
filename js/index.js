@@ -123,11 +123,30 @@ modalAnchor.forEach((anchor) => {
   if (window.location.pathname == anchorPath) {
     anchor.addEventListener("click", (event) => event.preventDefault());
   } else {
-    anchor.addEventListener("click", () => {
+    anchor.addEventListener("click", (e) => {
       //menghapus class active pada tag lain jika ada
       removeClassActiveModal();
       //melakukan toggle class active
       anchor.classList.toggle("active");
+
+      Swal.fire({
+        title: "Are you sure want to log out?",
+        icon: "question",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        denyButtonText: `No`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          Swal.fire("Thanks for coming", "", "success").then(() => {
+            window.location.pathname = "/";
+          });
+        } else if (result.isDenied) {
+          Swal.fire("Enjoy the App", "", "info");
+          e.preventDefault();
+        }
+      });
     });
   }
 });
