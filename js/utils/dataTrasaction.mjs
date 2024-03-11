@@ -112,6 +112,40 @@ export function getTodaySpending() {
 }
 
 /**
+ * Getter untuk mendapatkan last spending
+ *
+ * @returns {array} - jumlah uang yang dimiliki pengguna
+ */
+export function getLastSpending() {
+  const spending = getSpendingList();
+  const today = new Date().toLocaleDateString("en-GB");
+  const lastSpending = spending
+    .filter((transaction) => transaction.date === today)
+    .pop();
+  return {
+    category: lastSpending.category,
+    amount: lastSpending.amount,
+  };
+}
+
+/**
+ * Getter untuk mendapatkan last income
+ *
+ * @returns {array} - jumlah uang yang dimiliki pengguna
+ */
+export function getLastIncome() {
+  const income = getIncomeList();
+  const today = new Date().toLocaleDateString("en-GB");
+  const lastIncome = income
+    .filter((transaction) => transaction.date === today)
+    .pop();
+  return {
+    category: lastIncome.category,
+    amount: lastIncome.amount,
+  };
+}
+
+/**
  * Getter untuk mendapatkan list pengeluaran pengguna.
  *
  * @returns {Transaction[]} - Daftar transaksi pengeluaran
