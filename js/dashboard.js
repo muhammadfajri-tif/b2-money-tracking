@@ -1,9 +1,12 @@
 import {
+  getIncomeList,
   getLastIncome,
   getLastSpending,
   getMoney,
+  getSpendingList,
   getTodayIncome,
   getTodaySpending,
+  parseDate,
 } from "./utils/dataTrasaction.mjs";
 
 function formatCurrency(amount) {
@@ -20,7 +23,7 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-const money = formatCurrency(getMoney());
+const money = formatCurrency(getTotalMoney());
 document.querySelector(".money-text").textContent = money;
 
 const income = formatCurrency(getTodayIncome());
@@ -43,7 +46,24 @@ const last_spending_date = getLastSpending()["category"];
 document.querySelector(".last-spending-date").textContent =
   capitalizeFirstLetter(last_spending_date);
 
-document.querySelector(".add-reminder").addEventListener("click", function () {
+document.querySelector(".add-reminder").addEventListener("click", function() {
   // navigate to add reminder page
   window.location.href = "manage.html";
 });
+
+function getTotalMoney() {
+  let total = parseInt(getMoney());
+  const totalSpending = getSpendingList().map(data => Object.assign(data, { type: "spending" }));
+  const totalIncome = getIncomeList().map(data => Object.assign(data, { type: "income" }));
+
+  // merge & sort by date
+  const transactions = totalIncome.concat(totalSpending).sort((a, b) => parseDate(a.date) - parseDate(b.date));
+
+  // calculate each transactions
+  transactions.forEach(data => {
+    if (data.type === "income") total += parseInt(data.amount);
+    if (data.type === "spending") total -= parseInt(data.amount);
+  })
+
+  return total;
+}
