@@ -9,7 +9,7 @@
 <h3 align="center">Money Tracking App</h3>
 
   <p align="center">
-    simple yet, backend-less money tracking app developed by <a href="#contributor"> B2 - D4 TI</a>
+    simple yet, backend-less money tracking app developed by <a href="#contributor">B2 - D4 TI</a>
     <br />
     <a href="https://github.com/muhammadfajri-tif/b2-money-tracking#"><strong>Explore the docs »</strong></a>
     <br />
@@ -29,6 +29,7 @@
     <li>
         <a href="#about-the-project">About The Project</a>
         <ul>
+            <li><a href="#showcase">Showcase</a></li>
             <li><a href="#tech-stack">Tech Stack</a></li>
         </ul>
     </li>
@@ -50,9 +51,54 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Money Tracking Screen Shot]](/docs/web-screenshoot.png)
-
 Money Tracking App by [by B2](#contributor) boasts an innovative approach to simplicity and user experience. With its emphasis on facial recognition for accessing dashboard, users can manage their finances with confidence. Additionally, the app offers robust data visualization tools, empowering users to gain valuable insights into their financial habits. Its analytics feature allows for easy export of data to CSV or JSON formats, ensuring seamless integration with other applications. Users can efficiently manage their transactions, with options to delete, update, and add new entries effortlessly. Moreover, the app provides a reliable backup and restore feature, allowing users to safeguard their data and restore it whenever needed, providing peace of mind in the digital age. Learn more about the complete features in [features section](#features).
+
+### Showcase
+
+<details>
+  <summary><strong>Landing Page</strong></summary>
+    <ul>
+        <li>
+            <img src="./docs/landing-page.png" alt="Landing Page Screenshot">
+        </li>
+    </ul>
+</details>
+
+<details>
+  <summary><strong>Face Recognition</strong></summary>
+    <ul>
+        <li>
+            <img src="./docs/face-recognition.png" alt="Face Recognition Page Screenshot">
+        </li>
+    </ul>
+</details>
+
+<details>
+  <summary><strong>Dashboard</strong></summary>
+    <ul>
+        <li>
+            <img src="./docs/dashboard.png" alt="Dashboard Screenshot">
+        </li>
+    </ul>
+</details>
+
+<details>
+  <summary><strong>Data Analytics & Visualization</strong></summary>
+    <ul>
+        <li>
+            <img src="./docs/data-visualization.png" alt="Data Analytics & Visualization Page Screenshot">
+        </li>
+    </ul>
+</details>
+
+<details>
+  <summary><strong>Manage Transaction</strong></summary>
+    <ul>
+        <li>
+            <img src="./docs/manage-transaction.png" alt="Manage Transaction Page Screenshot">
+        </li>
+    </ul>
+</details>
 
 
 <!-- Tech Stack -->
