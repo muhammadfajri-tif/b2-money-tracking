@@ -1,0 +1,208 @@
+{
+  "name": "foo",
+  "money": 20000,
+  "spending": [
+    {
+      "date": "10/5/2024",
+      "amount": 85000,
+      "category": "Makanan"
+    },
+    {
+      "date": "11/5/2024",
+      "amount": 90000,
+      "category": "Transportasi"
+    },
+    {
+      "date": "12/5/2024",
+      "amount": 95000,
+      "category": "Belanja"
+    },
+    {
+      "date": "13/5/2024",
+      "amount": 80000,
+      "category": "Hiburan"
+    },
+    {
+      "date": "14/5/2024",
+      "amount": 12500,
+      "category": "Kesehatan"
+    },
+    {
+      "date": "15/5/2024",
+      "amount": 70000,
+      "category": "Transportasi"
+    },
+    {
+      "date": "16/5/2024",
+      "amount": 32500,
+      "category": "Elektronik"
+    },
+    {
+      "date": "17/5/2024",
+      "amount": 90000,
+      "category": "Pendidikan"
+    },
+    {
+      "date": "18/5/2024",
+      "amount": 95000,
+      "category": "Kesehatan"
+    },
+    {
+      "date": "19/5/2024",
+      "amount": 44000,
+      "category": "Transportasi"
+    },
+    {
+      "date": "20/5/2024",
+      "amount": 75000,
+      "category": "Elektronik"
+    },
+    {
+      "date": "21/5/2024",
+      "amount": 70000,
+      "category": "Pendidikan"
+    },
+    {
+      "date": "22/5/2024",
+      "amount": 22000,
+      "category": "Hiburan"
+    },
+    {
+      "date": "23/5/2024",
+      "amount": 90000,
+      "category": "Makanan"
+    },
+    {
+      "date": "24/5/2024",
+      "amount": 95000,
+      "category": "Transportasi"
+    },
+    {
+      "date": "25/5/2024",
+      "amount": 33000,
+      "category": "Belanja"
+    },
+    {
+      "date": "26/5/2024",
+      "amount": 75000,
+      "category": "Kesehatan"
+    },
+    {
+      "date": "27/5/2024",
+      "amount": 70000,
+      "category": "Transportasi"
+    },
+    {
+      "date": "28/5/2024",
+      "amount": 85000,
+      "category": "Elektronik"
+    },
+    {
+      "date": "29/5/2024",
+      "amount": 12000,
+      "category": "Pendidikan"
+    }
+  ],
+  "income": [
+    {
+      "date": "14/5/2024",
+      "amount": 75000,
+      "category": "Hasil Penjualan"
+    },
+    {
+      "date": "15/5/2024",
+      "amount": 70000,
+      "category": "Juara Lomba"
+    },
+    {
+      "date": "16/5/2024",
+      "amount": 85000,
+      "category": "Layanan Komputer Rumah"
+    },
+    {
+      "date": "17/5/2024",
+      "amount": 90000,
+      "category": "Pendapatan Penyewaan Properti"
+    },
+    {
+      "date": "18/5/2024",
+      "amount": 95000,
+      "category": "Pemasukan Pasif"
+    },
+    {
+      "date": "19/5/2024",
+      "amount": 80000,
+      "category": "Pemasukan Pasif"
+    },
+    {
+      "date": "20/5/2024",
+      "amount": 75000,
+      "category": "Pemasukan Pasif"
+    },
+    {
+      "date": "21/5/2024",
+      "amount": 70000,
+      "category": "Pemasukan Pasif"
+    },
+    {
+      "date": "22/5/2024",
+      "amount": 85000,
+      "category": "Pemasukan Pasif"
+    },
+    {
+      "date": "23/5/2024",
+      "amount": 90000,
+      "category": "Pemasukan Lainnya"
+    },
+    {
+      "date": "24/5/2024",
+      "amount": 95000,
+      "category": "Pemasukan Lainnya"
+    },
+    {
+      "date": "25/5/2024",
+      "amount": 80000,
+      "category": "Pemasukan Lainnya"
+    },
+    {
+      "date": "26/5/2024",
+      "amount": 75000,
+      "category": "Pemasukan Lainnya"
+    },
+    {
+      "date": "27/5/2024",
+      "amount": 70000,
+      "category": "Pemasukan Lainnya"
+    },
+    {
+      "date": "28/5/2024",
+      "amount": 85000,
+      "category": "Pemasukan Lainnya"
+    },
+    {
+      "date": "29/5/2024",
+      "amount": 90000,
+      "category": "Pemasukan Lainnya"
+    },
+    {
+      "date": "30/5/2024",
+      "amount": 95000,
+      "category": "Pemasukan Lainnya"
+    },
+    {
+      "date": "31/5/2024",
+      "amount": 80000,
+      "category": "Pemasukan Ekstra"
+    },
+    {
+      "date": "1/6/2024",
+      "amount": 75000,
+      "category": "Pemasukan Ekstra"
+    },
+    {
+      "date": "2/6/2024",
+      "amount": 70000,
+      "category": "Pemasukan Ekstra"
+    }
+  ]
+}

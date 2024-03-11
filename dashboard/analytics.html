@@ -7,8 +7,10 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
       rel="stylesheet"
     />
+
     <link rel="stylesheet" href="../css/dashboard-style.css" />
-    <title>Responsive Dashboard Design #1 | AsmrProg</title>
+
+    <title>Analytics | B2Proyek</title>
   </head>
 
   <body>
@@ -18,7 +20,7 @@
         <div class="toggle">
           <div class="logo">
             <img src="../images/logo.png" />
-            <h2>Asmr<span class="danger">Prog</span></h2>
+            <h2>B2<span class="warning">Proyek</span></h2>
           </div>
           <div class="close" id="close-btn">
             <span class="material-icons-sharp"> close </span>
@@ -30,43 +32,43 @@
             <span class="material-icons-sharp"> dashboard </span>
             <h3>Dashboard</h3>
           </a>
-          <a href="#">
-            <span class="material-icons-sharp"> person_outline </span>
-            <h3>Users</h3>
+          <a href="manage.html">
+            <span class="material-icons-sharp"> account_balance_wallet </span>
+            <h3>Manage</h3>
           </a>
-          <a href="#">
-            <span class="material-icons-sharp"> receipt_long </span>
-            <h3>History</h3>
-          </a>
-          <a href="#" class="active">
+          <a href="analytics.html" class="active">
             <span class="material-icons-sharp"> insights </span>
             <h3>Analytics</h3>
           </a>
-          <a href="#">
-            <span class="material-icons-sharp"> mail_outline </span>
-            <h3>Tickets</h3>
-            <span class="message-count">27</span>
-          </a>
-          <a href="#">
-            <span class="material-icons-sharp"> inventory </span>
-            <h3>Sale List</h3>
-          </a>
-          <a href="#">
-            <span class="material-icons-sharp"> report_gmailerrorred </span>
-            <h3>Reports</h3>
-          </a>
-          <a href="#">
+          <a href="settings.html">
             <span class="material-icons-sharp"> settings </span>
-            <h3>Settings</h3>
+            <h3>Setting</h3>
           </a>
-          <a href="#">
-            <span class="material-icons-sharp"> add </span>
-            <h3>New Login</h3>
-          </a>
-          <a href="">
-            <span class="material-icons-sharp"> logout </span>
-            <h3>Logout</h3>
-          </a>
+          <div class="bottom-sidebar">
+            <a href="support.html">
+              <span class="material-icons-sharp"> help_outline </span>
+              <h3>Support</h3>
+            </a>
+            <div class="dark-mode">
+              <a href="#">
+                <span class="material-icons-sharp icon-theme"> wb_sunny </span>
+                <h3 class="sidebar-theme title-theme">Light Theme</h3>
+              </a>
+            </div>
+
+            <!-- hr line -->
+            <div class="line"></div>
+            <div class="sidebar-profile">
+              <img src="../images/profile-1.jpg" />
+              <div class="profile-info">
+                <h3>Admin</h3>
+                <small class="text-muted">Admin</small>
+              </div>
+            </div>
+            <div class="sidebar-cc">
+              <p>©2024 Kelompok B2</p>
+            </div>
+          </div>
         </div>
       </aside>
       <!-- End of Sidebar Section -->
@@ -76,6 +78,23 @@
         <h1>Analytics</h1>
         <!-- Analyses -->
         <div class="analytics">
+          <div class="chart-container" style="padding-top: 0">
+            <div id="filter">
+              <h2>Overview Statistic</h2>
+              <div class="filter-group">
+                <button id="filterDay" class="filter-item">1 Day</button>
+                <button id="filterWeek" class="filter-item">1 Week</button>
+                <button id="filterMonth" class="filter-item">1 Month</button>
+                <button id="filterYear" class="filter-item">1 Year</button>
+                <button id="filterAll" class="filter-item">All Time</button>
+              </div>
+            </div>
+            <div id="dashboardChart"></div>
+          </div>
+          <div class="chart-combine">
+            <div id="incomeChart"></div>
+            <div id="outcomeChart"></div>
+          </div>
           <div class="chart-container">
             <h2>Your Daily Spend</h2>
             <div id="dailyChart"></div>
@@ -88,15 +107,18 @@
             <h2>Your Monthly Spend</h2>
             <div id="monthlyChart"></div>
           </div>
+          <div id="yearlyChart" class="chart-box"></div>
+          <div id="quartersChart" class="chart-box"></div>
+          <!-- <div class="wrap"></div> -->
         </div>
         <!-- End of Analyses -->
       </main>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="../js/orders.js"></script>
-    <script src="../js/index.js"></script>
-    <script src="../js/chart.js"></script>
+    <script type="module" src="../js/index.js"></script>
+    <script type="module" src="../js/utils/dataTrasaction.mjs"></script>
+    <script type="module" src="../js/chart.js"></script>
   </body>
 </html>
