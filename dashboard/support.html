@@ -28,22 +28,24 @@
         </div>
 
         <div class="sidebar">
-          <a href="index.html">
-            <span class="material-icons-sharp"> dashboard </span>
-            <h3>Dashboard</h3>
-          </a>
-          <a href="manage.html">
-            <span class="material-icons-sharp"> account_balance_wallet </span>
-            <h3>Manage</h3>
-          </a>
-          <a href="analytics.html">
-            <span class="material-icons-sharp"> insights </span>
-            <h3>Analytics</h3>
-          </a>
-          <a href="settings.html">
-            <span class="material-icons-sharp"> settings </span>
-            <h3>Setting</h3>
-          </a>
+          <div class="top-sidebar">
+            <a href="index.html">
+              <span class="material-icons-sharp"> dashboard </span>
+              <h3>Dashboard</h3>
+            </a>
+            <a href="manage.html">
+              <span class="material-icons-sharp"> account_balance_wallet </span>
+              <h3>Manage</h3>
+            </a>
+            <a href="analytics.html">
+              <span class="material-icons-sharp"> insights </span>
+              <h3>Analytics</h3>
+            </a>
+            <a href="settings.html">
+              <span class="material-icons-sharp"> settings </span>
+              <h3>Setting</h3>
+            </a>
+          </div>
           <div class="bottom-sidebar">
             <div class="bottom-active">
               <a href="support.html">
@@ -198,13 +200,19 @@
             </p>
             <a href="#">Read More</a>
           </div>
+        </div>
       </main>
+      <!-- Right Section -->
+      <div class="right-section">
+        <div class="nav">
+          <button id="menu-btn">
+            <span class="material-icons-sharp"> menu </span>
+          </button>
+        </div>
+        <!-- End of Nav -->
+      </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="../js/orders.js"></script>
     <script type="module" src="../js/index.js"></script>
-    <script type="module" src="../js/utils/dataTrasaction.mjs"></script>
-    <script type="module" src="../js/chart.js"></script>
   </body>
 </html>
