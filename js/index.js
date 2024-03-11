@@ -133,11 +133,23 @@ modalAnchor.forEach((anchor) => {
 });
 
 menuBtn.addEventListener("click", () => {
-  sideMenu.style.display = "block";
+  sideMenu.classList.remove("hidden");
+  overlay.classList.add("active");
 });
 
 closeBtn.addEventListener("click", () => {
-  sideMenu.style.toggle = "none";
+  sideMenu.classList.add("hidden");
+  overlay.classList.remove("active");
+});
+
+window.addEventListener("resize", function () {
+  // Jika lebar halaman lebih besar dari 768px, pastikan navbar ditampilkan
+  if (window.innerWidth > 768) {
+    overlay.classList.remove("active");
+    sideMenu.classList.remove("hidden");
+  } else if (!sideMenu.classList.contains("hidden")) {
+    overlay.classList.add("active");
+  }
 });
 
 darkMode.addEventListener("click", () => {
@@ -145,25 +157,6 @@ darkMode.addEventListener("click", () => {
   darkMode.querySelector("span:nth-child(1)").classList.toggle("active");
   darkMode.querySelector("span:nth-child(2)").classList.toggle("active");
 });
-
-// Orders.forEach((order) => {
-//   const tr = document.createElement("tr");
-//   const trContent = `
-//         <td>${order.productName}</td>
-//         <td>${order.productNumber}</td>
-//         <td>${order.paymentStatus}</td>
-//         <td class="${
-//           order.status === "Declined"
-//             ? "danger"
-//             : order.status === "Pending"
-//             ? "warning"
-//             : "primary"
-//         }">${order.status}</td>
-//         <td class="primary">Details</td>
-//     `;
-//   tr.innerHTML = trContent;
-//   document.querySelector("table tbody").appendChild(tr);
-// });
 
 const prefersDarkMode = window.matchMedia(
   "(prefers-color-scheme: dark)"

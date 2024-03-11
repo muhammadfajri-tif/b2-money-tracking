@@ -33,43 +33,22 @@
           <span class="material-icons-sharp"> dashboard </span>
           <h3>Dashboard</h3>
         </a>
-        <!-- <a href="#">
-          <span class="material-icons-sharp"> person_outline </span>
-          <h3>Users</h3>
-        </a> -->
-        <!-- <a href="#">
-          <span class="material-icons-sharp"> receipt_long </span>
-          <h3>History</h3>
-        </a> -->
-        <a href="#">
+        <a href="/dashboard/manage.html">
+          <span class="material-icons-sharp"> account_balance_wallet </span>
+          <h3>Manage</h3>
+        </a>
+        <a href="/dashboard/analytics.html">
           <span class="material-icons-sharp"> insights </span>
           <h3>Analytics</h3>
         </a>
-        <!-- <a href="#">
-          <span class="material-icons-sharp"> mail_outline </span>
-          <h3>Tickets</h3>
-          <span class="message-count">27</span>
-        </a> -->
-        <!-- <a href="#">
-          <span class="material-icons-sharp"> inventory </span>
-          <h3>Sale List</h3>
-        </a> -->
-        <!-- <a href="#">
-          <span class="material-icons-sharp"> report_gmailerrorred </span>
-          <h3>Reports</h3>
-        </a> -->
-        <!-- <a href="#">
+        <a href="/dashboard/settings.html">
           <span class="material-icons-sharp"> settings </span>
           <h3>Settings</h3>
-        </a> -->
-        <!-- <a href="#">
-          <span class="material-icons-sharp"> add </span>
-          <h3>New Login</h3>
-        </a> -->
-        <!-- <a href="#">
-          <span class="material-icons-sharp"> logout </span>
-          <h3>Logout</h3>
-        </a> -->
+        </a>
+        <a href="/dashboard/support.html">
+          <span class="material-icons-sharp"> help_outline </span>
+          <h3>Support</h3>
+        </a>
       </div>
     </aside>
     <!-- End of Sidebar Section -->
@@ -78,6 +57,9 @@
 
       <header>
         <div class="header-date">
+          <button id="menu-btn">
+            <span class="material-icons-sharp"> menu </span>
+          </button>
           <i class="fa fa-cloud"></i>
           <div class="date"></div>
         </div>
@@ -86,9 +68,6 @@
         </div>
         <div class="haeder-menu">
           <div class="nav">
-            <button id="menu-btn">
-              <span class="material-icons-sharp"> menu </span>
-            </button>
             <div class="dark-mode">
               <span class="material-icons-sharp active"> light_mode </span>
               <span class="material-icons-sharp"> dark_mode </span>
@@ -119,10 +98,6 @@
           </div>
           <div class="modal-nav">
             <a href="#">
-              <span class="material-icons-sharp"> settings </span>
-              <h3>Settings</h3>
-            </a>
-            <a href="#">
               <span class="material-icons-sharp"> logout </span>
               <h3>Logout</h3>
             </a>
@@ -140,8 +115,8 @@
             <div class="sales">
               <div class="status">
                 <div class="info">
-                  <h3>Balance</h3>
-                  <h1 id="balance-value">90</h1>
+                  <h3>Today Money</h3>
+                  <h1 class="money-text">$0</h1>
                 </div>
                 <!-- Lingkaran -->
                 <div class="progresss Balance">
@@ -168,8 +143,8 @@
             <div class="visits">
               <div class="status">
                 <div class="info">
-                  <h3>Expenses</h3>
-                  <h1 id="expense-value">100</h1>
+                  <h3>Today Income</h3>
+                  <h1 class="income-text">$0</h1>
                 </div>
                 <!-- Lingkaran -->
                 <div class="progresss Expenses">
@@ -196,8 +171,8 @@
             <div class="searches">
               <div class="status">
                 <div class="info">
-                  <h3>Income</h3>
-                  <h1 id="income-value">200</h1>
+                  <h3>Today Spending</h3>
+                  <h1 class="spending-text">$0</h1>
                 </div>
                 <!-- Card -->
                 <div class="progresss Income">
@@ -258,75 +233,32 @@
             <a href="#">Show All</a>
           </div>
           <!-- End of Recent Orders -->
-          <!-- Card -->
-          <!-- End of Analyses -->
-          <!-- New Users Section -->
-          <!-- <div class="new-users">
-            <h2>New Users</h2>
-            <div class="user-list">
-              <div class="user">
-                <img src="../images/profile-2.jpg" />
-                <h2>Jack</h2>
-                <p>54 Min Ago</p>
+          <div class="analytics">
+            <div class="chart-container" style="padding-top: 0">
+              <div id="filter">
+                <h2>Overview Statistic</h2>
+                <div class="filter-group">
+                  <button id="filterDay" class="filter-item">1 Day</button>
+                  <button id="filterWeek" class="filter-item">1 Week</button>
+                  <button id="filterMonth" class="filter-item">1 Month</button>
+                  <button id="filterYear" class="filter-item">1 Year</button>
+                  <button id="filterAll" class="filter-item">All Time</button>
+                </div>
               </div>
-              <div class="user">
-                <img src="../images/profile-3.jpg" />
-                <h2>Amir</h2>
-                <p>3 Hours Ago</p>
-              </div>
-              <div class="user">
-                <img src="../images/profile-4.jpg" />
-                <h2>Ember</h2>
-                <p>6 Hours Ago</p>
-              </div>
-              <div class="user">
-                <img src="../images/plus.png" />
-                <h2>More</h2>
-                <p>New User</p>
-              </div>
+              <div id="dashboardChart"></div>
             </div>
-          </div> -->
-          <!-- End of New Users Section -->
-
-          <!-- Recent Orders Table -->
-          <!-- <div class="recent-orders">
-            <h2>Recent Orders</h2>
-            <table>
-              <thead>
-                <tr>
-                  <th>Course Name</th>
-                  <th>Course Number</th>
-                  <th>Payment</th>
-                  <th>Status</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-            <a href="#">Show All</a>
-          </div> -->
-          <!-- End of Recent Orders -->
+          </div>
         </main>
         <!-- End of Main Content -->
 
         <!-- Right Section -->
         <div class="right-section">
-          <!-- End of Nav -->
-
-          <!-- <div class="user-profile">
-            <div class="logo">
-              <img src="../images/logo.png" />
-              <h2>AsmrProg</h2>
-              <p>Fullstack Web Developer</p>
-            </div>
-          </div> -->
-
           <div class="reminders">
             <div class="header">
               <h2>Reminders</h2>
               <span class="material-icons-sharp"> notifications_none </span>
             </div>
-  
+
             <div class="notification">
               <div class="icon">
                 <span class="material-icons-sharp"> volume_up </span>
@@ -339,7 +271,7 @@
                 <span class="material-icons-sharp"> more_vert </span>
               </div>
             </div>
-  
+
             <div class="notification deactive">
               <div class="icon">
                 <span class="material-icons-sharp"> edit </span>
@@ -352,7 +284,7 @@
                 <span class="material-icons-sharp"> more_vert </span>
               </div>
             </div>
-  
+
             <div class="notification add-reminder">
               <div>
                 <span class="material-icons-sharp"> add </span>

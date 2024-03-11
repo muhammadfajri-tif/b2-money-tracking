@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/dashboard-style.css" />
+    <title>Responsive Dashboard Design #1 | AsmrProg</title>
+  </head>
+
+  <body>
+    <!-- Sidebar Section -->
+    <aside>
+      <div class="toggle">
+        <div class="logo">
+          <img src="../images/logo.png" />
+          <h2>B2<span class="danger">Proyek</span></h2>
+        </div>
+        <div class="close" id="close-btn">
+          <span class="material-icons-sharp"> close </span>
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <a href="/dashboard/index.html">
+          <span class="material-icons-sharp"> dashboard </span>
+          <h3>Dashboard</h3>
+        </a>
+        <a href="/dashboard/manage.html">
+          <span class="material-icons-sharp"> account_balance_wallet </span>
+          <h3>Manage</h3>
+        </a>
+        <a href="/dashboard/analytics.html">
+          <span class="material-icons-sharp"> insights </span>
+          <h3>Analytics</h3>
+        </a>
+        <a href="/dashboard/settings.html" class="active">
+          <span class="material-icons-sharp"> settings </span>
+          <h3>Settings</h3>
+        </a>
+        <a href="/dashboard/support.html">
+          <span class="material-icons-sharp"> help_outline </span>
+          <h3>Support</h3>
+        </a>
+      </div>
+    </aside>
+    <!-- End of Sidebar Section -->
+    <div class="main-container">
+      <!-- Header -->
+
+      <header>
+        <div class="header-date">
+          <button id="menu-btn">
+            <span class="material-icons-sharp"> menu </span>
+          </button>
+          <i class="fa fa-cloud"></i>
+          <div class="date"></div>
+        </div>
+        <div class="header-search">
+          <input type="text" placeholder="Search" />
+        </div>
+        <div class="haeder-menu">
+          <div class="nav">
+            <div class="dark-mode">
+              <span class="material-icons-sharp active"> light_mode </span>
+              <span class="material-icons-sharp"> dark_mode </span>
+            </div>
+
+            <div class="profile">
+              <div class="info">
+                <p>Hey, <b>Hanif Ahmad</b></p>
+              </div>
+              <div class="profile-photo">
+                <a data-modal-target="#modal" href="#">
+                  <img src="../images/profil.jpeg" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- End Header -->
+      <div class="modal" id="modal">
+        <div class="modal-header">
+          <div class="title">Hanif Ahmad</div>
+          <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-image">
+            <img src="../images/profil.jpeg" />
+          </div>
+          <div class="modal-nav">
+            <a href="#">
+              <span class="material-icons-sharp"> logout </span>
+              <h3>Logout</h3>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div id="overlay"></div>
+      <div class="container">
+        <!-- Main Content -->
+        <main style="grid-column: 1/3">
+          <h1>Settings</h1>
+
+          <!-- Improved Import Data section -->
+          <div class="form-container">
+            <h2>Import Your Data</h2>
+            <p>
+              Import your data from a file. Supported file types are .json and
+              .csv
+              <br />
+              <strong>Note:</strong> Importing data will overwrite your current
+              data.
+            </p>
+
+            <div class="file-upload">
+              <label for="file-select" class="custom-file-upload">
+                <span class="material-icons-sharp">cloud_upload</span> Choose
+                File
+              </label>
+              <input
+                id="file-select"
+                class="file-select"
+                type="file"
+                accept=".json, .csv"
+              />
+              <span class="file-name">No file chosen</span>
+            </div>
+          </div>
+
+          <div class="support">
+            <div class="support-card">
+              <a id="backup-account-button">Backup/Export Akun</a>
+            </div>
+            <div class="support-card">
+              <a id="export-income-json-button"
+                >Export Pemasukan/income Keuangan (json)</a
+              >
+            </div>
+            <div class="support-card">
+              <a id="export-income-csv-button"
+                >Export Pemasukan/income Keuangan (csv)</a
+              >
+            </div>
+          </div>
+          <div class="support">
+            <div class="support-card">
+              <a id="export-spending-json-button"
+                >Export Pengeluaran/spending Keuangan (json)</a
+              >
+            </div>
+
+            <div class="support-card">
+              <a id="export-spending-csv-button"
+                >Export Pengeluaran/spending Keuangan (csv)</a
+              >
+            </div>
+          </div>
+
+          <!-- Improved Create Account form -->
+          <div class="form-container">
+            <button
+              type="button"
+              onclick="toggleFormCreateUse()"
+              class="btn-show-form"
+            >
+              Want to create a new account?
+            </button>
+          </div>
+
+          <div class="form-container create-account">
+            <form id="new-account-form" class="create-account-form">
+              <h2>Create New Account</h2>
+              <p>
+                Create a new account to manage your money. You can create as
+                many accounts as you want.
+
+                <br />
+                <strong>Note:</strong> Creating a new account will overwrite
+                your current data.
+              </p>
+              <div class="form-group">
+                <label for="new-account-name">Username:</label>
+                <input
+                  type="text"
+                  id="new-account-name"
+                  name="new-account-name"
+                  placeholder="Enter username"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="new-account-money">Initial Balance:</label>
+                <input
+                  type="text"
+                  id="new-account-money"
+                  name="new-account-money"
+                  min="0"
+                  placeholder="Rp0"
+                  required
+                />
+              </div>
+              <button type="submit" name="new-account-submit">
+                Create Account
+              </button>
+            </form>
+          </div>
+          <!-- End of Section create new account -->
+        </main>
+        <!-- End of Main Content -->
+      </div>
+    </div>
+    <script type="module" src="../js/index.js"></script>
+    <script type="module" src="../js/utils/account.mjs"></script>
+    <script type="module" src="../js/history.js"></script>
+    <script src="../js/orders.js"></script>
+    <script>
+      const money = document.getElementById("new-account-money");
+
+      function formatRupiah(amount) {
+        return "Rp" + new Intl.NumberFormat("id-ID").format(amount);
+      }
+
+      // Event listener for input value change
+      money.addEventListener("input", function () {
+        // Remove non-numeric characters
+        let amount = this.value.replace(/\D/g, "");
+
+        // Format amount in Rupiah currency
+        let formattedAmount = formatRupiah(amount);
+
+        this.value = formattedAmount;
+      });
+
+      // handle form buat akun baru
+      function toggleFormCreateUse() {
+        const createAccount = document.querySelector(".create-account");
+        createAccount.classList.toggle("active");
+      }
+    </script>
+  </body>
+</html>
