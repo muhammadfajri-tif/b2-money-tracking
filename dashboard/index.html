@@ -12,6 +12,8 @@
   </head>
 
   <body>
+    <audio id="audio" src="../sounds/windows_7_startup.mp3" autoplay></audio>
+
     <div class="container">
       <!-- Sidebar Section -->
       <aside>
@@ -204,6 +206,16 @@
         </div>
       </div>
     </div>
+
+    <script>
+      // Wait for the audio to be loaded
+      document
+        .getElementById("audio")
+        .addEventListener("loadedmetadata", function () {
+          // Play the audio
+          this.play();
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="../js/orders.js"></script>
