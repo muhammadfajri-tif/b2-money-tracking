@@ -324,15 +324,14 @@ main .analyse > div:hover {
   box-shadow: none;
 }
 
-main .analyse > div .status {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 main .analyse h3 {
   margin-left: 0.6rem;
-  font-size: 1rem;
+  font-size: 1.4rem;
+}
+
+main .analyse h1 {
+  margin-left: 0.6rem;
+  font-size: 2.5rem;
 }
 
 main .analyse .progresss {
@@ -949,6 +948,10 @@ button[type="submit"]:hover {
 
 .support-card p {
   color: var(--color-dark-variant);
+}
+
+.status {
+  text-align: center;
 }
 
 /* Style for export links */

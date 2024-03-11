@@ -28,7 +28,6 @@
  *
  */
 
-
 /**
  * Module untuk mengubah tanggal (hh/bb/tttt) dari bentuk string ke Date.
  *
@@ -84,6 +83,32 @@ export function getUsername() {
  */
 export function getMoney() {
   return window.localStorage.getItem("money");
+}
+
+/**
+ * Getter untuk mendapatkan jumlah income di hari ini
+ *
+ * @returns {number} - jumlah uang yang dimiliki pengguna
+ */
+export function getTodayIncome() {
+  const income = getIncomeList();
+  const today = new Date().toLocaleDateString("en-GB");
+  return income
+    .filter((transaction) => transaction.date === today)
+    .reduce((acc, curr) => acc + curr.amount, 0);
+}
+
+/**
+ * Getter untuk mendapatkan jumlah spending di hari ini
+ *
+ * @returns {number} - jumlah uang yang dimiliki pengguna
+ */
+export function getTodaySpending() {
+  const spending = getSpendingList();
+  const today = new Date().toLocaleDateString("en-GB");
+  return spending
+    .filter((transaction) => transaction.date === today)
+    .reduce((acc, curr) => acc + curr.amount, 0);
 }
 
 /**
@@ -259,7 +284,12 @@ export function addNewIncome(newTransaction, typeTransaction) {
  * @param {'spending'|'income'} transactionType - Tipe/jenis transaksi. Nilai valid hanya 'spending' atau 'income'
  * @returns {Transaction[]} index 0: data yang belum di update, index 1: data yang telah di update
  */
-export function updateTransaction(id, updatedData, existingTransaction, transactionType) {
+export function updateTransaction(
+  id,
+  updatedData,
+  existingTransaction,
+  transactionType
+) {
   // update specific data by index
   const dataBeforeUpdate = existingTransaction.splice(id, 1, updatedData);
 
@@ -268,10 +298,13 @@ export function updateTransaction(id, updatedData, existingTransaction, transact
   console.log(`[UPDATED] ${transactionType}`, existingTransaction);
 
   // save to the local storage
-  (transactionType === "income") &&
+  transactionType === "income" &&
     window.localStorage.setItem("income", JSON.stringify(existingTransaction));
-  (transactionType === "spending") &&
-    window.localStorage.setItem("spending", JSON.stringify(existingTransaction));
+  transactionType === "spending" &&
+    window.localStorage.setItem(
+      "spending",
+      JSON.stringify(existingTransaction)
+    );
 
   return [dataBeforeUpdate, updatedData];
 }
@@ -293,11 +326,13 @@ export function deleteTransaction(id, existingTransaction, transactionType) {
   console.log(`[DELETED] current ${transactionType}`, existingTransaction);
 
   // save to the local storage
-  (transactionType === "income") &&
+  transactionType === "income" &&
     window.localStorage.setItem("income", JSON.stringify(existingTransaction));
-  (transactionType === "spending") &&
-    window.localStorage.setItem("spending", JSON.stringify(existingTransaction));
+  transactionType === "spending" &&
+    window.localStorage.setItem(
+      "spending",
+      JSON.stringify(existingTransaction)
+    );
 
   return deletedData;
 }
-

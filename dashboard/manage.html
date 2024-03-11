@@ -271,9 +271,56 @@
     ></script>
 
     <script>
+      // Function to format currency (in this case, Indonesian Rupiah)
+      function formatCurrency(amount) {
+        return new Intl.NumberFormat("id-ID", {
+          style: "currency",
+          currency: "IDR",
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+        }).format(amount);
+      }
+
+      // Function to format date
+      function formatDate(dateString) {
+        const options = { year: "numeric", month: "short", day: "numeric" };
+        return new Date(dateString).toLocaleDateString("en-US", options);
+      }
+
       $(document).ready(function () {
-        $("#user-income-transaction-table").DataTable();
-        $("#user-spending-transaction-table").DataTable();
+        $("#user-income-transaction-table").DataTable({
+          columnDefs: [
+            {
+              targets: 1, // index of the Date column
+              render: function (data, type, row) {
+                return formatDate(data);
+              },
+            },
+            {
+              targets: 2, // index of the Amount column
+              render: function (data, type, row) {
+                return formatCurrency(data);
+              },
+            },
+          ],
+        });
+
+        $("#user-spending-transaction-table").DataTable({
+          columnDefs: [
+            {
+              targets: 1, // index of the Date column
+              render: function (data, type, row) {
+                return formatDate(data);
+              },
+            },
+            {
+              targets: 2, // index of the Amount column
+              render: function (data, type, row) {
+                return formatCurrency(data);
+              },
+            },
+          ],
+        });
       });
     </script>
   </body>
