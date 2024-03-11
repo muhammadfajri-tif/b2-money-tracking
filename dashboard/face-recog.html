@@ -4,37 +4,16 @@
     <title>Face Recognition</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, shrink-to-fit=yes" />
-    <meta name="application-name" content="FaceAPI" />
-    <meta name="keywords" content="FaceAPI" />
-    <meta
-      name="description"
-      content="FaceAPI: AI-powered Face Detection, Description & Recognition for Browser and NodeJS using Tensorflow/JS; Author: Vladimir Mandic <https://github.com/vladmandic>"
-    />
-    <meta
-      name="msapplication-tooltip"
-      content="FaceAPI: AI-powered Face Detection, Description & Recognition for Browser and NodeJS using Tensorflow/JS; Author: Vladimir Mandic <https://github.com/vladmandic>"
-    />
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
-    <!-- <script src="../js/models/webcam.js" type="module"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1/dist/face-api.js"></script>
 
     <script type="module">
-      /**
-       * FaceAPI Demo for Browsers
-       * Loaded via `webcam.html`
-       */
-
-      // import * as faceapi from "../dist/face-api.esm.js"; // use when in dev mode
-      // import * as faceapi from "@vladmandic/face-api"; // use when downloading face-api as npm
-      // configuration options
-      // const modelPath = "../model/"; // path to model folder that will be loaded using http
       const modelPath =
-        "https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model/"; // path to model folder that will be loaded using http
-      const minScore = 0.2; // minimum score
-      const maxResults = 5; // maximum number of results to return
+        // "https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model/"; // CDN model path
+        "../models/"; // local model path
+      const minScore = 0.2;
+      const maxResults = 5;
       let optionsSSDMobileNet;
-
-      // helper function to pretty-print json object to string
       function str(json) {
         let text = '<font color="lightblue">';
         text += json
@@ -45,31 +24,26 @@
         text += "</font>";
         return text;
       }
-
-      // helper function to print strings to html document as a log
       function log(...txt) {
-        console.log(...txt); // eslint-disable-line no-console
+        console.log(...txt);
         const div = document.getElementById("log");
         if (div) div.innerHTML += `<br>${txt}`;
       }
-      // helper function to draw detected faces
-      // helper function to draw detected faces
-      // helper function to draw detected faces
       function drawFaces(canvas, data, fps, smileTime) {
         const ctx = canvas.getContext("2d", { willReadFrequently: true });
         if (!ctx) return;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        // draw title
+        // draw fps
         ctx.font = 'small-caps 20px "Segoe UI"';
         ctx.fillStyle = "white";
         ctx.fillText(`FPS: ${fps}`, 10, 25);
 
-        // Draw top message overlay
-        const overlayPadding = 10; // Padding around the text
+        // draw smile time
+        const overlayPadding = 10;
         const text =
           smileTime !== 0
             ? `Hold your smile until 5 seconds, your time: ${smileTime} seconds`
-            : "Please Smile To Login :)"; // Determine the text content
+            : "Please Smile To Login :)";
         const textWidth = ctx.measureText(text).width; // Calculate the width of the text
         const overlayWidth = textWidth + 1 * overlayPadding; // Calculate the width of the overlay rectangle
         const overlayHeight = 50; // Height of the overlay rectangle
@@ -82,7 +56,26 @@
         const textX = overlayX + (overlayWidth - textWidth + 30) / 2; // X coordinate to center the text within the overlay
         ctx.fillText(text, textX, overlayY + 30); // Adjust the position of the text
 
-        // draw overlay
+        // draw overlay for Having problem with cam? Click Here
+        ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+        // change overlay position to right top corner
+        const overlayWidth2 = 390; // Width of the overlay rectangle
+        const overlayX2 = canvas.width - overlayWidth2 - 50; // X coordinate to right align the overlay
+        const overlayY2 = 10; // Y coordinate of the overlay
+        ctx.fillRect(overlayX2, overlayY2, overlayWidth2, 60); // Adjust the position and size of the overlay rectangle
+
+        // Draw Having problem with cam? Click Here
+        ctx.font = 'bold 20px "Segoe UI"'; // Adjust the font size and style
+        ctx.fillStyle = "white";
+        ctx.fillText(
+          "Having problem with cam?",
+          overlayX2 + 10,
+          overlayY2 + 40
+        ); // Adjust the position of the text
+        ctx.fillStyle = "red";
+        ctx.fillText("Click Here", overlayX2 + 280, overlayY2 + 40); // Adjust the position of the text
+
+        // draw overlay for emotional state
         ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
         ctx.fillRect(10, canvas.height - 70, 230, 50); // Adjust the size of the overlay rectangle
 
@@ -191,58 +184,33 @@
         }
       }
 
-      // function drawFaces(canvas, data, fps) {
-      //   const ctx = canvas.getContext("2d", { willReadFrequently: true });
-      //   if (!ctx) return;
-      //   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      //   // draw FPS
-      //   ctx.font = 'small-caps 20px "Segoe UI"';
-      //   ctx.fillStyle = "white";
-      //   ctx.fillText(`FPS: ${fps}`, 10, 25);
-
-      //   // draw overlay
-      //   ctx.font = '16px "Segoe UI"';
-      //   ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
-      //   ctx.fillRect(10, canvas.height - 40, 200, 30);
-
-      //   // draw emotional state
-      //   ctx.fillStyle = "white";
-      //   ctx.fillText("Emotion: ", 20, canvas.height - 20);
-
-      //   for (const person of data) {
-      //     // Draw the bounding box around the face
-      //     ctx.lineWidth = 3;
-      //     ctx.strokeStyle = "deepskyblue";
-      //     ctx.globalAlpha = 0.6;
-      //     ctx.beginPath();
-      //     ctx.rect(
-      //       person.detection.box.x,
-      //       person.detection.box.y,
-      //       person.detection.box.width,
-      //       person.detection.box.height
-      //     );
-      //     ctx.stroke();
-      //     ctx.globalAlpha = 1;
-
-      //     // Determine emotional state
-      //     let emotion;
-      //     if (person.expressions.happy > 0.5) {
-      //       emotion = "Smile";
-      //     } else if (person.expressions.neutral > 0.5) {
-      //       emotion = "Neutral";
-      //     } else {
-      //       emotion = "Sad";
-      //     }
-
-      //     // Draw emotional state text
-      //     ctx.fillText(emotion, 100, canvas.height - 20);
-      //   }
-      // }
-
       let smileStartTime; // Variable to store the time when the smile is detected
       let smileDetected = false; // Flag to track if a smile is detected
       let smileTime = 0; // Variable to store the smile time
+
+      // Add event listener for canvas click
+      canvas.addEventListener("click", function (event) {
+        console.log("Canvas clicked");
+        const ctx = canvas.getContext("2d", { willReadFrequently: true });
+        if (!ctx) return;
+        const rect = canvas.getBoundingClientRect();
+        const clickX = event.clientX - rect.left;
+        const clickY = event.clientY - rect.top;
+        const overlayX = canvas.width - 440; // X coordinate of the overlay rectangle
+        const overlayY = 10; // Y coordinate of the overlay rectangle
+        const clickHereX = overlayX + 280; // X coordinate of the "Click Here" text
+        const clickHereY = overlayY + 40; // Y coordinate of the "Click Here" text
+
+        // Check if click is within "Click Here" text boundaries
+        if (
+          clickX >= clickHereX &&
+          clickX <= clickHereX + ctx.measureText("Click Here").width &&
+          clickY >= clickHereY - 20 &&
+          clickY <= clickHereY + 10
+        ) {
+          window.location.href = "index.html"; // Navigate to index.html
+        }
+      });
 
       async function detectVideo(video, canvas) {
         if (!video || video.paused) return false;
@@ -332,17 +300,6 @@
           settings.aspectRatio = Math.trunc(100 * settings.aspectRatio) / 100;
         log(`Camera active: ${track.label}`);
         log(`Camera settings: ${str(settings)}`);
-        // canvas.addEventListener("click", () => {
-        //   if (video && video.readyState >= 2) {
-        //     if (video.paused) {
-        //       video.play();
-        //       detectVideo(video, canvas);
-        //     } else {
-        //       video.pause();
-        //     }
-        //   }
-        //   log(`Camera state: ${video.paused ? "paused" : "playing"}`);
-        // });
         return new Promise((resolve) => {
           video.onloadeddata = async () => {
             canvas.width = video.videoWidth;
@@ -355,9 +312,6 @@
       }
 
       async function setupFaceAPI() {
-        // load face-api models
-        // log('Models loading');
-        // await faceapi.nets.tinyFaceDetector.load(modelPath); // using ssdMobilenetv1
         await faceapi.nets.ssdMobilenetv1.load(modelPath);
         await faceapi.nets.ageGenderNet.load(modelPath);
         await faceapi.nets.faceLandmark68Net.load(modelPath);
@@ -367,21 +321,9 @@
           minConfidence: minScore,
           maxResults,
         });
-        // check tf engine state
-        // log(
-        //   `Models loaded: ${str(faceapi.tf.engine().state.numTensors)} tensors`
-        // );
       }
 
       async function main() {
-        // initialize tfjs
-        // log("FaceAPI WebCam Test");
-
-        // if you want to use wasm backend location for wasm binaries must be specified
-        // await faceapi.tf?.setWasmPaths(`https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@${faceapi.tf.version_core}/dist/`);
-        // await faceapi.tf?.setBackend('wasm');
-        // log(`WASM SIMD: ${await faceapi.tf?.env().getAsync('WASM_HAS_SIMD_SUPPORT')} Threads: ${await faceapi.tf?.env().getAsync('WASM_HAS_MULTITHREAD_SUPPORT') ? 'Multi' : 'Single'}`);
-
         // default is webgl backend
         await faceapi.tf.setBackend("webgl");
         await faceapi.tf.ready();
@@ -393,16 +335,6 @@
           faceapi.tf.env().set("WEBGL_EXP_CONV", true);
         if (faceapi.tf?.env().flagRegistry.WEBGL_EXP_CONV)
           faceapi.tf.env().set("WEBGL_EXP_CONV", true);
-
-        // check version
-        // log(
-        //   `Version: FaceAPI ${str(
-        //     faceapi?.version || "(not loaded)"
-        //   )} TensorFlow/JS ${str(
-        //     faceapi.tf?.version_core || "(not loaded)"
-        //   )} Backend: ${str(faceapi.tf?.getBackend() || "(not loaded)")}`
-        // );
-
         await setupFaceAPI();
         await setupCamera();
       }
@@ -429,6 +361,5 @@
       style="position: fixed; top: 0; left: 0; z-index: 3"
     ></canvas>
     <div id="log" style="overflow-y: scroll; height: 16.5rem"></div>
-    <!-- Heading Says Setting Up Camera.. on center of page -->
   </body>
 </html>
