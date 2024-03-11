@@ -1,9 +1,8 @@
 <!-- PROJECT LOGO -->
 <a name="readme-top"></a>
-<br />
 <div align="center">
   <a href="https://github.com/muhammadfajri-tif/b2-money-tracking">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="images/logo.png" alt="Logo" width="128" height="128">
   </a>
 
 <h3 align="center">Money Tracking App</h3>
