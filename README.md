@@ -2,7 +2,7 @@
 <a name="readme-top"></a>
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
+  <a href="https://github.com/muhammadfajri-tif/b2-money-tracking">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -11,7 +11,7 @@
   <p align="center">
     simple yet, backend-less money tracking app developed by <a href="#contributor"> B2 - D4 TI</a>
     <br />
-    <a href="https://github.com/muhammadfajri-tif/b2-money-tracking"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/muhammadfajri-tif/b2-money-tracking#"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://muhammadfajri-tif.github.io/b2-money-tracking">View Demo</a>
@@ -72,17 +72,33 @@ Money Tracking App by [by B2](#contributor) boasts an innovative approach to sim
 
 **Supported File Format for Export/Import Data**
 
-[![CSV](./docs/csv-icon.png =48x48)](https://en.wikipedia.org/wiki/Comma-separated_values)
-[![JSON](./docs/json-icon.png =48x48)](https://www.json.org/json-en.html)
+
+<a href="https://en.wikipedia.org/wiki/Comma-separated_values">
+    <img src="./docs/csv-icon.png" alt="CSV Icon" width="48" height="48">
+</a>
+<a href="https://www.json.org/json-en.html">
+    <img src="./docs/json-icon.png" alt="JSON Icon" width="48" height="48">
+</a>
+
+<!-- [![CSV]](./docs/csv-icon.png =48x48)(https://en.wikipedia.org/wiki/Comma-separated_values) -->
+<!-- [![JSON](./docs/json-icon.png =48x48)(https://www.json.org/json-en.html) -->
 
 **Storage System**
 
-[![Browser Local Storage](./docs/file-storage.png =48x48)](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage">
+    <img src="./docs/file-storage.png" alt="Browser Local Storage Icon" width="48" height="48">
+</a>
+
+<!-- ![Browser Local Storage](./docs/file-storage.png =48x48)(https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) -->
 
 **Additional Tools**
 
-[![Draw IO](./docs/drawio.png =42x48)](https://www.drawio.com/)
 [![Figma](https://skillicons.dev/icons?i=figma)](https://www.figma.com/)
+<a href="https://www.drawio.com/">
+    <img src="./docs/drawio.png" alt="Drawio Icon" width="42" height="48">
+</a>
+
+<!-- [![Draw IO]](./docs/drawio.png =42x48)(https://www.drawio.com/) -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
