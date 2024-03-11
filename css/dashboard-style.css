@@ -525,6 +525,12 @@ main .recent-orders a {
   margin-bottom: 0.2rem;
 }
 
+.user-profile .logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .right-section .reminders {
   margin-top: 2rem;
 }

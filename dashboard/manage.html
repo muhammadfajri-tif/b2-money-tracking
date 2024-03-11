@@ -20,7 +20,7 @@
       type="text/css"
       href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"
     />
-    <title>Manage Your Account</title>
+    <title>Manage | B2Proyek</title>
   </head>
 
   <body>
@@ -30,7 +30,7 @@
         <div class="toggle">
           <div class="logo">
             <img src="../images/logo.png" />
-            <h2>Asmr<span class="danger">Prog</span></h2>
+            <h2>B2<span class="danger">Proyek</span></h2>
           </div>
           <div class="close" id="close-btn">
             <span class="material-icons-sharp"> close </span>
@@ -52,7 +52,7 @@
           </a>
           <a href="settings.html">
             <span class="material-icons-sharp"> settings </span>
-            <h3>Settings</h3>
+            <h3>Setting</h3>
           </a>
           <div class="bottom-sidebar">
             <a href="support.html">
@@ -269,59 +269,5 @@
       type="text/javascript"
       src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"
     ></script>
-
-    <script>
-      // Function to format currency (in this case, Indonesian Rupiah)
-      function formatCurrency(amount) {
-        return new Intl.NumberFormat("id-ID", {
-          style: "currency",
-          currency: "IDR",
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0,
-        }).format(amount);
-      }
-
-      // Function to format date
-      function formatDate(dateString) {
-        const options = { year: "numeric", month: "short", day: "numeric" };
-        return new Date(dateString).toLocaleDateString("en-US", options);
-      }
-
-      $(document).ready(function () {
-        $("#user-income-transaction-table").DataTable({
-          columnDefs: [
-            {
-              targets: 1, // index of the Date column
-              render: function (data, type, row) {
-                return formatDate(data);
-              },
-            },
-            {
-              targets: 2, // index of the Amount column
-              render: function (data, type, row) {
-                return formatCurrency(data);
-              },
-            },
-          ],
-        });
-
-        $("#user-spending-transaction-table").DataTable({
-          columnDefs: [
-            {
-              targets: 1, // index of the Date column
-              render: function (data, type, row) {
-                return formatDate(data);
-              },
-            },
-            {
-              targets: 2, // index of the Amount column
-              render: function (data, type, row) {
-                return formatCurrency(data);
-              },
-            },
-          ],
-        });
-      });
-    </script>
   </body>
 </html>

@@ -102,11 +102,11 @@ function renderNewTableRow(table, transactionType) {
 
     // field date
     let colDate = newRecord.insertCell(1);
-    colDate.innerText = element.date;
+    colDate.innerText = formatDate(element.date);
 
     // field amount
     let colAmount = newRecord.insertCell(2);
-    colAmount.innerText = parseInt(element.amount);
+    colAmount.innerText = formatCurrency(parseInt(element.amount));
 
     // field category
     let colCategory = newRecord.insertCell(3);
@@ -174,4 +174,30 @@ function promptUpdateData(id, existingTransaction, transactionType) {
   confirm(`Apakah anda yakin akan mengubah data menjadi 
     ${newData.date}, ${newData.amount}, ${newData.category}, ${newData.desc}?`) &&
     updateTransaction(id, newData, existingTransaction, transactionType);
+}
+
+function formatCurrency(amount) {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
+
+// Function to format date
+function formatDate(dateString) {
+  // Parse the date string into a Date object
+  const dateParts = dateString.split("/");
+  const year = parseInt(dateParts[2]);
+  const month = parseInt(dateParts[1]) - 1; // Months are zero-based in JavaScript Date object
+  const day = parseInt(dateParts[0]);
+  const date = new Date(year, month, day);
+
+  // Format the date according to Indonesian locale
+  return date.toLocaleDateString("id-ID", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 }
