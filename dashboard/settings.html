@@ -67,7 +67,7 @@
 
             <!-- hr line -->
             <div class="line"></div>
-            <div class="sidebar-profile">
+            <div data-modal-target="#modal" class="sidebar-profile">
               <img src="../images/profile-1.jpg" />
               <div class="profile-info">
                 <h3>Admin</h3>
@@ -81,6 +81,24 @@
         </div>
       </aside>
       <!-- End of Sidebar Section -->
+      <div class="modal" id="modal">
+        <div class="modal-header">
+          <div class="title">Hanif Ahmad</div>
+          <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-image">
+            <img src="../images/profile-1.jpg" />
+          </div>
+          <div class="modal-nav">
+            <a href="#">
+              <span class="material-icons-sharp"> logout </span>
+              <h3>Logout</h3>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div id="overlay"></div>
 
       <!-- Main Content -->
       <main class="main-container">
@@ -204,6 +222,7 @@
 
       <!-- End of Form input new data -->
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script type="module" src="../js/index.js"></script>
     <script type="module" src="../js/utils/account.mjs"></script>
