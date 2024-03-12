@@ -61,3 +61,96 @@ function checkAndSetCookies() {
 }
 
 checkAndSetCookies();
+
+const modalAnchor = document.querySelector(".modal-nav a");
+
+const days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "Mei",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+const divDate = document.querySelector(".right-section .date");
+const date = new Date();
+const dayName = days[date.getDay()];
+const monthName = months[date.getMonth()];
+
+date.toUTCString();
+divDate.innerHTML = `${dayName}, ${date.getDate()} ${monthName} ${date.getFullYear()}`;
+
+//MODAL
+const openModalButtons = document.querySelectorAll("[data-modal-target]");
+const closeModalButtons = document.querySelectorAll("[data-close-button]");
+const overlay = document.getElementById("overlay");
+
+openModalButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const modal = document.querySelector(button.dataset.modalTarget);
+    openModal(modal);
+  });
+});
+
+overlay.addEventListener("click", () => {
+  const modals = document.querySelectorAll(".modal.active");
+  modals.forEach((modal) => {
+    closeModal(modal);
+  });
+});
+
+closeModalButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const modal = button.closest(".modal");
+    closeModal(modal);
+  });
+});
+
+function openModal(modal) {
+  if (modal == null) return;
+  modal.classList.add("active");
+  overlay.classList.add("active");
+}
+
+function closeModal(modal) {
+  if (modal == null) return;
+  modal.classList.remove("active");
+  overlay.classList.remove("active");
+}
+
+modalAnchor.addEventListener("click", () => {
+  Swal.fire({
+    title: "Are you sure want to log out?",
+    icon: "question",
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: "Yes",
+    denyButtonText: `No`,
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      Swal.fire("Thanks for coming", "", "success").then(() => {
+        window.location.pathname = "/";
+      });
+    } else if (result.isDenied) {
+      Swal.fire("Enjoy the App", "", "info");
+      e.preventDefault();
+    }
+  });
+});

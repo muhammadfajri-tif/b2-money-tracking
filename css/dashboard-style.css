@@ -230,6 +230,7 @@ aside .sidebar .sidebar-profile {
   border-radius: 1rem;
   box-shadow: 0 0 1rem var(--color-light);
   margin: 1rem 1rem 0rem 1rem;
+  cursor: pointer;
 }
 
 aside .sidebar .sidebar-profile img {
@@ -1097,6 +1098,126 @@ tbody > tr > td:nth-child(6) {
 .dataTable button:hover {
   opacity: 0.8; /* Reduce opacity on hover */
 }
+
+/*MODAL*/
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 99;
+  background-color: white;
+  width: 50%;
+  color: var(--color-dark);
+  background-color: var(--color-background);
+  max-width: 80%;
+}
+
+.modal.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+
+.modal-header .title {
+  margin: 0 auto;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.modal-header .close-button {
+  cursor: pointer;
+  color: var(--color-dark);
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.modal-body {
+  padding: 10px 15px;
+}
+
+.modal-image {
+  margin: 25px auto;
+  width: 50%;
+}
+
+.modal-nav a {
+  display: flex;
+  align-items: center;
+  color: var(--color-info-dark);
+  height: 3.7rem;
+  gap: 1rem;
+  position: relative;
+  margin-left: 2rem;
+  transition: all 0.3s ease;
+}
+
+.modal-nav a span {
+  font-size: 1.6rem;
+  transition: all 0.3s ease;
+}
+
+.modal-nav a:hover {
+  color: var(--color-primary);
+}
+
+.modal-nav a:hover span {
+  margin-left: 0.6rem;
+}
+
+.modal-nav a.active::before {
+  content: "";
+  width: 6px;
+  height: 18px;
+  background-color: var(--color-primary);
+}
+
+.modal-nav a.active span {
+  color: var(--color-primary);
+  margin-left: calc(1rem - 3px);
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  transition: 200ms ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+#overlay.active {
+  z-index: 1;
+  opacity: 1;
+  pointer-events: all;
+}
+/*END MODAL*/
+
+/*DIV DATE*/
+.right-section .over-date{
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: end;
+  padding-right: 3em;
+  margin: 20px 0 0;
+}
+/*END DIV DATE*/
 
 @media screen and (max-width: 768px) {
   .form-section {
