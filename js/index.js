@@ -146,7 +146,7 @@ modalAnchor.addEventListener("click", () => {
     /* Read more about isConfirmed, isDenied below */
     if (result.isConfirmed) {
       Swal.fire("Thanks for coming", "", "success").then(() => {
-        window.location.pathname = "/";
+        window.location.pathname = "../index.html";
       });
     } else if (result.isDenied) {
       Swal.fire("Enjoy the App", "", "info");
