@@ -8,6 +8,10 @@
       rel="stylesheet"
     />
     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
       rel="icon"
       type="image/png"
       sizes="32x32"
@@ -18,7 +22,7 @@
   </head>
 
   <body>
-    <audio id="audio" src="../sounds/windows_7_startup.mp3" autoplay></audio>
+    <!-- <audio id="audio" src="../sounds/windows_7_startup.mp3" autoplay></audio> -->
 
     <div class="container">
       <!-- Sidebar Section -->
@@ -68,7 +72,7 @@
             <!-- hr line -->
             <div class="line"></div>
 
-            <div class="sidebar-profile">
+            <div data-modal-target="#modal" class="sidebar-profile">
               <img src="../images/profile-1.jpg" />
               <div class="profile-info">
                 <h3>Admin</h3>
@@ -79,7 +83,24 @@
         </div>
       </aside>
       <!-- End of Sidebar Section -->
-
+      <div class="modal" id="modal">
+        <div class="modal-header">
+          <div class="title">Hanif Ahmad</div>
+          <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-image">
+            <img src="../images/profile-1.jpg" />
+          </div>
+          <div class="modal-nav">
+            <a href="#">
+              <span class="material-icons-sharp"> logout </span>
+              <h3>Logout</h3>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div id="overlay"></div>
       <!-- Main Content -->
       <main>
         <h1>Dashboard</h1>
@@ -133,6 +154,10 @@
 
       <!-- Right Section -->
       <div class="right-section">
+        <div class="over-date">
+          <i class="fa fa-cloud"></i>
+          <div class="date"></div>
+        </div>
         <div class="nav">
           <button id="menu-btn">
             <span class="material-icons-sharp"> menu </span>
@@ -199,6 +224,7 @@
           this.play();
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="../js/orders.js"></script>
