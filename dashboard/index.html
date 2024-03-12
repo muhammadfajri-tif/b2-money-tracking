@@ -7,6 +7,10 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" href="../css/dashboard-style.css" />
     <title>Dashboard | B2Proyek</title>
   </head>
@@ -14,167 +18,286 @@
   <body>
     <audio id="audio" src="../sounds/windows_7_startup.mp3" autoplay></audio>
 
-    <div class="container">
-      <!-- Sidebar Section -->
-      <aside>
-        <div class="toggle">
-          <div class="logo">
-            <img src="../images/logo.png" />
-            <h2>B2<span class="warning">Proyek</span></h2>
-          </div>
-          <div class="close" id="close-btn">
-            <span class="material-icons-sharp"> close </span>
-          </div>
+    <aside>
+      <div class="toggle">
+        <div class="logo">
+          <img src="../images/logo.png" />
+          <h2>B2<span class="danger">Proyek</span></h2>
         </div>
+        <div class="close" id="close-btn">
+          <span class="material-icons-sharp"> close </span>
+        </div>
+      </div>
 
-        <div class="sidebar">
-          <a href="#" class="active">
-            <span class="material-icons-sharp"> dashboard </span>
-            <h3>Dashboard</h3>
-          </a>
-          <a href="manage.html">
-            <span class="material-icons-sharp"> account_balance_wallet </span>
-            <h3>Manage</h3>
-          </a>
-          <a href="analytics.html">
-            <span class="material-icons-sharp"> insights </span>
-            <h3>Analytics</h3>
-          </a>
-          <a href="settings.html">
-            <span class="material-icons-sharp"> settings </span>
-            <h3>Setting</h3>
-          </a>
-          <div class="bottom-sidebar">
-            <a href="support.html">
-              <span class="material-icons-sharp"> help_outline </span>
-              <h3>Support</h3>
-            </a>
+      <div class="sidebar">
+        <a href="/dashboard/index.html" class="active">
+          <span class="material-icons-sharp"> dashboard </span>
+          <h3>Dashboard</h3>
+        </a>
+        <a href="/dashboard/manage.html">
+          <span class="material-icons-sharp"> account_balance_wallet </span>
+          <h3>Manage</h3>
+        </a>
+        <a href="/dashboard/analytics.html">
+          <span class="material-icons-sharp"> insights </span>
+          <h3>Analytics</h3>
+        </a>
+        <a href="/dashboard/settings.html">
+          <span class="material-icons-sharp"> settings </span>
+          <h3>Settings</h3>
+        </a>
+        <a href="/dashboard/support.html">
+          <span class="material-icons-sharp"> help_outline </span>
+          <h3>Support</h3>
+        </a>
+      </div>
+    </aside>
+    <!-- End of Sidebar Section -->
+    <div class="main-container">
+      <!-- Header -->
+      <header>
+        <div class="header-date">
+          <button id="menu-btn">
+            <span class="material-icons-sharp"> menu </span>
+          </button>
+          <i class="fa fa-cloud"></i>
+          <div class="date"></div>
+        </div>
+        <div class="header-search">
+          <input type="text" placeholder="Search" />
+        </div>
+        <div class="haeder-menu">
+          <div class="nav">
             <div class="dark-mode">
-              <a href="#">
-                <span class="material-icons-sharp icon-theme"> wb_sunny </span>
-                <h3 class="sidebar-theme title-theme">Light Theme</h3>
-              </a>
+              <span class="material-icons-sharp active"> light_mode </span>
+              <span class="material-icons-sharp"> dark_mode </span>
             </div>
 
-            <!-- hr line -->
-            <div class="line"></div>
-
-            <div class="sidebar-profile">
-              <img src="../images/profile-1.jpg" />
+            <div class="profile">
               <div class="profile-info">
                 <h3>Admin</h3>
                 <small class="text-muted">Admin</small>
               </div>
-            </div>
-          </div>
-        </div>
-      </aside>
-      <!-- End of Sidebar Section -->
-
-      <!-- Main Content -->
-      <main>
-        <h1>Dashboard</h1>
-        <!-- Analyses -->
-        <div class="analyse">
-          <div class="sales">
-            <div class="status">
-              <div class="info">
-                <h3>Total Money</h3>
-                <h1 class="money-text">$0</h1>
-              </div>
-            </div>
-          </div>
-          <div class="visits">
-            <div class="status">
-              <div class="info">
-                <h3>Today Income</h3>
-                <h1 class="income-text">$0</h1>
-              </div>
-            </div>
-          </div>
-          <div class="searches">
-            <div class="status">
-              <div class="info">
-                <h3>Today Spending</h3>
-                <h1 class="spending-text">$0</h1>
+              <div class="profile-photo">
+                <a data-modal-target="#modal" href="#">
+                  <img src="../images/profile-1.jpg" />
+                </a>
               </div>
             </div>
           </div>
         </div>
-        <!-- End of Analyses -->
-        <div class="analytics">
-          <div class="chart-container" style="padding-top: 0">
-            <div id="filter">
-              <h2>Overview Statistic</h2>
-              <div class="filter-group">
-                <button id="filterDay" class="filter-item">1 Day</button>
-                <button id="filterWeek" class="filter-item">1 Week</button>
-                <button id="filterMonth" class="filter-item">1 Month</button>
-                <button id="filterYear" class="filter-item">1 Year</button>
-                <button id="filterAll" class="filter-item">All Time</button>
-              </div>
-            </div>
-            <div id="dashboardChart"></div>
+      </header>
+      <!-- End Header -->
+      <div class="modal" id="modal">
+        <div class="modal-header">
+          <div class="title">Hanif Ahmad</div>
+          <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-image">
+            <img src="../images/profile-1.jpg" />
+          </div>
+          <div class="modal-nav">
+            <a href="#">
+              <span class="material-icons-sharp"> logout </span>
+              <h3>Logout</h3>
+            </a>
           </div>
         </div>
-
-        <!-- End of Recent Orders -->
-      </main>
-      <!-- End of Main Content -->
-
-      <!-- Right Section -->
-      <div class="right-section">
-        <div class="nav">
-          <button id="menu-btn">
-            <span class="material-icons-sharp"> menu </span>
-          </button>
-        </div>
-        <!-- End of Nav -->
-
-        <div class="user-profile">
-          <div class="logo">
-            <img src="../images/logo.png" />
-            <h2>B2 Proyek</h2>
-            <p>Kelompok B2 Matakuliah Proyek 1</p>
-          </div>
-        </div>
-
-        <div class="reminders">
-          <div class="header">
-            <h2>Last Today Activity</h2>
-            <span class="material-icons-sharp"> notifications_none </span>
-          </div>
-
-          <div class="notification">
-            <div class="icon">
-              <span class="material-icons-sharp"> trending_up </span>
-            </div>
-            <div class="content">
-              <div class="info">
-                <h3 class="last-income"></h3>
-                <small class="text_muted last-income-date"> </small>
+      </div>
+      <div id="overlay"></div>
+      <div class="container">
+        <!-- Main Content -->
+        <main>
+          <!-- Analyses -->
+          <h1>Dashboard</h1>
+          <div class="analyse">
+            <!-- Card -->
+            <div class="sales">
+              <div class="status">
+                <div class="info">
+                  <h3>Total Money</h3>
+                  <h1 class="money-text">$0</h1>
+                </div>
+                <!-- Lingkaran -->
+                <div class="progresss Balance">
+                  <svg>
+                    <defs>
+                      <linearGradient id="GradientColorBalance">
+                        <stop offset="0%" stop-color="#67E434" />
+                        <stop offset="100%" stop-color="#67E434" />
+                      </linearGradient>
+                    </defs>
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="36"
+                      stroke-linecap="round"
+                    ></circle>
+                  </svg>
+                  <div id="number"></div>
+                </div>
+                <!-- Lingkaran -->
               </div>
-              <span class="material-icons-sharp"> more_vert </span>
             </div>
-          </div>
-
-          <div class="notification deactive">
-            <div class="icon">
-              <span class="material-icons-sharp"> trending_down </span>
-            </div>
-            <div class="content">
-              <div class="info">
-                <h3 class="last-spending"></h3>
-                <small class="text_muted last-spending-date"> </small>
+            <!-- Card -->
+            <div class="visits">
+              <div class="status">
+                <div class="info">
+                  <h3>Today Income</h3>
+                  <h1 class="income-text">$0</h1>
+                </div>
+                <!-- Lingkaran -->
+                <div class="progresss Expenses">
+                  <svg>
+                    <defs>
+                      <linearGradient id="GradientColorExpenses">
+                        <stop offset="0%" stop-color="#E4080A" />
+                        <stop offset="100%" stop-color="#E4080A" />
+                      </linearGradient>
+                    </defs>
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="36"
+                      stroke-linecap="round"
+                    ></circle>
+                  </svg>
+                  <div id="number"></div>
+                </div>
+                <!-- Lingkaran -->
               </div>
-              <span class="material-icons-sharp"> more_vert </span>
+            </div>
+            <!-- Card -->
+            <div class="searches">
+              <div class="status">
+                <div class="info">
+                  <h3>Today Spending</h3>
+                  <h1 class="spending-text">$0</h1>
+                </div>
+                <!-- Card -->
+                <div class="progresss Income">
+                  <svg>
+                    <defs>
+                      <linearGradient id="GradientColorIncome">
+                        <stop offset="0%" stop-color="#3483eb" />
+                        <stop offset="100%" stop-color="#3483eb" />
+                      </linearGradient>
+                    </defs>
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="36"
+                      stroke-linecap="round"
+                    ></circle>
+                  </svg>
+                  <div id="number"></div>
+                </div>
+                <!-- Card -->
+              </div>
             </div>
           </div>
+          <!-- Recent Orders Table -->
+          <div class="recent-orders">
+            <h2>Recent History</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Method</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Add</td>
+                  <td>50000</td>
+                  <td>Success</td>
+                  <td>POST</td>
+                </tr>
+                <tr>
+                  <td>Add</td>
+                  <td>53000</td>
+                  <td>Success</td>
+                  <td>POST</td>
+                </tr>
+                <tr>
+                  <td>Add</td>
+                  <td>100000</td>
+                  <td>Success</td>
+                  <td>POST</td>
+                </tr>
+              </tbody>
+            </table>
+            <a href="#">Show All</a>
+          </div>
+          <!-- End of Recent Orders -->
+          <div class="analytics">
+            <div class="chart-container" style="padding-top: 0">
+              <div id="filter">
+                <h2>Overview Statistic</h2>
+                <div class="filter-group">
+                  <button id="filterDay" class="filter-item">1 Day</button>
+                  <button id="filterWeek" class="filter-item">1 Week</button>
+                  <button id="filterMonth" class="filter-item">1 Month</button>
+                  <button id="filterYear" class="filter-item">1 Year</button>
+                  <button id="filterAll" class="filter-item">All Time</button>
+                </div>
+              </div>
+              <div id="dashboardChart"></div>
+            </div>
+          </div>
+        </main>
+        <!-- End of Main Content -->
 
-          <div class="notification add-reminder">
-            <div>
-              <span class="material-icons-sharp"> add </span>
-              <h3>Add Income or Spending</h3>
+        <!-- Right Section -->
+        <div class="right-section">
+          <div class="user-profile">
+            <div class="logo">
+              <img src="../images/logo.png" />
+              <h2>B2 Proyek</h2>
+              <p>Kelompok B2 Matakuliah Proyek 1</p>
+            </div>
+          </div>
+          <div class="reminders">
+            <div class="header">
+              <h2>Last Today Activity</h2>
+              <span class="material-icons-sharp"> notifications_none </span>
+            </div>
+
+            <div class="notification">
+              <div class="icon">
+                <span class="material-icons-sharp"> trending_up </span>
+              </div>
+              <div class="content">
+                <div class="info">
+                  <h3 class="last-income"></h3>
+                  <small class="text_muted last-income-date"> </small>
+                </div>
+                <span class="material-icons-sharp"> more_vert </span>
+              </div>
+            </div>
+
+            <div class="notification deactive">
+              <div class="icon">
+                <span class="material-icons-sharp"> trending_down </span>
+              </div>
+              <div class="content">
+                <div class="info">
+                  <h3 class="last-spending"></h3>
+                  <small class="text_muted last-spending-date"> </small>
+                </div>
+                <span class="material-icons-sharp"> more_vert </span>
+              </div>
+            </div>
+
+            <div class="notification add-reminder">
+              <div>
+                <span class="material-icons-sharp"> add </span>
+                <h3>Add Income or Spending</h3>
+              </div>
             </div>
           </div>
         </div>
@@ -190,7 +313,8 @@
           this.play();
         });
     </script>
-
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="../js/orders.js"></script>
     <script type="module" src="../js/index.js"></script>
