@@ -1,5 +1,7 @@
 <!-- PROJECT LOGO -->
+
 <a name="readme-top"></a>
+
 <div align="center">
   <a href="https://github.com/muhammadfajri-tif/b2-money-tracking">
     <img src="images/logo.png" alt="Logo" width="128" height="128">
@@ -46,10 +48,12 @@
   </ol>
 </details>
 
-
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
+<img src="./docs/dashboard.png" alt="Dashboard Screenshot">
+<img src="./docs/theme.png" alt="Dashboard Dark Screenshot">
 Money Tracking App by [by B2](#contributor) boasts an innovative approach to simplicity and user experience. With its emphasis on facial recognition for accessing dashboard, users can manage their finances with confidence. Additionally, the app offers robust data visualization tools, empowering users to gain valuable insights into their financial habits. Its analytics feature allows for easy export of data to CSV or JSON formats, ensuring seamless integration with other applications. Users can efficiently manage their transactions, with options to delete, update, and add new entries effortlessly. Moreover, the app provides a reliable backup and restore feature, allowing users to safeguard their data and restore it whenever needed, providing peace of mind in the digital age. Learn more about the complete features in [features section](#features).
 
 ### Showcase
@@ -57,50 +61,72 @@ Money Tracking App by [by B2](#contributor) boasts an innovative approach to sim
 <details>
   <summary><strong>Landing Page</strong></summary>
     <ul>
-        <li>
             <img src="./docs/landing-page.png" alt="Landing Page Screenshot">
-        </li>
+            <img src="./docs/landing-page2.png" alt="Landing Page Screenshot">
+            <img src="./docs/landing-page3.png" alt="Landing Page Screenshot">
+            <img src="./docs/landing-page4.png" alt="Landing Page Screenshot">
     </ul>
+
 </details>
 
 <details>
   <summary><strong>Face Recognition</strong></summary>
     <ul>
-        <li>
             <img src="./docs/face-recognition.png" alt="Face Recognition Page Screenshot">
-        </li>
+            <img src="./docs/face-recognition2.png" alt="Face Recognition Page Screenshot">
     </ul>
 </details>
 
 <details>
   <summary><strong>Dashboard</strong></summary>
     <ul>
-        <li>
             <img src="./docs/dashboard.png" alt="Dashboard Screenshot">
-        </li>
-    </ul>
-</details>
-
-<details>
-  <summary><strong>Data Analytics & Visualization</strong></summary>
-    <ul>
-        <li>
-            <img src="./docs/data-visualization.png" alt="Data Analytics & Visualization Page Screenshot">
-        </li>
     </ul>
 </details>
 
 <details>
   <summary><strong>Manage Transaction</strong></summary>
     <ul>
-        <li>
             <img src="./docs/manage-transaction.png" alt="Manage Transaction Page Screenshot">
-        </li>
     </ul>
 </details>
 
+<details>
+  <summary><strong>Data Analytics & Visualization</strong></summary>
+    <ul>
+            <img src="./docs/analytics.png" alt="Manage Analytics Page Screenshot">
+            <img src="./docs/analytics2.png" alt="Manage Analytics Page Screenshot">
+            <img src="./docs/analytics3.png" alt="Manage Analytics Page Screenshot">
+            <img src="./docs/analytics4.png" alt="Manage Analytics Page Screenshot">
+            <img src="./docs/analytics5.png" alt="Manage Analytics Page Screenshot">
+            <img src="./docs/analytics6.png" alt="Manage Analytics Page Screenshot">
+    </ul>
+</details>
+
+<details>
+  <summary><strong>Setting</strong></summary>
+    <ul>
+            <img src="./docs/setting.png" alt="Setting Screenshot">
+    </ul>
+</details>
+
+<details>
+  <summary><strong>Support</strong></summary>
+    <ul>
+            <img src="./docs/support.png" alt="Support Screenshot">
+    </ul>
+</details>
+
+<details>
+  <summary><strong>Light/Dark Theme</strong></summary>
+    <ul>
+            <img src="./docs/dashboard.png" alt="Light Theme Screenshot">
+            <img src="./docs/theme.png" alt="Dark Theme Screenshot">
+    </ul>
+</details>
 
 <!-- Tech Stack -->
+
 ### Tech Stack
 
 **Markup/Programming Languages**
@@ -116,7 +142,6 @@ Money Tracking App by [by B2](#contributor) boasts an innovative approach to sim
 [![Code Repository](https://skillicons.dev/icons?i=github)](https://github.com/)
 
 **Supported File Format for Export/Import Data**
-
 
 <a href="https://en.wikipedia.org/wiki/Comma-separated_values">
     <img src="./docs/csv-icon.png" alt="CSV Icon" width="48" height="48">
@@ -140,20 +165,20 @@ Money Tracking App by [by B2](#contributor) boasts an innovative approach to sim
 
 [![Figma](https://skillicons.dev/icons?i=figma)](https://www.figma.com/)
 <a href="https://www.drawio.com/">
-    <img src="./docs/drawio.png" alt="Drawio Icon" width="42" height="48">
+<img src="./docs/drawio.png" alt="Drawio Icon" width="42" height="48">
 </a>
 
 <!-- [![Draw IO]](./docs/drawio.png =42x48)(https://www.drawio.com/) -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
  <!-- Features Section -->
+
 ## Features
 
 ### Face Recognition
 
-The face recognition featurerequiring users to authenticate themselves using facial recognition technology before accessing the dashboard application. 
+The face recognition featurerequiring users to authenticate themselves using facial recognition technology before accessing the dashboard application.
 
 ### Data Visualization
 
@@ -173,13 +198,12 @@ The backup and restore feature allows users to securely save their financial dat
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 ## Contributor
 
-- [231524044] **Fathan Khairun Normawijaya**<br>*developing landing page + documentation*
-- [231524045] **Hanif Ahmad Rizqullah**<br>*developing dashboard*
-- [231524053] **Muhammad Fajri**<br>*developing export/import account + manage transaction features*
-- [231524054] **Muhammad Gianluigi Julian**<br>*developing landing page*
-- [231524064] **Yahya Alfon Sinaga**<br>*developing face recognition, data visualization + analytics features*
+- [231524044] **Fathan Khairun Normawijaya**<br>_developing landing page + documentation_
+- [231524045] **Hanif Ahmad Rizqullah**<br>_developing dashboard_
+- [231524053] **Muhammad Fajri**<br>_developing export/import account + manage transaction features_
+- [231524054] **Muhammad Gianluigi Julian**<br>_developing landing page_
+- [231524064] **Yahya Alfon Sinaga**<br>_developing face recognition, data visualization + analytics features_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
