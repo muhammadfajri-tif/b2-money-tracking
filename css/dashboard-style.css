@@ -166,6 +166,7 @@ aside .sidebar {
   position: relative;
   top: 1.5rem;
   transition: all 0.3s ease;
+  justify-content: space-between;
 }
 
 aside .sidebar:hover {
@@ -195,9 +196,8 @@ aside .sidebar a span {
 } */
 
 aside .sidebar .bottom-sidebar {
-  position: absolute;
+  position: relative;
   bottom: 2rem;
-  width: 100%;
 }
 
 aside .sidebar .sidebar-cc {
@@ -250,9 +250,6 @@ aside .sidebar .profile-info {
 }
 
 aside .sidebar .bottom-sidebar a {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
   padding: 1rem 1rem;
   background-color: var(--color-white);
   border-radius: 1rem;
@@ -298,6 +295,12 @@ aside .sidebar .message-count {
   color: var(--color-white);
   font-size: 11px;
   border-radius: var(--border-radius-1);
+}
+
+@media screen and (max-width: 768px) {
+  aside .sidebar .bottom-sidebar a {
+    margin: 1rem 0 0 0;
+  }
 }
 
 main {
@@ -1123,11 +1126,6 @@ tbody > tr > td:nth-child(6) {
     width: 5.6rem;
   }
 
-  aside .sidebar a:last-child {
-    position: relative;
-    margin-top: 1.8rem;
-  }
-
   main .analyse {
     grid-template-columns: 1fr;
     gap: 0;
@@ -1199,12 +1197,6 @@ tbody > tr > td:nth-child(6) {
 
   aside .sidebar a {
     width: 100%;
-    height: 3.4rem;
-  }
-
-  aside .sidebar a:last-child {
-    position: absolute;
-    bottom: 5rem;
   }
 
   aside .toggle .close {

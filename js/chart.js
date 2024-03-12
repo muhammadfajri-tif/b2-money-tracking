@@ -752,7 +752,7 @@ const incomeOptions = {
   labels: incomeDataWithCategory.map((data) => data.category),
   chart: {
     type: "pie",
-    width: "740px",
+    width: "520px",
     animations: {
       enabled: true,
       easing: "easeinout",
@@ -846,7 +846,7 @@ const outcomeOptions = {
   labels: outcomeDataWithCategory.map((data) => data.category),
   chart: {
     type: "pie",
-    width: "600px",
+    width: "550px",
     animations: {
       enabled: true,
       easing: "easeinout",

@@ -1,208 +1,164 @@
 {
   "name": "foo",
-  "money": 20000,
+  "money": 2000000,
   "spending": [
     {
-      "date": "10/5/2024",
+      "date": "01/03/2024",
       "amount": 85000,
-      "category": "Makanan"
+      "category": "Food",
+      "desc": "Groceries for the week"
     },
     {
-      "date": "11/5/2024",
-      "amount": 90000,
-      "category": "Transportasi"
+      "date": "02/03/2024",
+      "amount": 125000,
+      "category": "Entertainment",
+      "desc": "Movie night with friends"
     },
     {
-      "date": "12/5/2024",
-      "amount": 95000,
-      "category": "Belanja"
+      "date": "03/03/2024",
+      "amount": 60000,
+      "category": "Transportation",
+      "desc": "Bus fare"
     },
     {
-      "date": "13/5/2024",
+      "date": "04/03/2024",
+      "amount": 250000,
+      "category": "Household",
+      "desc": "Household supplies"
+    },
+    {
+      "date": "05/03/2024",
+      "amount": 50000,
+      "category": "Medical",
+      "desc": "Doctor's appointment"
+    },
+    {
+      "date": "06/03/2024",
+      "amount": 100000,
+      "category": "College",
+      "desc": "Textbooks for semester"
+    },
+    {
+      "date": "07/03/2024",
+      "amount": 75000,
+      "category": "Others",
+      "desc": "Miscellaneous expenses"
+    },
+    {
+      "date": "08/03/2024",
+      "amount": 70000,
+      "category": "Food",
+      "desc": "Dinner with family"
+    },
+    {
+      "date": "09/03/2024",
+      "amount": 30000,
+      "category": "Entertainment",
+      "desc": "Concert tickets"
+    },
+    {
+      "date": "10/03/2024",
+      "amount": 45000,
+      "category": "Transportation",
+      "desc": "Taxi ride"
+    },
+    {
+      "date": "11/03/2024",
       "amount": 80000,
-      "category": "Hiburan"
+      "category": "Household",
+      "desc": "Kitchen utensils"
     },
     {
-      "date": "14/5/2024",
-      "amount": 12500,
-      "category": "Kesehatan"
+      "date": "12/03/2024",
+      "amount": 55000,
+      "category": "Medical",
+      "desc": "Prescription medicines"
     },
     {
-      "date": "15/5/2024",
-      "amount": 70000,
-      "category": "Transportasi"
+      "date": "13/03/2024",
+      "amount": 120000,
+      "category": "College",
+      "desc": "Educational materials"
     },
     {
-      "date": "16/5/2024",
-      "amount": 32500,
-      "category": "Elektronik"
-    },
-    {
-      "date": "17/5/2024",
+      "date": "14/03/2024",
       "amount": 90000,
-      "category": "Pendidikan"
-    },
-    {
-      "date": "18/5/2024",
-      "amount": 95000,
-      "category": "Kesehatan"
-    },
-    {
-      "date": "19/5/2024",
-      "amount": 44000,
-      "category": "Transportasi"
-    },
-    {
-      "date": "20/5/2024",
-      "amount": 75000,
-      "category": "Elektronik"
-    },
-    {
-      "date": "21/5/2024",
-      "amount": 70000,
-      "category": "Pendidikan"
-    },
-    {
-      "date": "22/5/2024",
-      "amount": 22000,
-      "category": "Hiburan"
-    },
-    {
-      "date": "23/5/2024",
-      "amount": 90000,
-      "category": "Makanan"
-    },
-    {
-      "date": "24/5/2024",
-      "amount": 95000,
-      "category": "Transportasi"
-    },
-    {
-      "date": "25/5/2024",
-      "amount": 33000,
-      "category": "Belanja"
-    },
-    {
-      "date": "26/5/2024",
-      "amount": 75000,
-      "category": "Kesehatan"
-    },
-    {
-      "date": "27/5/2024",
-      "amount": 70000,
-      "category": "Transportasi"
-    },
-    {
-      "date": "28/5/2024",
-      "amount": 85000,
-      "category": "Elektronik"
-    },
-    {
-      "date": "29/5/2024",
-      "amount": 12000,
-      "category": "Pendidikan"
+      "category": "Others",
+      "desc": "Gift for friend's birthday"
     }
   ],
   "income": [
     {
-      "date": "14/5/2024",
-      "amount": 75000,
-      "category": "Hasil Penjualan"
+      "date": "01/03/2024",
+      "amount": 42500,
+      "category": "Salary",
+      "desc": "First paycheck of the month"
     },
     {
-      "date": "15/5/2024",
+      "date": "02/03/2024",
+      "amount": 62500,
+      "category": "Allowance",
+      "desc": "Monthly allowance"
+    },
+    {
+      "date": "03/03/2024",
+      "amount": 30000,
+      "category": "Grants",
+      "desc": "Scholarship grant"
+    },
+    {
+      "date": "04/03/2024",
       "amount": 70000,
-      "category": "Juara Lomba"
+      "category": "Salary",
+      "desc": "Second paycheck of the month"
     },
     {
-      "date": "16/5/2024",
-      "amount": 85000,
-      "category": "Layanan Komputer Rumah"
+      "date": "05/03/2024",
+      "amount": 40000,
+      "category": "Allowance",
+      "desc": "Extra cash"
     },
     {
-      "date": "17/5/2024",
-      "amount": 90000,
-      "category": "Pendapatan Penyewaan Properti"
+      "date": "06/03/2024",
+      "amount": 45000,
+      "category": "Grants",
+      "desc": "Research grant extension"
     },
     {
-      "date": "18/5/2024",
-      "amount": 95000,
-      "category": "Pemasukan Pasif"
+      "date": "07/03/2024",
+      "amount": 55000,
+      "category": "Salary",
+      "desc": "Overtime payment"
     },
     {
-      "date": "19/5/2024",
-      "amount": 80000,
-      "category": "Pemasukan Pasif"
+      "date": "08/03/2024",
+      "amount": 30000,
+      "category": "Allowance",
+      "desc": "Pocket money"
     },
     {
-      "date": "20/5/2024",
-      "amount": 75000,
-      "category": "Pemasukan Pasif"
+      "date": "09/03/2024",
+      "amount": 25000,
+      "category": "Grants",
+      "desc": "Research stipend"
     },
     {
-      "date": "21/5/2024",
-      "amount": 70000,
-      "category": "Pemasukan Pasif"
+      "date": "10/03/2024",
+      "amount": 60000,
+      "category": "Salary",
+      "desc": "Performance bonus"
     },
     {
-      "date": "22/5/2024",
-      "amount": 85000,
-      "category": "Pemasukan Pasif"
+      "date": "11/03/2024",
+      "amount": 35000,
+      "category": "Allowance",
+      "desc": "Gift from parents"
     },
     {
-      "date": "23/5/2024",
-      "amount": 90000,
-      "category": "Pemasukan Lainnya"
-    },
-    {
-      "date": "24/5/2024",
-      "amount": 95000,
-      "category": "Pemasukan Lainnya"
-    },
-    {
-      "date": "25/5/2024",
-      "amount": 80000,
-      "category": "Pemasukan Lainnya"
-    },
-    {
-      "date": "26/5/2024",
-      "amount": 75000,
-      "category": "Pemasukan Lainnya"
-    },
-    {
-      "date": "27/5/2024",
-      "amount": 70000,
-      "category": "Pemasukan Lainnya"
-    },
-    {
-      "date": "28/5/2024",
-      "amount": 85000,
-      "category": "Pemasukan Lainnya"
-    },
-    {
-      "date": "29/5/2024",
-      "amount": 90000,
-      "category": "Pemasukan Lainnya"
-    },
-    {
-      "date": "30/5/2024",
-      "amount": 95000,
-      "category": "Pemasukan Lainnya"
-    },
-    {
-      "date": "31/5/2024",
-      "amount": 80000,
-      "category": "Pemasukan Ekstra"
-    },
-    {
-      "date": "1/6/2024",
-      "amount": 75000,
-      "category": "Pemasukan Ekstra"
-    },
-    {
-      "date": "2/6/2024",
-      "amount": 70000,
-      "category": "Pemasukan Ekstra"
+      "date": "12/03/2024",
+      "amount": 40000,
+      "category": "Grants",
+      "desc": "Funding for project"
     }
   ]
 }
