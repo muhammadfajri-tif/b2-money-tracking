@@ -4,10 +4,27 @@
     <title>Face Recognition</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, shrink-to-fit=yes" />
-    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../favicon-32x32.png"
+    />
     <script src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1/dist/face-api.js"></script>
 
     <script type="module">
+      const loading_text = document.querySelector(".loading-text");
+      const loading_desc = document.querySelector(".loading-desc");
+      loading_text.innerHTML = "Loading...";
+      loading_desc.innerHTML = "Have a problem with cam? Click Here";
+      // listen to loading_desc
+      loading_desc.style.cursor = "pointer";
+      loading_desc.style.color = "red";
+      loading_desc.style.textDecoration = "underline";
+      // listen to loading_desc click
+      loading_desc.addEventListener("click", function () {
+        window.location.href = "index.html";
+      });
       const modelPath =
         "https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model/"; // CDN model path
       // "../models/"; // local model path
@@ -300,6 +317,8 @@
           settings.aspectRatio = Math.trunc(100 * settings.aspectRatio) / 100;
         log(`Camera active: ${track.label}`);
         log(`Camera settings: ${str(settings)}`);
+        loading_text.innerHTML = "";
+        loading_desc.innerHTML = "";
         return new Promise((resolve) => {
           video.onloadeddata = async () => {
             canvas.width = video.videoWidth;
@@ -342,6 +361,15 @@
       // start processing as soon as page is loaded
       window.onload = main;
     </script>
+    <style>
+      .loading-container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+    </style>
   </head>
   <body
     style="
@@ -354,6 +382,10 @@
       overflow: hidden;
     "
   >
+    <div class="loading-container">
+      <h1 class="loading-text"></h1>
+      <h2 class="loading-desc"></h2>
+    </div>
     <video id="video" playsinline class="video"></video>
     <canvas
       id="canvas"
