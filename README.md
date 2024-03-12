@@ -54,6 +54,7 @@
 
 <img src="./docs/dashboard.png" alt="Dashboard Screenshot">
 <img src="./docs/theme.png" alt="Dashboard Dark Screenshot">
+
 Money Tracking App by [by B2](#contributor) boasts an innovative approach to simplicity and user experience. With its emphasis on facial recognition for accessing dashboard, users can manage their finances with confidence. Additionally, the app offers robust data visualization tools, empowering users to gain valuable insights into their financial habits. Its analytics feature allows for easy export of data to CSV or JSON formats, ensuring seamless integration with other applications. Users can efficiently manage their transactions, with options to delete, update, and add new entries effortlessly. Moreover, the app provides a reliable backup and restore feature, allowing users to safeguard their data and restore it whenever needed, providing peace of mind in the digital age. Learn more about the complete features in [features section](#features).
 
 ### Showcase
